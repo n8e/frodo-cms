@@ -1,0 +1,22 @@
+.container
+  section
+    .panel.panel-success(ng-if='login.loggedIn', ng-controller='EditUserController as edUser')
+      .panel-heading Edit Profile
+      form.form-sigin(method='post', ng-submit='edUser.updateUser ()')
+        br
+        | Username: 
+        label {{ login.user.username }}
+        br
+        |         First Name: 
+        label {{ login.user.name.first }}
+        input.form-control(type='text', name='firstname', placeholder='New First Name', ng-model='edUser.userData.firstname')
+        |         Last Name: 
+        label {{ login.user.name.last }}
+        input.form-control(type='text', name='lastname', placeholder='New Last Name', ng-model='edUser.userData.lastname')
+        |         Email: 
+        label {{ login.user.email }}
+        input.form-control(type='text', name='email', placeholder='New Email', ng-model='edUser.userData.email')
+        |         Role: 
+        label {{ login.user.role }}
+        br
+        button.btn.btn-success(type='submit') Update User

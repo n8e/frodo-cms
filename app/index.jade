@@ -1,0 +1,125 @@
+doctype html
+html(lang='en', ng-app='frodocms')
+  head
+    title Frodocms
+    base(href='/')
+    // cdns
+    script(src='lib/angular/angular.min.js')
+    link(rel='stylesheet', href='lib/bootstrap/dist/css/bootstrap.min.css')
+    // Font Awesome CSS
+    link(rel='stylesheet', href='font-awesome/css/font-awesome.min.css', type='text/css', media='screen')
+    // Include roboto.css to use the Roboto web font, material.css to include the theme and ripples.css to style the ripple effect
+    link(href='css/material.min.css', rel='stylesheet')
+    link(href='lib/ripples/dist/css/ripple.min.css', rel='stylesheet')
+    link(href='css/main.css', rel='stylesheet')
+    link(href='css/responsive.css', rel='stylesheet')
+    link(href='css/animate.min.css', rel='stylesheet')
+    script(src='lib/jquery/dist/jquery.min.js')
+    script(src='lib/bootstrap/dist/js/bootstrap.min.js')
+    script(src='lib/angular-route/angular-route.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.7/socket.io.js')
+    // local scripts
+    script(src='js/main.min.js')
+  body(ng-controller='LoginController as login')
+    header
+      .navbar.navbar-invers.menu-wrap
+        .navbar-header.text-center
+          a.navbar-brand.logo-right(href='')
+            i.mdi-image-timelapse
+            | Frodocms
+        ul.nav.navbar-nav.main-navigation
+          li(ng-if='login.loggedIn')
+            a(href='/profile') My Profile
+          li(ng-if='login.loggedIn')
+            a(href='/myDocuments') My Documents
+          li(ng-if='login.loggedIn')
+            a(href='/document') Create Document
+        ul.nav.navbar-nav.main-navigation
+          li.active
+            a(href='/') Home
+          li(ng-if='!login.loggedIn')
+            a(href='/login') Login
+          li(ng-if='!login.loggedIn')
+            a(href='/signup') Signup
+          li(ng-if='login.loggedIn')
+            a(href='#') Hello {{ login.user.username }}
+          li(ng-if='login.loggedIn')
+            a(href='#', ng-click='login.doLogout()') Logout
+        button#close-button.close-button Close Menu
+    main(style='padding-top:90px')
+      .col-md-12
+        .navbar.navbar-inverse.sticky-navigation.navbar-fixed-top(role='navigation', data-spy='affix', data-offset-top='200')
+          .container
+            .navbar-header
+              a.logo-left(href='index.html')
+                i.mdi-image-timelapse
+                | Frodocms
+            .navbar-right
+              button#open-button.menu-icon
+                i.mdi-navigation-menu
+      .ng-scope(ng-view='' style='height:660px')
+      section#footer
+        .container
+          .container
+            .row
+              .col-md-3.col-sm-6.col-xs-12
+                h3 Products
+                ul
+                  li
+                    a(href='http://wingthemes.com/') WingThemes
+                  li
+                    a(href='http://graygrids.com/') Graygrids
+                  li
+                    a(href='http://wpbean.com/') WPBean
+              .col-md-3.col-sm-6.col-xs-12
+                h3 FAQs
+                ul
+                  li
+                    a(href='#') Where we are?
+                  li
+                    a(href='#') Fees
+                  li
+                    a(href='#') Guarantee
+              .col-md-3.col-sm-6.col-xs-12
+                h3 About
+                ul
+                  li
+                    a(href='#') Team
+                  li
+                    a(href='#') Clients
+                  li
+                    a(href='#') Contact
+              .col-md-3.col-sm-6.col-xs-12
+                h3 Find us on
+                a.social(href='#', target='_blank')
+                  i.fa.fa-facebook
+                a.social(href='#', target='_blank')
+                  i.fa.fa-twitter
+                a.social(href='#', target='_blank')
+                  i.fa.fa-google-plus
+        // Go to Top Link
+        a.btn.btn-primary.back-to-top(href='#home')
+          i.mdi-hardware-keyboard-arrow-up
+      section#copyright
+        .container
+          .row
+            .col-md-12
+              p.copyright-text
+                | © Frodocms 2015 All right reserved. Designed and Developed by
+                a(href='http://graygrids.com/')
+                  | NM
+
+    script(src='lib/jquery/dist/jquery.min.js')
+    script(src='lib/bootstrap/dist/js/bootstrap.min.js')
+    script(src='lib/ripples/dist/js/ripple.min.js')
+    script(src='lib/material/js/material.js')
+    script(src='lib/wow/dist/wow.js')
+    script(src='lib/protonet/jquery.inview/jquery.inview.min.js')
+    script(src='../js/main.js')
+    script(src='lib/classie/classie.js')
+    script(src='lib/smooth-scroll/smooth-scroll.js')
+    script.
+      $(document).ready(function() {
+      // This command is used to initialize some elements and make them work properly
+      $.material.init();
+      });
