@@ -27,13 +27,13 @@ app.use(bodyParser.json());
 
 app.use(morgan('dev'));
 
-app.use(express.static(__dirname + '/app'));
+app.use(express.static(__dirname + '/public'));
 
 var api = require('./server/routes/index')(app, express, io);
 app.use('/api', api);
 
 app.get('/*', function(req, res) {
-  res.sendFile(__dirname + '/app/index.html');
+  res.sendFile(__dirname + '/public/index.html');
 });
 
 http.listen(config.port, function(err) {
