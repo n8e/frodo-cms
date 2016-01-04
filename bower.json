@@ -1,0 +1,43 @@
+{
+  "name": "frodocms",
+  "main": "index.js",
+  "version": "0.0.0",
+  "homepage": "https://github.com/andela-nmartin/frodocms",
+  "authors": [
+    "andela-nmartin <godmetweenciati@gmail.com>"
+  ],
+  "description": "document management system",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "document",
+    "management",
+    "system"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.3",
+    "angular-animate": "latest",
+    "angular-aria": "latest",
+    "angular-file-upload": "~2.2.0",
+    "angular-material": "~0.11.0",
+    "angular-mocks": "~1.4.7",
+    "angular-resource": "~1.4.7",
+    "angular-route": "~1.4.7",
+    "angular-ui-router": "~0.2.15",
+    "font-awesome": "fontawesome#~4.4.0",
+    "lodash": "latest",
+    "moment": "latest",
+    "angular-file-upload": "~2.2.0",
+    "angular-route": "~1.4.7"
+  }
+}
