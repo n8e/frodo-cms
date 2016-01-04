@@ -6,6 +6,12 @@ dependencies:
     - npm install gulp -g
     - npm install mocha -g
 
+database:
+  override:
+    - cp config/database.yml.ci config/database.yml
+    - node index.js
+    - node ./seeders/index.js
+
 machine:
   environment:
     NODE_ENV: test
