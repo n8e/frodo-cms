@@ -37,7 +37,12 @@
     "font-awesome": "fontawesome#~4.4.0",
     "lodash": "latest",
     "moment": "latest",
-    "angular-file-upload": "~2.2.0",
-    "angular-route": "~1.4.7"
+    "jquery": "~2.1.4",
+    "material": "~0.1.1",
+    "bootstrap": "~3.3.6",
+    "wow": "~1.1.2",
+    "ripples": "~1.0.0",
+    "classie": "~1.0.1",
+    "smooth-scroll": "~1.0.1"
   }
 }
