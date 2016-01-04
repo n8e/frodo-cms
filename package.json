@@ -58,7 +58,7 @@
   "devDependencies": {},
   "scripts": {
     "pretest": "node index.js &\nnode ./seeders/index.js",
-    "test": "jasmine-node tests/ --verbose",
+    "test": "jasmine-node tests/server/ --verbose",
     "posttest": "pkill node"
   },
   "repository": {
