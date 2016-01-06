@@ -19,7 +19,11 @@ html(lang='en', ng-app='frodocms')
     script(src='lib/angular-route/angular-route.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.7/socket.io.js')
     // local scripts
-    script(src='js/main.min.js')
+    script(src='js/services.js')
+    script(src='js/controllers.js')
+    script(src='js/app.routes.js')
+    script(src='js/directives.js')
+    script(src='js/app.js')
   body(ng-controller='LoginController as login')
     header
       .navbar.navbar-invers.menu-wrap
