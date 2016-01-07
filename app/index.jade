@@ -50,18 +50,37 @@ html(lang='en', ng-app='frodocms')
           li(ng-if='login.loggedIn')
             a(href='#', ng-click='login.doLogout()') Logout
         button#close-button.close-button Close Menu
-    main(style='padding-top:90px')
-      .col-md-12
-        .navbar.navbar-inverse.sticky-navigation.navbar-fixed-top(role='navigation', data-spy='affix', data-offset-top='200')
+    main
+      header#home.hero-area(ng-if='!showSection')
+        .col-md-12
+          .navbar.navbar-inverse.sticky-navigation.navbar-fixed-top(role='navigation', data-spy='affix', data-offset-top='200')
+              .container
+                .navbar-header
+                  a.logo-left(href='/')
+                    i.mdi-image-timelapse
+                    | Frodocms
+                .navbar-right
+                  button#open-button.menu-icon
+                    i.mdi-navigation-menu
+        .content-wrap
           .container
-            .navbar-header
-              a.logo-left(href='index.html')
-                i.mdi-image-timelapse
-                | Frodocms
-            .navbar-right
-              button#open-button.menu-icon
-                i.mdi-navigation-menu
-      .ng-scope(ng-view='' style='height:660px')
+            .contents.text-right
+              h1.wow.fadeInRight(data-wow-duration='1000ms', data-wow-delay='300ms') Frodocms - Managing your Documents
+              p.wow.fadeInRight(data-wow-duration='1000ms', data-wow-delay='400ms') Write and Save Documents
+              a.btn.btn-lg.btn-primary.wow.fadeInUp(href='/login', data-wow-duration='1000ms', data-wow-delay='400ms') Sign In
+              a.btn.btn-lg.btn-border.wow.fadeInUp(href='/signup', data-wow-duration='1000ms', data-wow-delay='500ms') Sign Up
+      header(ng-if='showSection' style='padding-top:90px' ng-controller="MainController as main")
+        .col-md-12
+          .navbar.navbar-inverse.sticky-navigation.navbar-fixed-top(role='navigation', data-spy='affix', data-offset-top='200')
+            .container
+              .navbar-header
+                a.logo-left(href='/')
+                  i.mdi-image-timelapse
+                  | Frodocms
+              .navbar-right
+                button#open-button.menu-icon(ng-click='main.toggleMenu()')
+                  i.mdi-navigation-menu
+        .ng-scope(ng-view='' style='height:700px' ng-if='showSection')
       section#footer
         .container
           .container
@@ -119,7 +138,7 @@ html(lang='en', ng-app='frodocms')
     script(src='lib/material/js/material.js')
     script(src='lib/wow/dist/wow.js')
     script(src='lib/protonet/jquery.inview/jquery.inview.min.js')
-    script(src='../js/main.js')
+    script(src='js/main.js')
     script(src='lib/classie/classie.js')
     script(src='lib/smooth-scroll/smooth-scroll.js')
     script.
