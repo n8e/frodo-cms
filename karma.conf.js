@@ -21,7 +21,11 @@ module.exports = function(config) {
       'public/lib/angular-resource/angular-resource.js',
       'public/lib/angular-route/angular-route.js',
       'public/lib/jquery/dist/jquery.js',
-      'public/js/main.js',
+      'public/js/controllers.js',
+      'public/js/services.js',
+      'public/js/app.routes.js',
+      'public/js/directives.js',
+      'public/js/app.js',
       'tests/unit/**/*'
     ],
 
