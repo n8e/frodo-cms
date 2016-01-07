@@ -1,0 +1,9 @@
+.container
+  section
+    .panel.panel-success
+      .panel-heading Your Documents
+      .panel-body(ng-repeat='each in document.documents | reverse')
+        h3 {{ each.title }}
+        p {{ each.content }}
+        p Owner: {{ each.ownerId}}
+        p Created: {{ each.dateCreated }}

@@ -1,0 +1,15 @@
+.container
+  .jumbotron
+    h2 Login
+  section(ng-controller='LoginController as login')
+    form.form-sigin(method='post', ng-submit='login.doLogin()')
+      br
+      | Username:
+      input.form-control(type='text', name='username', ng-model='login.loginData.username')
+      br
+      | Password:
+      input.form-control(type='password', name='password', ng-model='login.loginData.password')
+      br
+      button.btn.btn-success(type='submit') Login
+    p
+      a(href='/signup') Not Registered? Sign up here.
