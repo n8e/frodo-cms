@@ -1,5 +1,17 @@
 (function() {
   angular.module('frodocms.controllers', [])
+    .controller('MainController', function() {
+      var vm = this;
+      var isOpen = false;
+      vm.toggleMenu = function() {
+        if (isOpen) {
+          classie.remove(document.body, 'show-menu');
+        } else {
+          classie.add(document.body, 'show-menu');
+        }
+        isOpen = !isOpen;
+      };
+    })
     .controller('SignupController', ['$rootScope', '$location',
       'User',
       function($rootScope, $location, User) {
@@ -98,42 +110,44 @@
         vm.documents.push(data);
       });
     })
-    .controller('EditUserController', ['$rootScope', '$location', 'Auth', 
-      'User', function($rootScope, $location, Auth, User) {
-      var vm = this;
-      vm.loggedIn = Auth.isLoggedIn();
-      $rootScope.$on('$routeChangeStart', function() {
+    .controller('EditUserController', ['$rootScope', '$location', 'Auth',
+      'User',
+      function($rootScope, $location, Auth, User) {
+        var vm = this;
         vm.loggedIn = Auth.isLoggedIn();
-        Auth.getUser()
-          .then(function(data) {
-            vm.user = data.data;
-            console.log('CURRENT USER ' + vm.user);
-          });
-      });
-      vm.updateUser = function() {
-        console.log('IN HERE');
-        Auth.getUser()
-          .then(function(data) {
-            vm.user = data.data;
-            var updatedUser = {
-              username: vm.user.username,
-              password: vm.user.password,
-              firstname: vm.userData.firstname || vm.user.name.first,
-              lastname: vm.userData.lastname || vm.user.name.last,
-              email: vm.userData.email || vm.user.email,
-              role: vm.user.role
-            };
-            User.update(updatedUser)
-              .success(function(data) {
-                vm.processing = false;
-                if (data.success) {
-                  console.log('Update Response ' + data);
-                  $location.path('/myDocuments');
-                } else {
-                  vm.error = data.message;
-                }
-              });
-          });
-      };
-    }]);
+        $rootScope.$on('$routeChangeStart', function() {
+          vm.loggedIn = Auth.isLoggedIn();
+          Auth.getUser()
+            .then(function(data) {
+              vm.user = data.data;
+              console.log('CURRENT USER ' + vm.user);
+            });
+        });
+        vm.updateUser = function() {
+          console.log('IN HERE');
+          Auth.getUser()
+            .then(function(data) {
+              vm.user = data.data;
+              var updatedUser = {
+                username: vm.user.username,
+                password: vm.user.password,
+                firstname: vm.userData.firstname || vm.user.name.first,
+                lastname: vm.userData.lastname || vm.user.name.last,
+                email: vm.userData.email || vm.user.email,
+                role: vm.user.role
+              };
+              User.update(updatedUser)
+                .success(function(data) {
+                  vm.processing = false;
+                  if (data.success) {
+                    console.log('Update Response ' + data);
+                    $location.path('/myDocuments');
+                  } else {
+                    vm.error = data.message;
+                  }
+                });
+            });
+        };
+      }
+    ]);
 })();
