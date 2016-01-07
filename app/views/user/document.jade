@@ -1,0 +1,13 @@
+.container
+  section(ng-controller='DocumentController as docman')
+    .panel.panel-success
+      .panel-heading Create Document
+      form.form-sigin(method='post', ng-submit='docman.createDocument()')
+        br
+        | Title
+        input.form-control(type='text', name='title', ng-model='docman.docData.title')
+        br
+        | Content
+        textarea.form-control(name='content', ng-model='docman.docData.content')
+        br
+        button.btn.btn-success(type='submit') Save Document
