@@ -3,7 +3,7 @@
     .config(function($routeProvider, $locationProvider) {
       $routeProvider
         .when('/', {
-          templateUrl: 'views/home.html'
+          templateUrl: 'index.html'
         })
         .when('/signup', {
           templateUrl: 'views/signup.html'
@@ -31,5 +31,10 @@
           }
         });
       $locationProvider.html5Mode(true);
+    })
+    .run(function($rootScope, $location) {
+      $rootScope.$on('$routeChangeSuccess', function() {
+        $rootScope.showSection = $location.path() !== '/';
+      });
     });
 })();
