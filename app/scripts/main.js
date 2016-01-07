@@ -1,13 +1,10 @@
 jQuery(function($) {
-
   //Initiat WOW JS
   new WOW().init();
-
   // one page navigation 
   $('.main-navigation').onePageNav({
     currentClass: 'active'
   });
-
   // Countdown
   $('#counter').bind('inview', function(event, visible, visiblePartX, visiblePartY) {
     if (visible) {
@@ -28,8 +25,6 @@ jQuery(function($) {
       $(this).unbind('inview');
     }
   });
-
-
   /**
    * main.js
    * http://www.codrops.com
@@ -41,7 +36,6 @@ jQuery(function($) {
    * http://www.codrops.com
    */
   (function() {
-
     var bodyEl = document.body,
       content = document.querySelector('.contents'),
       openbtn = document.getElementById('open-button'),
@@ -57,7 +51,6 @@ jQuery(function($) {
       if (closebtn) {
         closebtn.addEventListener('click', toggleMenu);
       }
-
       // close the menu element if the target it´s not the menu element or one of its descendants..
       content.addEventListener('click', function(ev) {
         var target = ev.target;
@@ -75,9 +68,6 @@ jQuery(function($) {
       }
       isOpen = !isOpen;
     }
-
     init();
-
   })();
-
 });
