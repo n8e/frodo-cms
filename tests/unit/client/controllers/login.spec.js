@@ -1,35 +1,25 @@
-describe('LoginController', function() {
-  beforeEach(module('frodocms'));
-  var loginController, $rootScope;
+describe('Controller: Login Controller', function() {
+  // new instance of the module
+  beforeEach(angular.mock.module('frodocms'));
 
-  beforeEach(inject(function($controller) {
-    // mockAuth = module(function($provide) {
-    //   $provide.factory('Auth', ['$q', function($q) {
-    //     function doLogin(username, password) {
-    //       if (passPromise) {
-    //         return $q.when();
-    //       } else {
-    //         return $q.reject();
-    //       }
-    //     }
-    //     return {
-    //       doLogin: doLogin
-    //     };
-    //   }]);
-    // });
-    // // = Auth;
-    loginController = $controller('LoginController', { scope: $rootScope});
+  var controller, $rootScope, $scope, Auth;
+  // instantiate the main controller
+  beforeEach(angular.mock.inject(function($injector, $controller) {
+    controller = $controller('LoginController');
+    $rootScope = $injector.get('$rootScope');
+    Auth = $injector.get('Auth');
+    $scope = $rootScope.$new();
   }));
 
-  describe('test property', function() {
-    it('verifies that the test property resolves to "Test Text"', function() {
-      // vm.loginData.username = 'smalik';
-      // vm.loginData.password = '12345';
-      // loginController.doLogin();
-      // Auth.login(vm.loginData.username, vm.loginData.password);
-      expect(loginController.test).toEqual('Test Text');
-      // expect(loginController.doLogin).toBeDefined();
-      // expect(loginController.doLogin).toHaveBeenCalled();
+  describe('Initialization', function() {
+    it('should verify that doLogin function is defined', function() {
+      expect(controller.doLogin).toBeDefined();
+    });
+    it('should verify that doLogout function is defined', function() {
+      expect(controller.doLogout).toBeDefined();
+    });
+    it('should verify that loggedIn function is defined', function() {
+      expect(controller.loggedIn).toBeDefined();
     });
   });
 });
