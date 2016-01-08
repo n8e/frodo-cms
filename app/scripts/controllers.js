@@ -3,6 +3,7 @@
     .controller('MainController', function() {
       var vm = this;
       var isOpen = false;
+      vm.isOpen = isOpen;
       vm.toggleMenu = function() {
         if (isOpen) {
           classie.remove(document.body, 'show-menu');
