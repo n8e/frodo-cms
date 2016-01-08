@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   // get the required models and db connection
-  var config = require('../config/config'),
+  var config = require('../config'),
     User = require('../models/users'),
     Role = require('../models/roles'),
     jsonwebtoken = require('jsonwebtoken'),
