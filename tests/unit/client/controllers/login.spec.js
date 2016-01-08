@@ -1,4 +1,4 @@
-describe('Controller: Login Controller', function() {
+describe('Controller: LoginController', function() {
   // new instance of the module
   beforeEach(angular.mock.module('frodocms'));
 
