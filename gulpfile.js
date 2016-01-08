@@ -1,3 +1,7 @@
+var ENV = process.env.NODE_ENV || 'development';
+if (ENV === 'development') {
+  require('dotenv').load();
+}
 var gulp = require('gulp'),
   less = require('gulp-less'),
   jade = require('gulp-jade'),
@@ -11,6 +15,7 @@ var gulp = require('gulp'),
   uglify = require('gulp-uglify'),
   jshint = require('jshint'),
   plumber = require('gulp-plumber'),
+  reporter = require('gulp-codeclimate-reporter'),
   browserify = require('browserify'),
   path = require('path'),
   source = require('vinyl-source-stream'),
@@ -42,33 +47,42 @@ var gulp = require('gulp'),
 gulp.task('browser-sync', function() {
   browserSync({
     server: {
-       baseDir: "./public"
+      baseDir: "./public"
     }
   });
 });
 
-gulp.task('bs-reload', function () {
+gulp.task('bs-reload', function() {
   browserSync.reload();
 });
 
-gulp.task('scripts', function(){
+gulp.task('scripts', function() {
   return gulp.src('app/scripts/**/*.js')
     .pipe(plumber({
-      errorHandler: function (error) {
+      errorHandler: function(error) {
         console.log(error.message);
         this.emit('end');
-    }}))
+      }
+    }))
     .pipe(concat('main.js'))
     .pipe(gulp.dest('public/js/'))
-    .pipe(rename({suffix: '.min'}))
+    .pipe(rename({
+      suffix: '.min'
+    }))
     .pipe(uglify())
     .pipe(gulp.dest('public/js/'))
-    .pipe(browserSync.reload({stream:true}));
+    .pipe(browserSync.reload({
+      stream: true
+    }));
 });
 
-gulp.task('images', function(){
+gulp.task('images', function() {
   gulp.src('app/images/**/*')
-    .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
+    .pipe(cache(imagemin({
+      optimizationLevel: 3,
+      progressive: true,
+      interlaced: true
+    })))
     .pipe(gulp.dest('public/img/'));
 });
 
@@ -150,11 +164,22 @@ gulp.task('nodemon', function() {
     });
 });
 
+gulp.task('codeclimate-reporter', ['test:fend', 'test:bend'], function() {
+  return gulp.src(['coverage/lcov/lcov.info'], {
+      read: false
+    })
+    .pipe(reporter({
+      token: process.env.CODECLIMATE_REPO_TOKEN,
+      verbose: true
+    }));
+});
+
 gulp.task('watch', function() {
   gulp.watch(paths.jade, ['jade']);
   gulp.watch(paths.styles, ['less']);
 });
 
-gulp.task('build', ['jade', 'less', 'static-files','scripts', 'bower']);
+gulp.task('build', ['jade', 'less', 'static-files', 'scripts', 'bower']);
 gulp.task('production', ['nodemon', 'build']);
 gulp.task('default', ['nodemon', 'watch', 'build', 'images']);
+gulp.task('test', ['test:bend', 'test:fend', 'codeclimate-reporter']);
