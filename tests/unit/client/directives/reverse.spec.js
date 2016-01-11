@@ -1,18 +1,10 @@
-describe('Directive: reverseDirective', function() {
+describe('Filter: reverseDirective', function() {
   // new instance of the module
   beforeEach(angular.mock.module('frodocms'));
 
-  var reverse;
-  var items = ['Mustapha', 'Mwaniki', 'Sass'];
-
-  beforeEach(angular.mock.inject(function($injector) {
-    reverse = $injector.get('reverse');
-    spyOn(reverse).and.callThrough();
-    reverse(items);
-  }));
-
-  it('should verify that login function exists and is called', function() {
-    expect(reverse).toBeDefined();
-    expect(reverse).toHaveBeenCalled();
-  });
+  it('should verify that reverse filter is called',
+    angular.mock.inject(function(reverseFilter) {
+      var result = reverseFilter(['Mustapha', 'Mwaniki', 'Sass']);
+      expect(result).toEqual(['Sass', 'Mwaniki', 'Mustapha']);
+    }));
 });
