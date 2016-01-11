@@ -9,11 +9,14 @@ describe('Controller: Signup Controller', function() {
     $rootScope = $injector.get('$rootScope');
     User = $injector.get('User');
     $scope = $rootScope.$new();
+    spyOn(controller, 'doSignup').and.callThrough();
+    controller.doSignup();
   }));
 
   describe('Initialization', function() {
     it('should verify that doSignup function is defined', function() {
       expect(controller.doSignup).toBeDefined();
+      expect(controller.doSignup).toHaveBeenCalled();
     });
   });
 });

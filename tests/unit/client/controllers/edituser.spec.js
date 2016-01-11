@@ -10,11 +10,14 @@ describe('Controller: EditUser Controller', function() {
     Auth = $injector.get('Auth');
     User = $injector.get('User');
     $scope = $rootScope.$new();
+    spyOn(controller, 'updateUser').and.callThrough();
+    controller.updateUser();
   }));
 
   describe('Initialization', function() {
     it('should verify that updateUser function is defined', function() {
       expect(controller.updateUser).toBeDefined();
+      expect(controller.updateUser).toHaveBeenCalled();
     });
   });
 });

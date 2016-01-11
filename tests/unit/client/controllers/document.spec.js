@@ -8,11 +8,14 @@ describe('Controller: DocumentController', function() {
     controller = $controller('DocumentController');
     Document = $injector.get('Document');
     socketio = $injector.get('socketio');
+    spyOn(controller, 'createDocument').and.callThrough();
+    controller.createDocument();
   }));
 
   describe('Initialization', function() {
-    it('should verify that updateUser function is defined', function() {
+    it('should verify that createDocument function is defined', function() {
       expect(controller.createDocument).toBeDefined();
+      expect(controller.createDocument).toHaveBeenCalled();
     });
   });
 });
