@@ -9,6 +9,14 @@ describe('Controller: Signup Controller', function() {
     $rootScope = $injector.get('$rootScope');
     User = $injector.get('User');
     $scope = $rootScope.$new();
+    controller.signupData = {
+      username: 'knights',
+      password: '12345',
+      firstname: 'Eugene',
+      lastname: 'Mutai',
+      email: 'eugene.mutai@andela.com ',
+      role: 2
+    };
     spyOn(controller, 'doSignup').and.callThrough();
     controller.doSignup();
   }));

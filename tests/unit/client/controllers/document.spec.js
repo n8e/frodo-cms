@@ -8,6 +8,10 @@ describe('Controller: DocumentController', function() {
     controller = $controller('DocumentController');
     Document = $injector.get('Document');
     socketio = $injector.get('socketio');
+    controller.docData = {
+      title: 'title',
+      content: 'content'
+    };
     spyOn(controller, 'createDocument').and.callThrough();
     controller.createDocument();
   }));

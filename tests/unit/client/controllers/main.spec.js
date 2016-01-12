@@ -19,7 +19,7 @@ describe('Controller: Main Controller', function() {
       expect(controller.isOpen).toBeDefined();
     });
     it('should verify that isOpen is a falsy value', function() {
-      expect(controller.isOpen).toBeFalsy();
+      expect(controller.isOpen).toBe(false);
     });
   });
 });
