@@ -3,6 +3,7 @@
     .controller('MainController', function() {
       var vm = this;
       var isOpen = false;
+      vm.isOpen = isOpen;
       vm.toggleMenu = function() {
         if (isOpen) {
           classie.remove(document.body, 'show-menu');
@@ -19,7 +20,7 @@
         sm.doSignup = function() {
           sm.processing = true;
           sm.error = '';
-          var newUser = {
+          sm.newUser = {
             username: sm.signupData.username,
             password: sm.signupData.password,
             firstname: sm.signupData.firstname,
@@ -27,8 +28,7 @@
             email: sm.signupData.email,
             role: sm.signupData.role
           };
-          User.create(newUser)
-            .success(function(data) {
+          User.create(sm.newUser, function(data) {
               sm.processing = false;
               if (data.success) {
                 $location.path('/');
@@ -54,19 +54,18 @@
         vm.doLogin = function() {
           vm.processing = true;
           vm.error = '';
-          Auth.login(vm.loginData.username, vm.loginData.password)
-            .success(function(data) {
-              vm.processing = false;
-              Auth.getUser()
-                .then(function(data) {
-                  vm.user = data.data;
-                });
-              if (data.success) {
-                $location.path('/profile');
-              } else {
-                vm.error = data.message;
-              }
-            });
+          Auth.login(vm.loginData, function(data) {
+            vm.processing = false;
+            Auth.getUser()
+              .then(function(data) {
+                vm.user = data.data;
+              });
+            if (data.success) {
+              $location.path('/profile');
+            } else {
+              vm.error = data.message;
+            }
+          });
         };
         vm.doLogout = function() {
           Auth.logout();
@@ -78,8 +77,7 @@
       'socketio',
       function(Document, socketio) {
         var vm = this;
-        Document.all()
-          .success(function(data) {
+        Document.all(function(data) {
             vm.documents = data;
           });
 
@@ -90,8 +88,7 @@
             title: vm.docData.title,
             content: vm.docData.content
           };
-          Document.create(vm.documentData)
-            .success(function(data) {
+          Document.create(vm.documentData, function(data) {
               vm.processing = false;
               //clear up the form
               vm.documentData = {};
@@ -99,17 +96,20 @@
             });
         };
         socketio.on('document', function(data) {
-          vm.stories.push(data);
+          vm.documents.push(data);
         });
       }
     ])
-    .controller('AllDocumentsController', function(socketio, documents) {
+    .controller('AllDocumentsController', ['Document', 'socketio', function(Document, socketio) {
       var vm = this;
-      vm.documents = documents.data;
+      Document.all(function(data) {
+          vm.documents = data;
+        });
+      // vm.documents = documents.data;
       socketio.on('document', function(data) {
         vm.documents.push(data);
       });
-    })
+    }])
     .controller('EditUserController', ['$rootScope', '$location', 'Auth',
       'User',
       function($rootScope, $location, Auth, User) {
@@ -120,15 +120,12 @@
           Auth.getUser()
             .then(function(data) {
               vm.user = data.data;
-              console.log('CURRENT USER ' + vm.user);
             });
         });
         vm.updateUser = function() {
-          console.log('IN HERE');
-          Auth.getUser()
-            .then(function(data) {
+          Auth.getUser(function(data) {
               vm.user = data.data;
-              var updatedUser = {
+              vm.updatedUser = {
                 username: vm.user.username,
                 password: vm.user.password,
                 firstname: vm.userData.firstname || vm.user.name.first,
@@ -136,11 +133,9 @@
                 email: vm.userData.email || vm.user.email,
                 role: vm.user.role
               };
-              User.update(updatedUser)
-                .success(function(data) {
+              User.update(vm.updatedUser, function(data) {
                   vm.processing = false;
                   if (data.success) {
-                    console.log('Update Response ' + data);
                     $location.path('/myDocuments');
                   } else {
                     vm.error = data.message;

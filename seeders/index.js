@@ -1,7 +1,7 @@
 var User = require('../server/models/users'),
   Role = require('../server/models/roles'),
   mongoose = require('mongoose'),
-  config = require('../server/config/config');
+  config = require('../server/config');
 var user = new User({
   firstname: 'Sadiq',
   lastname: 'Malika',

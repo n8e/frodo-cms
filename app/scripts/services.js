@@ -3,14 +3,11 @@
     .factory('Auth', ['$http', '$q', 'AuthToken',
       function($http, $q, AuthToken) {
         var authFactory = {};
-        authFactory.login = function(username, password) {
-          return $http.post('/api/users/login', {
-              username: username,
-              password: password
-            })
+        authFactory.login = function(credentials, callback) {
+          return $http.post('/api/users/login', credentials)
             .success(function(data) {
               AuthToken.setToken(data.token);
-              return data;
+              callback(data);
             });
         };
         authFactory.logout = function() {
@@ -83,7 +80,6 @@
       return $http.get('/api/me')
       .success(function(data) {
           id = data._id;
-          console.log('IN USER ', id);
           $http.put('/api/users/' + id, userData);
         });
     };

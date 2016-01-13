@@ -21,6 +21,7 @@ machine:
     DATABASE_DIALECT: mongodb
     DATABASE_PORT: 27019
     DATABASE_URL: mongodb://ubuntu:@127.0.0.1:27019/circle_test
+    CODECLIMATE_REPO_TOKEN: 568f4a1796095db71636f201fa72ea5d7dd7c9d85ffd506fd0e78e9c3cc1cd94
 
 test:
   override:
