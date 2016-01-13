@@ -3,6 +3,13 @@ describe('Controller: Signup Controller', function() {
   beforeEach(angular.mock.module('frodocms'));
 
   var controller, $rootScope, $scope, User;
+
+  var signupCallback = {
+    success: function() {
+      return true;
+    }
+  };
+
   // instantiate the main controller
   beforeEach(angular.mock.inject(function($injector, $controller) {
     controller = $controller('SignupController');
@@ -17,6 +24,11 @@ describe('Controller: Signup Controller', function() {
       email: 'eugene.mutai@andela.com ',
       role: 2
     };
+
+    sinon.stub(User, 'create', function(args, fn) {
+      return fn({});
+    });
+
     spyOn(controller, 'doSignup').and.callThrough();
     controller.doSignup();
   }));

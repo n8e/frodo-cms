@@ -3,6 +3,13 @@ describe('Controller: EditUser Controller', function() {
   beforeEach(angular.mock.module('frodocms'));
 
   var controller, $rootScope, $scope, Auth, User;
+
+  var userCallback = {
+    success: function() {
+      return true;
+    }
+  };
+
   // instantiate the main controller
   beforeEach(angular.mock.inject(function($injector, $controller) {
     controller = $controller('EditUserController');
@@ -21,8 +28,15 @@ describe('Controller: EditUser Controller', function() {
     controller.userData = {
       firstname: 'Sandra',
       lastname: 'Malika',
-      email: 'smalika@gmail.com' 
+      email: 'smalika@gmail.com'
     };
+
+    sinon.stub(Auth, 'getUser', function(fn) {
+      return fn({});
+    });
+
+
+
     spyOn($scope, '$on').and.callThrough();
     spyOn(controller, 'updateUser').and.callThrough();
     controller.updateUser();

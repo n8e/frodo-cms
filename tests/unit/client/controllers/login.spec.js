@@ -4,6 +4,12 @@ describe('Controller: LoginController', function() {
 
   var controller, $rootScope, $scope, Auth;
 
+  var loginCallback = {
+    success: function(data) {
+      return true;
+    }
+  };
+
   // instantiate the main controller
   beforeEach(angular.mock.inject(function($injector, $controller) {
     controller = $controller('LoginController');
@@ -14,6 +20,13 @@ describe('Controller: LoginController', function() {
       username: 'smalik',
       password: '12345'
     };
+
+    // sinon.stub(loginCallback, 'success', function() {});
+
+    sinon.stub(Auth, 'login', function(args, fn) {
+      return fn({});
+    });
+
     spyOn($scope, '$on').and.callThrough();
     spyOn(controller, 'doLogin').and.callThrough();
     spyOn(controller, 'doLogout').and.callThrough();
@@ -21,22 +34,24 @@ describe('Controller: LoginController', function() {
     controller.doLogout();
     $scope.$on();
   }));
-  
-  describe('$routeChangeSuccess', function() {
-    it('should verify that the function runs', function() {
-      expect($scope.$on).toBeDefined();
-      expect($scope.$on).toHaveBeenCalled();
-    });
+
+  it('should verify that the function runs', function() {
+    expect($scope.$on).toBeDefined();
+    expect($scope.$on).toHaveBeenCalled();
   });
 
-  describe('Initialization', function() {
-    it('should verify that doLogin function is defined', function() {
-      expect(controller.doLogin).toBeDefined();
-      expect(controller.doLogin).toHaveBeenCalled();
-    });
-    it('should verify that doLogout function is defined', function() {
-      expect(controller.doLogout).toBeDefined();
-      expect(controller.doLogout).toHaveBeenCalled();
-    });
+  it('should verify that doLogin function is defined', function() {
+    expect(controller.doLogin).toBeDefined();
+    expect(controller.doLogin).toHaveBeenCalled();
+  });
+
+  it('should verify that doLogout function is defined', function() {
+    expect(controller.doLogout).toBeDefined();
+    expect(controller.doLogout).toHaveBeenCalled();
+  });
+
+  it('should call auth login', function() {
+    expect(Auth.login.called).toBe(true);
+    // expect(loginCallback.called).toBe(true);
   });
 });

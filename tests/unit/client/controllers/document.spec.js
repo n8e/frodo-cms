@@ -3,6 +3,12 @@ describe('Controller: DocumentController', function() {
   beforeEach(angular.mock.module('frodocms'));
 
   var controller, Document, socketio;
+
+  var documentCallback = {
+    success: function() {
+      return true;
+    }
+  }
   // instantiate the main controller
   beforeEach(angular.mock.inject(function($injector, $controller) {
     controller = $controller('DocumentController');
@@ -12,6 +18,15 @@ describe('Controller: DocumentController', function() {
       title: 'title',
       content: 'content'
     };
+
+    sinon.stub(Document, 'create', function(args, fn) {
+      return fn({});
+    });
+
+    sinon.stub(Document, 'all', function(fn) {
+      return fn({});
+    });
+
     spyOn(controller, 'createDocument').and.callThrough();
     controller.createDocument();
   }));
