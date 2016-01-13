@@ -1,7 +1,8 @@
 (function() {
   'use strict';
   // get the required models and db connection
-  var config = require('../config'),
+  var env = process.env.NODE_ENV || 'development',
+    config = require('../config')[env],
     User = require('../models/users'),
     Role = require('../models/roles'),
     jsonwebtoken = require('jsonwebtoken'),
