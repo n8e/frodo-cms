@@ -7,7 +7,7 @@ html(lang='en', ng-app='frodocms')
     script(src='lib/angular/angular.min.js')
     link(rel='stylesheet', href='lib/bootstrap/dist/css/bootstrap.min.css')
     // Font Awesome CSS
-    link(rel='stylesheet', href='font-awesome/css/font-awesome.min.css', type='text/css', media='screen')
+    link(rel='stylesheet', href='lib/font-awesome/css/font-awesome.min.css', type='text/css', media='screen')
     // Include roboto.css to use the Roboto web font, material.css to include the theme and ripples.css to style the ripple effect
     link(href='css/material.min.css', rel='stylesheet')
     link(href='lib/ripples/dist/css/ripple.min.css', rel='stylesheet')
@@ -83,54 +83,28 @@ html(lang='en', ng-app='frodocms')
         .ng-scope(ng-view='' style='height:700px' ng-if='showSection')
       section#footer
         .container
-          .container
+          .container#copyright
             .row
               .col-md-3.col-sm-6.col-xs-12
-                h3 Products
-                ul
-                  li
-                    a(href='http://wingthemes.com/') WingThemes
-                  li
-                    a(href='http://graygrids.com/') Graygrids
-                  li
-                    a(href='http://wpbean.com/') WPBean
-              .col-md-3.col-sm-6.col-xs-12
-                h3 FAQs
-                ul
-                  li
-                    a(href='#') Where we are?
-                  li
-                    a(href='#') Fees
-                  li
-                    a(href='#') Guarantee
-              .col-md-3.col-sm-6.col-xs-12
-                h3 About
-                ul
-                  li
-                    a(href='#') Team
-                  li
-                    a(href='#') Clients
-                  li
-                    a(href='#') Contact
-              .col-md-3.col-sm-6.col-xs-12
                 h3 Find us on
-                a.social(href='#', target='_blank')
-                  i.fa.fa-facebook
+              .col-md-3.col-sm-6.col-xs-12
                 a.social(href='#', target='_blank')
                   i.fa.fa-twitter
+              .col-md-3.col-sm-6.col-xs-12 
                 a.social(href='#', target='_blank')
                   i.fa.fa-google-plus
-        // Go to Top Link
-        a.btn.btn-primary.back-to-top(href='#home')
-          i.mdi-hardware-keyboard-arrow-up
-      section#copyright
-        .container
-          .row
-            .col-md-12
+              .col-md-3.col-sm-6.col-xs-12 
+                a.social(href='#', target='_blank')
+                  i.fa.fa-facebook
+            .row
+              .col-md-12
               p.copyright-text
                 | © Frodocms 2015 All right reserved. Designed and Developed by
-                a(href='http://graygrids.com/')
+                a(href='https://github.com/andela-nmartin/')
                   | NM
+        // Go to Top Link
+        a.btn.btn-primary.back-to-top(href='#home')
+          i.mdi-hardware-keyboard-arrow-up         
 
     script(src='lib/jquery/dist/jquery.min.js')
     script(src='lib/bootstrap/dist/js/bootstrap.min.js')
