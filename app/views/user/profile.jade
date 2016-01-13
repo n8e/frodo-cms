@@ -1,22 +1,30 @@
 .container
-  section
-    .panel.panel-success(ng-if='login.loggedIn', ng-controller='EditUserController as edUser')
-      .panel-heading Edit Profile
+  .row
+    .col.s6.col-md-4.col-sm-6.col-xs-12(style='margin:0; padding:0;')
+      .portfolio.col.s6
+        figure.effect-julia
+          img(src='img/frodo.png', alt='', style='height:250px; width:175px;')
+          figcaption
+            .heading
+              h3 {{ login.user.name.last }} 
+    .col.s6.offset-s7.heading
+      h3 Welcome {{ login.user.name.first }} 
       form.form-sigin(method='post', ng-submit='edUser.updateUser ()')
         br
         | Username: 
         label {{ login.user.username }}
         br
-        |         First Name: 
+        | Role: 
+        label {{ login.user.role }}
+        br
+        | First Name: 
         label {{ login.user.name.first }}
         input.form-control(type='text', name='firstname', placeholder='New First Name', ng-model='edUser.userData.firstname')
-        |         Last Name: 
+        | Last Name: 
         label {{ login.user.name.last }}
         input.form-control(type='text', name='lastname', placeholder='New Last Name', ng-model='edUser.userData.lastname')
-        |         Email: 
+        | Email: 
         label {{ login.user.email }}
         input.form-control(type='text', name='email', placeholder='New Email', ng-model='edUser.userData.email')
-        |         Role: 
-        label {{ login.user.role }}
         br
         button.btn.btn-success(type='submit') Update User
