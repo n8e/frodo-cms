@@ -29,13 +29,14 @@
             role: sm.signupData.role
           };
           User.create(sm.newUser, function(data) {
-              sm.processing = false;
-              if (data.success) {
-                $location.path('/');
-              } else {
-                sm.error = data.message;
-              }
-            });
+            console.log('FEND DATA FROM SERVER: ' + JSON.stringify(data));
+            sm.processing = false;
+            if (data.success) {
+              $location.path('/profile');
+            } else {
+              sm.error = data.message;
+            }
+          });
         };
       }
     ])
@@ -69,17 +70,17 @@
         };
         vm.doLogout = function() {
           Auth.logout();
+          vm.user = '';
           $location.path('/logout');
         };
       }
     ])
     .controller('DocumentController', ['Document',
-      'socketio',
-      function(Document, socketio) {
+      function(Document) {
         var vm = this;
         Document.all(function(data) {
-            vm.documents = data;
-          });
+          vm.documents = data;
+        });
 
         vm.createDocument = function() {
           vm.processing = true;
@@ -89,27 +90,28 @@
             content: vm.docData.content
           };
           Document.create(vm.documentData, function(data) {
-              vm.processing = false;
-              //clear up the form
-              vm.documentData = {};
-              vm.message = data.message;
-            });
+            vm.processing = false;
+            //clear up the form
+            vm.documentData = {};
+            vm.message = data.message;
+          });
         };
-        socketio.on('document', function(data) {
-          vm.documents.push(data);
-        });
       }
     ])
-    .controller('AllDocumentsController', ['Document', 'socketio', function(Document, socketio) {
-      var vm = this;
-      Document.all(function(data) {
-          vm.documents = data;
-        });
-      // vm.documents = documents.data;
-      socketio.on('document', function(data) {
-        vm.documents.push(data);
-      });
-    }])
+    .controller('AllDocumentsController', ['Document',
+      'Auth',
+      function(Document, Auth) {
+        var vm = this;
+        Auth.getUser()
+          .then(function(data) {
+            vm.user = data.data;
+            vm.documents = '';
+            Document.all(function(data) {
+              vm.documents = data;
+            });
+          });
+      }
+    ])
     .controller('EditUserController', ['$rootScope', '$location', 'Auth',
       'User',
       function($rootScope, $location, Auth, User) {
@@ -124,24 +126,24 @@
         });
         vm.updateUser = function() {
           Auth.getUser(function(data) {
-              vm.user = data.data;
-              vm.updatedUser = {
-                username: vm.user.username,
-                password: vm.user.password,
-                firstname: vm.userData.firstname || vm.user.name.first,
-                lastname: vm.userData.lastname || vm.user.name.last,
-                email: vm.userData.email || vm.user.email,
-                role: vm.user.role
-              };
-              User.update(vm.updatedUser, function(data) {
-                  vm.processing = false;
-                  if (data.success) {
-                    $location.path('/myDocuments');
-                  } else {
-                    vm.error = data.message;
-                  }
-                });
+            vm.user = data.data;
+            vm.updatedUser = {
+              username: vm.user.username,
+              password: vm.user.password,
+              firstname: vm.userData.firstname || vm.user.name.first,
+              lastname: vm.userData.lastname || vm.user.name.last,
+              email: vm.userData.email || vm.user.email,
+              role: vm.user.role
+            };
+            User.update(vm.updatedUser, function(data) {
+              vm.processing = false;
+              if (data.success) {
+                $location.path('/myDocuments');
+              } else {
+                vm.error = data.message;
+              }
             });
+          });
         };
       }
     ]);

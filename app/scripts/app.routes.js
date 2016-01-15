@@ -22,6 +22,9 @@
         .when('/profile', {
           templateUrl: 'views/user/profile.html'
         })
+        .when('/error', {
+          templateUrl: 'views/error.html'
+        })
         .when('/myDocuments', {
           templateUrl: 'views/user/view_my_documents.html',
           controller: 'AllDocumentsController',

@@ -210,7 +210,7 @@
 
     getAllDocumentsParticularUser: function(req, res) {
       var id = req.param('id');
-      User.find({
+      Document.find({
         ownerId: id
       }, function(err, documents) {
         if (err) {
