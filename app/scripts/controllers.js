@@ -106,17 +106,13 @@
       'Auth',
       function(Document, Auth) {
         var vm = this;
-        console.log('DEFINITELY HERE!!!!');
-        Auth.getUser()
-          .then(function(data) {
-            vm.user = data.data;
-            vm.documents = '';
-            console.log('NOT HERE!!!!');
-            Document.all(function(data) {
-              console.log('THIS HERE!!!!');
-              vm.documents = data;
-            });
+        Auth.getUser(function(data) {
+          vm.user = data.data;
+          vm.documents = '';
+          Document.all(function(data) {
+            vm.documents = data;
           });
+        });
       }
     ])
     .controller('EditUserController', ['$rootScope', '$location', 'Auth',
@@ -126,8 +122,7 @@
         vm.loggedIn = Auth.isLoggedIn();
         $rootScope.$on('$routeChangeStart', function() {
           vm.loggedIn = Auth.isLoggedIn();
-          Auth.getUser()
-            .then(function(data) {
+          Auth.getUser(function(data) {
               vm.user = data.data;
             });
         });

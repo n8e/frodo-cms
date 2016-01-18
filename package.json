@@ -58,7 +58,9 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "devDependencies": {
-    "karma-phantomjs-launcher": "^0.2.3"
+    "karma-phantomjs-launcher": "^0.2.3",
+    "karma-sinon": "^1.0.4",
+    "sinon": "^1.17.2"
   },
   "scripts": {
     "pretest": "node index.js &\nnode ./seeders/index.js",
