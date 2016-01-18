@@ -25,19 +25,6 @@ describe('Testing routes', function() {
       expect(route.current.controller).toBe('LoginController');
     });
   });
-  describe('myDocuments route', function() {
-    beforeEach(angular.mock.inject(
-      function($httpBackend) {
-        $httpBackend.expectGET('api/documents')
-          .respond(200);
-      }));
-
-    it('should load the login page on successful load of /login', function() {
-      location.path('/myDocuments');
-      rootScope.$digest();
-      expect(route.current.controller).toBe('AllDocumentsController');
-    });
-  });
   describe('$routeChangeSuccess', function() {
     it('should verify that the function runs', function() {
       expect(rootScope.$on).toBeDefined();

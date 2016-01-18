@@ -29,7 +29,6 @@
             role: sm.signupData.role
           };
           User.create(sm.newUser, function(data) {
-            console.log('FEND DATA FROM SERVER: ' + JSON.stringify(data));
             sm.processing = false;
             if (data.success) {
               $location.path('/profile');
@@ -107,11 +106,14 @@
       'Auth',
       function(Document, Auth) {
         var vm = this;
+        console.log('DEFINITELY HERE!!!!');
         Auth.getUser()
           .then(function(data) {
             vm.user = data.data;
             vm.documents = '';
+            console.log('NOT HERE!!!!');
             Document.all(function(data) {
+              console.log('THIS HERE!!!!');
               vm.documents = data;
             });
           });

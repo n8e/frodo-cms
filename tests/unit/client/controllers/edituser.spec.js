@@ -30,13 +30,9 @@ describe('Controller: EditUser Controller', function() {
       lastname: 'Malika',
       email: 'smalika@gmail.com'
     };
-
     sinon.stub(Auth, 'getUser', function(fn) {
       return fn({});
     });
-
-
-
     spyOn($scope, '$on').and.callThrough();
     spyOn(controller, 'updateUser').and.callThrough();
     controller.updateUser();

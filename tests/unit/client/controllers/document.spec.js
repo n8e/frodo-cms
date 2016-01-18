@@ -2,18 +2,17 @@ describe('Controller: DocumentController', function() {
   // new instance of the module
   beforeEach(angular.mock.module('frodocms'));
 
-  var controller, Document, socketio;
+  var controller, Document;
 
   var documentCallback = {
     success: function() {
       return true;
     }
-  }
+  };
   // instantiate the main controller
   beforeEach(angular.mock.inject(function($injector, $controller) {
     controller = $controller('DocumentController');
     Document = $injector.get('Document');
-    socketio = $injector.get('socketio');
     controller.docData = {
       title: 'title',
       content: 'content'

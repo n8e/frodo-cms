@@ -62,7 +62,7 @@
   },
   "scripts": {
     "pretest": "node index.js &\nnode ./seeders/index.js",
-    "test": "jasmine-node tests/server/ --verbose",
+    "test": "gulp test",
     "posttest": "pkill node"
   },
   "repository": {
