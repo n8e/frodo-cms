@@ -34,9 +34,8 @@
         id: req.body.role
       }, function(err, roles) {
         if (err) {
-          res.status(404).send({
-            'message': 'Role not Found!'
-          });
+          res.send(err);
+          return;
         }
         // add the role to the user before being saved
         user.role = roles[0].title;
@@ -45,9 +44,7 @@
         // save the user object
         user.save(function(err) {
           if (err) {
-            res.status(403).send({
-              'message': 'This user already exists. Go to login page.'
-            });
+            res.status(403).send(err);
           } else {
             res.json({
               success: true,

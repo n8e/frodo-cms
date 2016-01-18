@@ -108,33 +108,12 @@
             });
         });
     };
-    documentFactory.create = function(documentData) {
-      return $http.post('/api/documents', documentData);
+    documentFactory.create = function(documentData, callback) {
+      return $http.post('/api/documents', documentData)
+        .success(function(data) {
+          callback(data);
+        });
     };
     return documentFactory;
-  }])
-
-  .factory('socketio', ['$rootScope', function($rootScope) {
-    var socket = io.connect();
-    return {
-      on: function(eventName, callback) {
-        socket.on(eventName, function() {
-          var args = arguments;
-          $rootScope.$apply(function() {
-            callback.apply(socket, args);
-          });
-        });
-      },
-      emit: function(eventName, data, callback) {
-        socket.emit(eventName, data, function() {
-          var args = arguments;
-          $rootScope.apply(function() {
-            if (callback) {
-              callback.apply(socket, args);
-            }
-          });
-        });
-      }
-    };
   }]);
 })();

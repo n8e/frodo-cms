@@ -75,8 +75,8 @@
         };
       }
     ])
-    .controller('DocumentController', ['Document',
-      function(Document) {
+    .controller('DocumentController', ['Document', '$location',
+      function(Document, $location) {
         var vm = this;
         Document.all(function(data) {
           vm.documents = data;
@@ -91,9 +91,14 @@
           };
           Document.create(vm.documentData, function(data) {
             vm.processing = false;
-            //clear up the form
-            vm.documentData = {};
-            vm.message = data.message;
+            if (data.success) {
+              vm.message = data.message;
+              //clear up the form
+              vm.documentData = {};
+              $location.path('/myDocuments');
+            } else {
+              vm.error = data.message;
+            }
           });
         };
       }

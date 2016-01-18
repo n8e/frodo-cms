@@ -2,8 +2,7 @@
   'use strict';
   // get the required models and db connection
   var moment = require('moment'),
-    Document = require('../models/documents'),
-    User = require('../models/users');
+    Document = require('../models/documents');
 
   module.exports = {
     // get document by id
@@ -41,8 +40,13 @@
         if (err) {
           res.send(err);
           return;
+        } else {
+          res.json({
+            document: document,
+            success: true,
+            message: 'Document has been created!'
+          });
         }
-        res.send(document);
       });
     },
 
@@ -60,7 +64,6 @@
               message: 'No document found.'
             });
           } else {
-            console.log('LOGGED ID ' + req.decoded._id + ' LOGGED ROLE ' + req.decoded.role + ' OWNER ID ' + document.ownerId);
             if (req.decoded._id !== document.ownerId &&
               req.decoded.role === 'User') {
               // send 403 status and forbidden message
@@ -78,12 +81,11 @@
                   title: req.body.title,
                   content: req.body.content
                 },
-                function(err, documents) {
+                function(err) {
                   if (err) {
                     res.send(err);
                     return;
                   } else {
-                    console.log(documents);
                     res.json({
                       success: true,
                       message: 'Successfully updated Document!'
