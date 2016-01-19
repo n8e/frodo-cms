@@ -1,7 +1,8 @@
 (function() {
   'use strict';
   // require the module jsonwebtoken
-  var config = require('../config/config'),
+  var env = process.env.NODE_ENV || 'development',
+    config = require('../config')[env],
     jsonwebtoken = require('jsonwebtoken'),
     secretKey = config.secretKey;
 
@@ -9,8 +10,8 @@
     // function checks for the token
     authenticate: function(req, res, next) {
       console.log('Somebody just came to our app!');
-      var token = req.body.token || req.params.token || 
-      req.headers['x-access-token'];
+      var token = req.body.token || req.params.token ||
+        req.headers['x-access-token'];
       // check if token exists
       if (token) {
         jsonwebtoken.verify(token, secretKey, function(err, decoded) {

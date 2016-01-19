@@ -9,7 +9,9 @@
           templateUrl: 'views/signup.html'
         })
         .when('/login', {
-          templateUrl: 'views/login.html'
+          templateUrl: 'views/login.html',
+          controller: 'LoginController',
+          controllerAs: 'login'
         })
         .when('/document', {
           templateUrl: 'views/user/document.html'
@@ -19,6 +21,9 @@
         })
         .when('/profile', {
           templateUrl: 'views/user/profile.html'
+        })
+        .when('/error', {
+          templateUrl: 'views/error.html'
         })
         .when('/myDocuments', {
           templateUrl: 'views/user/view_my_documents.html',

@@ -23,7 +23,9 @@
     "describe",
     "beforeEach",
     "module",
-    "angular"
+    "angular",
+    "spyOn",
+    "sinon"
   ],
   "quotmark": true,
   "trailing": true,

@@ -11,6 +11,7 @@ var gulp = require('gulp'),
   uglify = require('gulp-uglify'),
   jshint = require('jshint'),
   plumber = require('gulp-plumber'),
+  reporter = require('gulp-codeclimate-reporter'),
   browserify = require('browserify'),
   path = require('path'),
   source = require('vinyl-source-stream'),
@@ -38,66 +39,65 @@ var gulp = require('gulp'),
     serverTests: ['./tests/server/**/*.spec.js'],
     styles: 'app/styles/*.+(less|css)'
   };
+var Server = require('karma').Server;
+var jasmineNode = require('gulp-jasmine-node');
 
 gulp.task('browser-sync', function() {
   browserSync({
     server: {
-       baseDir: "./public"
+      baseDir: "./public"
     }
   });
 });
 
-gulp.task('bs-reload', function () {
+gulp.task('bs-reload', function() {
   browserSync.reload();
 });
 
-gulp.task('scripts', function(){
+gulp.task('scripts', function() {
   return gulp.src('app/scripts/**/*.js')
     .pipe(plumber({
-      errorHandler: function (error) {
+      errorHandler: function(error) {
         console.log(error.message);
         this.emit('end');
-    }}))
+      }
+    }))
     .pipe(concat('main.js'))
     .pipe(gulp.dest('public/js/'))
-    .pipe(rename({suffix: '.min'}))
+    .pipe(rename({
+      suffix: '.min'
+    }))
     .pipe(uglify())
     .pipe(gulp.dest('public/js/'))
-    .pipe(browserSync.reload({stream:true}));
+    .pipe(browserSync.reload({
+      stream: true
+    }));
 });
 
-gulp.task('images', function(){
+gulp.task('images', function() {
   gulp.src('app/images/**/*')
-    .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
+    .pipe(cache(imagemin({
+      optimizationLevel: 3,
+      progressive: true,
+      interlaced: true
+    })))
     .pipe(gulp.dest('public/img/'));
 });
 
-gulp.task('test:fend', function() {
+gulp.task('test:fend', function(done) {
   // Be sure to return the stream
-  return gulp.src(paths.unitTests)
-    .pipe(karma({
-      configFile: __dirname + '/karma.conf.js',
-      // autoWatch: false,
-      // singleRun: true
-      action: 'run'
-    }))
-    .on('error', function(err) {
-      // Make sure failed tests cause gulp to exit non-zero
-      throw err;
-    });
+  new Server({
+    configFile: __dirname + '/karma.conf.js',
+    // autoWatch: false,
+    singleRun: true
+  }, done).start();
 });
 
 gulp.task('test:bend', function() {
-  return gulp.src(paths.serverTests)
-    .pipe(mocha({
-      reporter: 'spec'
-    }))
-    .once('error', function() {
-      process.exit(1);
-    })
-    .once('end', function() {
-      process.exit();
-    });
+  return gulp.src(['tests/server/**/*.spec.js'])
+    .pipe(jasmineNode({
+      timeout: 10000
+    }));
 });
 
 gulp.task('jade', function() {
@@ -150,11 +150,22 @@ gulp.task('nodemon', function() {
     });
 });
 
+gulp.task('codeclimate-reporter', ['test:fend', 'test:bend'], function() {
+  return gulp.src(['coverage/lcov/lcov.info'], {
+      read: false
+    })
+    .pipe(reporter({
+      token: process.env.CODECLIMATE_REPO_TOKEN,
+      verbose: true
+    }));
+});
+
 gulp.task('watch', function() {
   gulp.watch(paths.jade, ['jade']);
   gulp.watch(paths.styles, ['less']);
 });
 
-gulp.task('build', ['jade', 'less', 'static-files','scripts', 'bower']);
+gulp.task('build', ['jade', 'less', 'static-files', 'scripts', 'bower']);
 gulp.task('production', ['nodemon', 'build']);
 gulp.task('default', ['nodemon', 'watch', 'build', 'images']);
+gulp.task('test', ['test:bend', 'test:fend', 'codeclimate-reporter']);

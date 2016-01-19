@@ -66,12 +66,12 @@ describe('Document tests requiring authentication', function() {
         .set('x-access-token', authToken)
         .send(document1)
         .end(function(err, res) {
-          doc1id = res.body._id;
+          doc1id = res.body.document._id;
           expect(res.status).toEqual(200);
-          expect(typeof res.body).toBe('object');
-          expect(res.body._id).toBeDefined();
-          expect(res.body.title).toEqual(document1.title);
-          expect(res.body.content).toBe(document1.content);
+          expect(typeof res.body.document).toBe('object');
+          expect(res.body.document._id).toBeDefined();
+          expect(res.body.document.title).toEqual(document1.title);
+          expect(res.body.document.content).toBe(document1.content);
           done();
         });
     });
@@ -84,12 +84,12 @@ describe('Document tests requiring authentication', function() {
         .set('x-access-token', authToken)
         .send(document2)
         .end(function(err, res) {
-          doc2id = res.body._id;
+          doc2id = res.body.document._id;
           expect(res.status).toEqual(200);
-          expect(typeof res.body).toBe('object');
-          expect(res.body._id).toBeDefined();
-          expect(res.body.title).toEqual(document2.title);
-          expect(res.body.content).toBe(document2.content);
+          expect(typeof res.body.document).toBe('object');
+          expect(res.body.document._id).toBeDefined();
+          expect(res.body.document.title).toEqual(document2.title);
+          expect(res.body.document.content).toBe(document2.content);
           done();
         });
     });
@@ -120,7 +120,7 @@ describe('Document tests requiring authentication', function() {
         .set('x-access-token', authToken)
         .end(function(err, res) {
           var itemOne = res.body[0];
-          var itemLast = res.body[res.body.length - 1];
+          var itemLast = res.body[res.body.length - 2];
           expect(res.status).toEqual(200);
           expect(itemLast.dateCreated).toEqual(itemOne.dateCreated);
           done();
@@ -180,13 +180,13 @@ describe('Administrator Documents', function() {
         .set('x-access-token', authToken)
         .send(document3)
         .end(function(err, res) {
-          doc3id = res.body._id;
+          doc3id = res.body.document._id;
           expect(res.status).toEqual(200);
           expect('Content-Type', 'json', done);
-          expect(typeof res.body).toBe('object');
-          expect(res.body._id).toBeDefined();
-          expect(res.body.title).toEqual(document3.title);
-          expect(res.body.content).toBe(document3.content);
+          expect(typeof res.body.document).toBe('object');
+          expect(res.body.document._id).toBeDefined();
+          expect(res.body.document.title).toEqual(document3.title);
+          expect(res.body.document.content).toBe(document3.content);
           done();
         });
     });
@@ -199,12 +199,12 @@ describe('Administrator Documents', function() {
         .set('x-access-token', authToken)
         .send(document4)
         .end(function(err, res) {
-          doc4id = res.body._id;
+          doc4id = res.body.document._id;
           expect(res.status).toEqual(200);
-          expect(typeof res.body).toBe('object');
-          expect(res.body._id).toBeDefined();
-          expect(res.body.title).toEqual(document4.title);
-          expect(res.body.content).toBe(document4.content);
+          expect(typeof res.body.document).toBe('object');
+          expect(res.body.document._id).toBeDefined();
+          expect(res.body.document.title).toEqual(document4.title);
+          expect(res.body.document.content).toBe(document4.content);
           done();
         });
     });

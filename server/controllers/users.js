@@ -1,7 +1,8 @@
 (function() {
   'use strict';
   // get the required models and db connection
-  var config = require('../config/config'),
+  var env = process.env.NODE_ENV || 'development',
+    config = require('../config')[env],
     User = require('../models/users'),
     Role = require('../models/roles'),
     jsonwebtoken = require('jsonwebtoken'),
@@ -34,6 +35,7 @@
       }, function(err, roles) {
         if (err) {
           res.send(err);
+          return;
         }
         // add the role to the user before being saved
         user.role = roles[0].title;
@@ -43,13 +45,13 @@
         user.save(function(err) {
           if (err) {
             res.status(403).send(err);
-            return;
+          } else {
+            res.json({
+              success: true,
+              message: 'User has been created!',
+              token: token
+            });
           }
-          res.json({
-            success: true,
-            message: 'User has been created!',
-            token: token
-          });
         });
       });
     },
@@ -64,7 +66,7 @@
         }
         if (!user) {
           res.status(500).send({
-            message: 'User doesnt exist'
+            message: 'User does not exist'
           });
         } else if (user) {
           var validPassword = user.comparePassword(req.body.password);

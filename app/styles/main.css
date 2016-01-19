@@ -213,7 +213,7 @@ a:focus {
   }
 }
 .hero-area {
-  background: url(/img/hero-area.jpg) no-repeat;
+  background: url(/img/background.jpg) no-repeat;
   background-size: cover;
   background-position: center bottom;
   color: #fff;
@@ -536,7 +536,7 @@ a:focus {
 }
 #footer {
   position: relative;
-  background: #333;
+  background: #191919;
 }
 #footer h3 {
   color: #fff;

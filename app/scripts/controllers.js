@@ -3,6 +3,7 @@
     .controller('MainController', function() {
       var vm = this;
       var isOpen = false;
+      vm.isOpen = isOpen;
       vm.toggleMenu = function() {
         if (isOpen) {
           classie.remove(document.body, 'show-menu');
@@ -19,7 +20,7 @@
         sm.doSignup = function() {
           sm.processing = true;
           sm.error = '';
-          var newUser = {
+          sm.newUser = {
             username: sm.signupData.username,
             password: sm.signupData.password,
             firstname: sm.signupData.firstname,
@@ -27,15 +28,14 @@
             email: sm.signupData.email,
             role: sm.signupData.role
           };
-          User.create(newUser)
-            .success(function(data) {
-              sm.processing = false;
-              if (data.success) {
-                $location.path('/');
-              } else {
-                sm.error = data.message;
-              }
-            });
+          User.create(sm.newUser, function(data) {
+            sm.processing = false;
+            if (data.success) {
+              $location.path('/profile');
+            } else {
+              sm.error = data.message;
+            }
+          });
         };
       }
     ])
@@ -46,42 +46,38 @@
         vm.loggedIn = Auth.isLoggedIn();
         $rootScope.$on('$routeChangeStart', function() {
           vm.loggedIn = Auth.isLoggedIn();
-          Auth.getUser()
-            .then(function(data) {
+          Auth.getUser(function(data) {
               vm.user = data.data;
             });
         });
         vm.doLogin = function() {
           vm.processing = true;
           vm.error = '';
-          Auth.login(vm.loginData.username, vm.loginData.password)
-            .success(function(data) {
-              vm.processing = false;
-              Auth.getUser()
-                .then(function(data) {
-                  vm.user = data.data;
-                });
-              if (data.success) {
-                $location.path('/profile');
-              } else {
-                vm.error = data.message;
-              }
-            });
+          Auth.login(vm.loginData, function(data) {
+            vm.processing = false;
+            Auth.getUser(function(data) {
+                vm.user = data.data;
+              });
+            if (data.success) {
+              $location.path('/profile');
+            } else {
+              vm.error = data.message;
+            }
+          });
         };
         vm.doLogout = function() {
           Auth.logout();
+          vm.user = '';
           $location.path('/logout');
         };
       }
     ])
-    .controller('DocumentController', ['Document',
-      'socketio',
-      function(Document, socketio) {
+    .controller('DocumentController', ['Document', '$location',
+      function(Document, $location) {
         var vm = this;
-        Document.all()
-          .success(function(data) {
-            vm.documents = data;
-          });
+        Document.all(function(data) {
+          vm.documents = data;
+        });
 
         vm.createDocument = function() {
           vm.processing = true;
@@ -90,26 +86,33 @@
             title: vm.docData.title,
             content: vm.docData.content
           };
-          Document.create(vm.documentData)
-            .success(function(data) {
-              vm.processing = false;
+          Document.create(vm.documentData, function(data) {
+            vm.processing = false;
+            if (data.success) {
+              vm.message = data.message;
               //clear up the form
               vm.documentData = {};
-              vm.message = data.message;
-            });
+              $location.path('/myDocuments');
+            } else {
+              vm.error = data.message;
+            }
+          });
         };
-        socketio.on('document', function(data) {
-          vm.stories.push(data);
+      }
+    ])
+    .controller('AllDocumentsController', ['Document',
+      'Auth',
+      function(Document, Auth) {
+        var vm = this;
+        Auth.getUser(function(data) {
+          vm.user = data.data;
+          vm.documents = '';
+          Document.all(function(data) {
+            vm.documents = data;
+          });
         });
       }
     ])
-    .controller('AllDocumentsController', function(socketio, documents) {
-      var vm = this;
-      vm.documents = documents.data;
-      socketio.on('document', function(data) {
-        vm.documents.push(data);
-      });
-    })
     .controller('EditUserController', ['$rootScope', '$location', 'Auth',
       'User',
       function($rootScope, $location, Auth, User) {
@@ -117,36 +120,30 @@
         vm.loggedIn = Auth.isLoggedIn();
         $rootScope.$on('$routeChangeStart', function() {
           vm.loggedIn = Auth.isLoggedIn();
-          Auth.getUser()
-            .then(function(data) {
+          Auth.getUser(function(data) {
               vm.user = data.data;
-              console.log('CURRENT USER ' + vm.user);
             });
         });
         vm.updateUser = function() {
-          console.log('IN HERE');
-          Auth.getUser()
-            .then(function(data) {
-              vm.user = data.data;
-              var updatedUser = {
-                username: vm.user.username,
-                password: vm.user.password,
-                firstname: vm.userData.firstname || vm.user.name.first,
-                lastname: vm.userData.lastname || vm.user.name.last,
-                email: vm.userData.email || vm.user.email,
-                role: vm.user.role
-              };
-              User.update(updatedUser)
-                .success(function(data) {
-                  vm.processing = false;
-                  if (data.success) {
-                    console.log('Update Response ' + data);
-                    $location.path('/myDocuments');
-                  } else {
-                    vm.error = data.message;
-                  }
-                });
+          Auth.getUser(function(data) {
+            vm.user = data.data;
+            vm.updatedUser = {
+              username: vm.user.username,
+              password: vm.user.password,
+              firstname: vm.userData.firstname || vm.user.name.first,
+              lastname: vm.userData.lastname || vm.user.name.last,
+              email: vm.userData.email || vm.user.email,
+              role: vm.user.role
+            };
+            User.update(vm.updatedUser, function(data) {
+              vm.processing = false;
+              if (data.success) {
+                $location.path('/myDocuments');
+              } else {
+                vm.error = data.message;
+              }
             });
+          });
         };
       }
     ]);

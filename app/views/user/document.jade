@@ -1,13 +1,14 @@
 .container
+  .jumbotron
+    h2 Create Document 
+      .fa.fa-file 
   section(ng-controller='DocumentController as docman')
-    .panel.panel-success
-      .panel-heading Create Document
-      form.form-sigin(method='post', ng-submit='docman.createDocument()')
-        br
-        | Title
-        input.form-control(type='text', name='title', ng-model='docman.docData.title')
-        br
-        | Content
-        textarea.form-control(name='content', ng-model='docman.docData.content')
-        br
-        button.btn.btn-success(type='submit') Save Document
+    form.form-sigin(method='post', ng-submit='docman.createDocument()')
+      br
+      h3.title-small Title
+      input.form-control(type='text', name='title', ng-model='docman.docData.title')
+      br
+      h3.title-small Content
+      textarea.form-control(name='content', ng-model='docman.docData.content', style='height:200px;')
+      br
+      button.btn.btn-success(type='submit') Save Document

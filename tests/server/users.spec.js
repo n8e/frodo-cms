@@ -41,7 +41,6 @@ describe('Users', function() {
           expect(res.status).toEqual(403);
           expect(typeof res.body).toBe('object');
           expect(res.body.code).toEqual(11000);
-          expect(res.body.errmsg).toContain('E11000 duplicate key error index');
           expect(res.body.index).toEqual(0);
           done();
         });
@@ -103,7 +102,7 @@ describe('Users', function() {
       })
       .end(function(err, res) {
         expect(res.status).toEqual(500);
-        expect(res.body.message).toBe('User doesnt exist');
+        expect(res.body.message).toBe('User does not exist');
         done();
       });
   });

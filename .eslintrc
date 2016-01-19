@@ -22,7 +22,9 @@
     "it",
     "describe",
     "beforeEach",
-    "module"
+    "module",
+    "spyOn",
+    "sinon"
   ],
   "quotmark": true,
   "trailing": true,

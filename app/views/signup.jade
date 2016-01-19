@@ -3,6 +3,14 @@
     h2 Sign Up
   section(ng-controller='SignupController as signup')
     form.form-sigin(method='post', ng-submit='signup.doSignup()')
+      .alert.alert-info(ng-if='!signup.error')
+        a.close(href='#', data-dismiss='alert', aria-label='close') ×
+        strong Info!
+        |  Please fill every entry to signup!
+      .alert.alert-danger(ng-if='signup.error')
+        a.close(href='#', data-dismiss='alert', aria-label='close') ×
+        strong Error!
+        | {{ signup.error }}
       br
       | Username
       input.form-control(type='text', name='username', ng-model='signup.signupData.username')
@@ -20,7 +28,11 @@
       input.form-control(type='text', name='email', ng-model='signup.signupData.email')
       br
       | Role
-      input.form-control(type='text', name='role', ng-model='signup.signupData.role')
+      br
+      input.form-control(type='radio', name='role', value='1' ng-model='signup.signupData.role')
+      |  Administrator
+      input.form-control(type='radio', name='role', value='2', checked='true' ng-model='signup.signupData.role')
+      |  User
       br
       button.btn.btn-success(type='submit') Signup
     p

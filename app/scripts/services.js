@@ -3,14 +3,11 @@
     .factory('Auth', ['$http', '$q', 'AuthToken',
       function($http, $q, AuthToken) {
         var authFactory = {};
-        authFactory.login = function(username, password) {
-          return $http.post('/api/users/login', {
-              username: username,
-              password: password
-            })
+        authFactory.login = function(credentials, callback) {
+          return $http.post('/api/users/login', credentials)
             .success(function(data) {
               AuthToken.setToken(data.token);
-              return data;
+              callback(data);
             });
         };
         authFactory.logout = function() {
@@ -64,26 +61,28 @@
       };
       interceptorFactory.responseError = function(response) {
         if (response.status == 403) {
-          $location.path('/api/users/login');
+          $location.path('/login');
         }
-        console.log(response);
-        return $q.reject(response);
+        return response;
       };
       return interceptorFactory;
     }
   ])
 
-  .factory('User', ['$http', function($http) {
+  .factory('User', ['$http', 'AuthToken', function($http, AuthToken) {
     var userFactory = {};
     var id;
-    userFactory.create = function(userData) {
-      return $http.post('/api/users', userData);
+    userFactory.create = function(userData, callback) {
+      return $http.post('/api/users', userData)
+        .success(function(data) {
+          AuthToken.setToken(data.token);
+          callback(data);
+        });
     };
     userFactory.update = function(userData) {
       return $http.get('/api/me')
-      .success(function(data) {
+        .success(function(data) {
           id = data._id;
-          console.log('IN USER ', id);
           $http.put('/api/users/' + id, userData);
         });
     };
@@ -95,40 +94,26 @@
 
   .factory('Document', ['$http', function($http) {
     var documentFactory = {};
+    var id;
     documentFactory.allDocuments = function() {
       return $http.get('/api/documents');
     };
-    documentFactory.all = function() {
-      return $http.get('/api/documents');
+    documentFactory.all = function(callback) {
+      $http.get('/api/me')
+        .success(function(data) {
+          id = data._id;
+          return $http.get('/api/users/' + id + '/documents')
+            .success(function(data) {
+              callback(data);
+            });
+        });
     };
-    documentFactory.create = function(documentData) {
-      return $http.post('/api/documents', documentData);
+    documentFactory.create = function(documentData, callback) {
+      return $http.post('/api/documents', documentData)
+        .success(function(data) {
+          callback(data);
+        });
     };
-
     return documentFactory;
-  }])
-
-  .factory('socketio', ['$rootScope', function($rootScope) {
-    var socket = io.connect();
-    return {
-      on: function(eventName, callback) {
-        socket.on(eventName, function() {
-          var args = arguments;
-          $rootScope.$apply(function() {
-            callback.apply(socket, args);
-          });
-        });
-      },
-      emit: function(eventName, data, callback) {
-        socket.emit(eventName, data, function() {
-          var args = arguments;
-          $rootScope.apply(function() {
-            if (callback) {
-              callback.apply(socket, args);
-            }
-          });
-        });
-      }
-    };
   }]);
 })();

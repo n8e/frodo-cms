@@ -3,6 +3,10 @@
     h2 Login
   section(ng-controller='LoginController as login')
     form.form-sigin(method='post', ng-submit='login.doLogin()')
+      .alert.alert-danger(ng-if='login.error')
+        a.close(href='#', data-dismiss='alert', aria-label='close') ×
+        strong Error!
+        |  {{ login.error }}
       br
       | Username:
       input.form-control(type='text', name='username', ng-model='login.loginData.username')
