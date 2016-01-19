@@ -46,8 +46,7 @@
         vm.loggedIn = Auth.isLoggedIn();
         $rootScope.$on('$routeChangeStart', function() {
           vm.loggedIn = Auth.isLoggedIn();
-          Auth.getUser()
-            .then(function(data) {
+          Auth.getUser(function(data) {
               vm.user = data.data;
             });
         });
@@ -56,8 +55,7 @@
           vm.error = '';
           Auth.login(vm.loginData, function(data) {
             vm.processing = false;
-            Auth.getUser()
-              .then(function(data) {
+            Auth.getUser(function(data) {
                 vm.user = data.data;
               });
             if (data.success) {
