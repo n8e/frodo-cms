@@ -37,7 +37,9 @@ var api = require('./server/routes/index')(app, express, io);
 app.use('/api', api);
 
 app.get('/*', function(req, res) {
-  res.sendFile(__dirname + '/public/index.html');
+  res.sendFile('index.html', {
+    root: '/public/'
+  });
 });
 
 var server = app.listen(config.port || 3000, function() {
