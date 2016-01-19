@@ -165,7 +165,8 @@ gulp.task('watch', function() {
   gulp.watch(paths.styles, ['less']);
 });
 
-gulp.task('build', ['jade', 'less', 'static-files', 'scripts', 'bower']);
+gulp.task('build', ['jade', 'less', 'static-files', 'scripts', 'images', 'bower']);
+gulp.task('heroku:production', ['build']);
 gulp.task('production', ['nodemon', 'build']);
 gulp.task('default', ['nodemon', 'watch', 'build', 'images']);
 gulp.task('test', ['test:bend', 'test:fend', 'codeclimate-reporter']);
