@@ -2,39 +2,52 @@ describe('Controller: DocumentController', function() {
   // new instance of the module
   beforeEach(angular.mock.module('frodocms'));
 
-  var controller, Document, socketio;
+  var controller, Document, $location;
 
-  var documentCallback = {
-    success: function() {
-      return true;
-    }
-  }
   // instantiate the main controller
   beforeEach(angular.mock.inject(function($injector, $controller) {
-    controller = $controller('DocumentController');
     Document = $injector.get('Document');
-    socketio = $injector.get('socketio');
-    controller.docData = {
-      title: 'title',
-      content: 'content'
-    };
-
-    sinon.stub(Document, 'create', function(args, fn) {
-      return fn({});
-    });
-
-    sinon.stub(Document, 'all', function(fn) {
-      return fn({});
-    });
-
-    spyOn(controller, 'createDocument').and.callThrough();
-    controller.createDocument();
+    $location = $injector.get('$location');
+    Document.all = sinon.spy();
+    controller = $controller('DocumentController');
   }));
 
   describe('Initialization', function() {
-    it('should verify that createDocument function is defined', function() {
-      expect(controller.createDocument).toBeDefined();
-      expect(controller.createDocument).toHaveBeenCalled();
+    it('Document.all should be a function and should be defined', function() {
+      expect(Document.all.called).toBe(true);
+      expect(typeof Document.all).toBe('function');
+      Document.all.args[0][0]('data');
+      expect(controller.documents).toBeDefined();
+      expect(controller.documents).toBe('data');
     });
+    it('createDocument is a function and should call Document.create',
+      function() {
+        Document.create = sinon.spy();
+        controller.docData = {
+          title: 'title',
+          content: 'content'
+        };
+        controller.createDocument();
+        expect(Document.create.called).toBe(true);
+        expect(typeof Document.create).toBe('function');
+        expect(controller.processing).toBe(true);
+        expect(controller.docData).toBeDefined();
+        expect(typeof controller.docData).toBe('object');
+        $location.path = sinon.stub();
+        Document.create.args[0][1]({
+          success: true,
+          message: 'message'
+        });
+        expect(controller.processing).toBe(false);
+        expect(controller.message).not.toBe('');
+        expect($location.path.called).toBe(true);
+        Document.create.args[0][1]({
+          success: false,
+          message: 'message'
+        });
+        expect($location.path.calledOnce).toBe(true);
+        expect(controller.error).toBeDefined();
+        expect(controller.error).toBe('message');
+      });
   });
 });

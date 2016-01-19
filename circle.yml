@@ -4,6 +4,11 @@ dependencies:
   post:
     - npm install module-deps
     - npm install gulp -g
+    - npm install gulp-karma -g
+    - npm install karma -g
+    - npm install karma-jasmine -g
+    - npm install karma-sinon -g
+    - npm install sinon -g
     - npm install mocha -g
 
 database:

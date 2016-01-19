@@ -39,6 +39,8 @@ var gulp = require('gulp'),
     serverTests: ['./tests/server/**/*.spec.js'],
     styles: 'app/styles/*.+(less|css)'
   };
+var Server = require('karma').Server;
+var jasmineNode = require('gulp-jasmine-node');
 
 gulp.task('browser-sync', function() {
   browserSync({
@@ -82,32 +84,20 @@ gulp.task('images', function() {
     .pipe(gulp.dest('public/img/'));
 });
 
-gulp.task('test:fend', function() {
+gulp.task('test:fend', function(done) {
   // Be sure to return the stream
-  return gulp.src(paths.unitTests)
-    .pipe(karma({
-      configFile: __dirname + '/karma.conf.js',
-      // autoWatch: false,
-      // singleRun: true
-      action: 'run'
-    }))
-    .on('error', function(err) {
-      // Make sure failed tests cause gulp to exit non-zero
-      throw err;
-    });
+  new Server({
+    configFile: __dirname + '/karma.conf.js',
+    // autoWatch: false,
+    singleRun: true
+  }, done).start();
 });
 
 gulp.task('test:bend', function() {
-  return gulp.src(paths.serverTests)
-    .pipe(mocha({
-      reporter: 'spec'
-    }))
-    .once('error', function() {
-      process.exit(1);
-    })
-    .once('end', function() {
-      process.exit();
-    });
+  return gulp.src(['tests/server/**/*.spec.js'])
+    .pipe(jasmineNode({
+      timeout: 10000
+    }));
 });
 
 gulp.task('jade', function() {

@@ -1,7 +1,11 @@
+var env = process.env.NODE_ENV || 'development';
+if (env === 'development') {
+  require('dotenv').load();
+}
 var User = require('../server/models/users'),
   Role = require('../server/models/roles'),
   mongoose = require('mongoose'),
-  config = require('../server/config');
+  config = require('../server/config')[env];
 var user = new User({
   firstname: 'Sadiq',
   lastname: 'Malika',

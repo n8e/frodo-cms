@@ -40,11 +40,6 @@
     "jshint": "^2.8.0",
     "jsonwebtoken": "^5.4.0",
     "karma": "^0.13.15",
-    "karma-chrome-launcher": "^0.2.2",
-    "karma-firefox-launcher": "^0.1.7",
-    "karma-opera-launcher": "^0.3.0",
-    "karma-phantomjs-launcher": "^0.2.3",
-    "karma-safari-launcher": "^0.1.1",
     "moment": "^2.10.6",
     "mongoose": "^4.1.12",
     "morgan": "^1.6.1",
@@ -58,11 +53,19 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "devDependencies": {
-    "karma-phantomjs-launcher": "^0.2.3"
+    "karma-chrome-launcher": "^0.2.2",
+    "karma-coverage": "^0.5.3",
+    "karma-firefox-launcher": "^0.1.7",
+    "karma-jasmine": "^0.3.6",
+    "karma-opera-launcher": "^0.3.0",
+    "karma-phantomjs-launcher": "^0.2.3",
+    "karma-safari-launcher": "^0.1.1",
+    "karma-sinon": "^1.0.4",
+    "sinon": "^1.17.2"
   },
   "scripts": {
     "pretest": "node index.js &\nnode ./seeders/index.js",
-    "test": "jasmine-node tests/server/ --verbose",
+    "test": "gulp test",
     "posttest": "pkill node"
   },
   "repository": {

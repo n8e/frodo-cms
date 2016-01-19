@@ -2,20 +2,16 @@ describe('Controller: Signup Controller', function() {
   // new instance of the module
   beforeEach(angular.mock.module('frodocms'));
 
-  var controller, $rootScope, $scope, User;
-
-  var signupCallback = {
-    success: function() {
-      return true;
-    }
-  };
+  var controller, $rootScope, $location, User;
 
   // instantiate the main controller
   beforeEach(angular.mock.inject(function($injector, $controller) {
-    controller = $controller('SignupController');
     $rootScope = $injector.get('$rootScope');
+    $location = $injector.get('$location');
     User = $injector.get('User');
-    $scope = $rootScope.$new();
+    // instantiate controller
+    controller = $controller('SignupController');
+    // signup data
     controller.signupData = {
       username: 'knights',
       password: '12345',
@@ -24,19 +20,31 @@ describe('Controller: Signup Controller', function() {
       email: 'eugene.mutai@andela.com ',
       role: 2
     };
-
-    sinon.stub(User, 'create', function(args, fn) {
-      return fn({});
-    });
-
-    spyOn(controller, 'doSignup').and.callThrough();
-    controller.doSignup();
   }));
 
   describe('Initialization', function() {
-    it('should verify that doSignup function is defined', function() {
-      expect(controller.doSignup).toBeDefined();
-      expect(controller.doSignup).toHaveBeenCalled();
+    it('doSignup should be a function and should call User.create', function() {
+      User.create = sinon.spy();
+      controller.doSignup();
+      expect(typeof controller.doSignup).toBe('function');
+      expect(User.create.called).toBe(true);
+      expect(controller.processing).toBeDefined();
+      expect(controller.processing).toBe(true);
+      $location.path = sinon.stub();
+      User.create.args[0][1]({
+          success: true,
+          message: 'message'
+      });
+      expect(controller.processing).toBeDefined();
+      expect(controller.processing).toBe(false);
+      expect($location.path.called).toBe(true);
+      User.create.args[0][1]({
+        success: false,
+        message: 'message'
+      });
+      expect($location.path.calledOnce).toBe(true);
+      expect(controller.error).toBeDefined();
+      expect(controller.error).toBe('message');
     });
   });
 });

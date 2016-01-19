@@ -10,7 +10,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine', 'sinon'],
 
 
     // list of files / patterns to load in the browser
@@ -27,7 +27,7 @@ module.exports = function(config) {
       'app/scripts/services.js',
       'app/scripts/directives.js',
       'app/scripts/app.js',
-      'tests/unit/client/**/*.js'
+      'tests/unit/client/**/*.spec.js'
     ],
 
 
@@ -40,7 +40,6 @@ module.exports = function(config) {
     // https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
       'app/scripts/app.js': 'coverage',
-      'app/scripts/app.routes.js': 'coverage',
       'app/scripts/controllers.js': 'coverage',
       'app/scripts/services.js': 'coverage',
       'app/scripts/directives.js': 'coverage'

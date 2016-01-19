@@ -1,9 +1,21 @@
 .container
   section
-    .panel.panel-success
-      .panel-heading Your Documents
+    .heading
+        h3 {{ login.user.name.last }}'s documents
       .panel-body(ng-repeat='each in document.documents | reverse')
-        h3 {{ each.title }}
+        h3.title-small {{ each.title }}
         p {{ each.content }}
-        p Owner: {{ each.ownerId}}
         p Created: {{ each.dateCreated }}
+        br
+        button.btn.btn-success(type='submit') Update
+        button.btn.btn-danger(type='submit') Delete
+  section
+    .heading
+        h3 {{ login.user.name.last }}'s documents
+      .panel-body(ng-repeat='each in document.documents | reverse')
+        h3.title-small {{ each.title }}
+        p {{ each.content }}
+        p Created: {{ each.dateCreated }}
+        br
+        button.btn.btn-success(type='submit') Update
+        button.btn.btn-danger(type='submit') Delete
