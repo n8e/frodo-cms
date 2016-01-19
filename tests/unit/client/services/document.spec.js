@@ -15,10 +15,11 @@ describe('Service: Document Service', function() {
     Document.create();
   }));
 
-  it('should verify that allDocuments function exists and is called', function() {
-    expect(Document.allDocuments).toBeDefined();
-    expect(Document.allDocuments).toHaveBeenCalled();
-  });
+  it('should verify that allDocuments function exists and is called',
+    function() {
+      expect(Document.allDocuments).toBeDefined();
+      expect(Document.allDocuments).toHaveBeenCalled();
+    });
   it('should verify that all function exists and is called', function() {
     expect(Document.all).toBeDefined();
     expect(Document.all).toHaveBeenCalled();
