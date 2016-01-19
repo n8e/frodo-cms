@@ -45,7 +45,7 @@ var jasmineNode = require('gulp-jasmine-node');
 gulp.task('browser-sync', function() {
   browserSync({
     server: {
-      baseDir: "./public"
+      baseDir: './public'
     }
   });
 });
