@@ -31,7 +31,7 @@ app.use(bodyParser.json());
 
 app.use(morgan('dev'));
 
-app.use(express.static(__dirname + './public'));
+app.use(express.static(__dirname + '/public'));
 
 var api = require('./server/routes/index')(app, express, io);
 app.use('/api', api);
