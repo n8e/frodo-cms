@@ -44,7 +44,8 @@
     "ripples": "~1.0.0",
     "classie": "~1.0.1",
     "smooth-scroll": "~1.0.1",
-    "socket.io-client": "~1.4.4"
+    "socket.io-client": "~1.4.4",
+    "protonet/jquery.inview": "jquery.inview#~1.0.0"
   },
   "devDependencies": {
     "sinonjs": "~1.17.1",
