@@ -10,9 +10,6 @@ var mongoose = require('mongoose');
 var morgan = require('morgan');
 var app = express();
 
-// var http = require('http').Server(app);
-// var io = require('socket.io')(http);
-
 // connect to Mongo when the app initializes and 
 // drop the db before seeding
 mongoose.connect(config.database, function(err) {
