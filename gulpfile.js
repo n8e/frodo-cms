@@ -122,7 +122,7 @@ gulp.task('less', function() {
 
 gulp.task('bower', function() {
   return bower()
-    .pipe(gulp.dest('public/lib/'));
+    .pipe(gulp.dest('public/lib/'));  
 });
 
 gulp.task('lint', function() {
