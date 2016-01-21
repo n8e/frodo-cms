@@ -47,8 +47,8 @@
         $rootScope.$on('$routeChangeStart', function() {
           vm.loggedIn = Auth.isLoggedIn();
           Auth.getUser(function(data) {
-              vm.user = data.data;
-            });
+            vm.user = data.data;
+          });
         });
         vm.doLogin = function() {
           vm.processing = true;
@@ -56,8 +56,8 @@
           Auth.login(vm.loginData, function(data) {
             vm.processing = false;
             Auth.getUser(function(data) {
-                vm.user = data.data;
-              });
+              vm.user = data.data;
+            });
             if (data.success) {
               $location.path('/profile');
             } else {
@@ -100,11 +100,11 @@
         };
       }
     ])
-    .controller('AllDocumentsController', ['Document',
-      'Auth',
+    .controller('AllDocumentsController', ['Document', 'Auth',
       function(Document, Auth) {
         var vm = this;
         Auth.getUser(function(data) {
+          console.log('HERE NOW');
           vm.user = data.data;
           vm.documents = '';
           Document.all(function(data) {
@@ -121,8 +121,9 @@
         $rootScope.$on('$routeChangeStart', function() {
           vm.loggedIn = Auth.isLoggedIn();
           Auth.getUser(function(data) {
-              vm.user = data.data;
-            });
+            vm.user = data.data;
+
+          });
         });
         vm.updateUser = function() {
           Auth.getUser(function(data) {
