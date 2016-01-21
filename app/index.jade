@@ -9,21 +9,20 @@ html(lang='en', ng-app='frodocms')
     // Font Awesome CSS
     link(rel='stylesheet', href='lib/font-awesome/css/font-awesome.min.css', type='text/css', media='screen')
     // Include roboto.css to use the Roboto web font, material.css to include the theme and ripples.css to style the ripple effect
-    link(href='css/material.min.css', rel='stylesheet')
-    link(href='lib/ripples/dist/css/ripple.min.css', rel='stylesheet')
+    link(href='css/material.css', rel='stylesheet')
+    link(href='lib/bootstrap-material-design/dist/css/ripples.min.css', rel='stylesheet')
+    link(href='lib/bootstrap-material-design/dist/css/bootstrap-material-design.min.css', rel='stylesheet')
     link(href='css/main.css', rel='stylesheet')
+    link(href='lib/robotodraft/robotodraft.css', rel='stylesheet')
     link(href='css/responsive.css', rel='stylesheet')
-    link(href='css/animate.min.css', rel='stylesheet')
+    link(href='lib/animate.css/animate.min.css', rel='stylesheet')
+    link(href='lib/Materialize/dist/css/materialize.css', rel='stylesheet')
     script(src='lib/jquery/dist/jquery.min.js')
+    script(src='lib/Materialize/dist/js/materialize.js')
     script(src='lib/bootstrap/dist/js/bootstrap.min.js')
     script(src='lib/angular-route/angular-route.min.js')
-    script(src='lib/socket.io-client/socket.io.js')
     // local scripts
-    script(src='js/services.js')
-    script(src='js/controllers.js')
-    script(src='js/app.routes.js')
-    script(src='js/directives.js')
-    script(src='js/app.js')
+    script(src='js/main.js')
   body(ng-controller='LoginController as login')
     header
       .navbar.navbar-invers.menu-wrap
@@ -50,8 +49,8 @@ html(lang='en', ng-app='frodocms')
           li(ng-if='login.loggedIn')
             a(href='#', ng-click='login.doLogout()') Logout
         button#close-button.close-button Close Menu
-    main
-      header#home.hero-area(ng-if='!showSection')
+    main(style='min-height:100%;')
+      header#home.hero-area(style='min-height:80%;' ng-if='!showSection')
         .col-md-12
           .navbar.navbar-inverse.sticky-navigation.navbar-fixed-top(role='navigation', data-spy='affix', data-offset-top='200')
               .container
@@ -69,7 +68,7 @@ html(lang='en', ng-app='frodocms')
               p.wow.fadeInRight(data-wow-duration='1000ms', data-wow-delay='400ms') Write and Save Documents
               a.btn.btn-lg.btn-primary.wow.fadeInUp(href='/login', data-wow-duration='1000ms', data-wow-delay='400ms' ng-if='!login.loggedIn') Sign In
               a.btn.btn-lg.btn-border.wow.fadeInUp(href='/signup', data-wow-duration='1000ms', data-wow-delay='500ms' ng-if='!login.loggedIn') Sign Up
-      header(ng-if='showSection' style='padding-top:90px' ng-controller="MainController as main")
+      header(ng-if='showSection' style='padding-top:90px;min-height:80%;' ng-controller='MainController as main')
         .col-md-12
           .navbar.navbar-inverse.sticky-navigation.navbar-fixed-top(role='navigation', data-spy='affix', data-offset-top='200')
             .container
@@ -81,7 +80,7 @@ html(lang='en', ng-app='frodocms')
                 button#open-button.menu-icon(ng-click='main.toggleMenu()')
                   i.mdi-navigation-menu
         .ng-scope(ng-view='' ng-if='showSection')
-      section#footer
+      section#footer(style='min-height:20%;')
         .container#copyright
           .row
             .col-md-12
@@ -94,11 +93,10 @@ html(lang='en', ng-app='frodocms')
         i.mdi-hardware-keyboard-arrow-up         
 
     script(src='lib/jquery/dist/jquery.min.js')
+    script(src='lib/bootstrap-material-design/dist/js/ripples.min.js')
     script(src='lib/bootstrap/dist/js/bootstrap.min.js')
-    script(src='lib/ripples/dist/js/ripple.min.js')
     script(src='lib/material/js/material.js')
     script(src='lib/wow/dist/wow.js')
-    script(src='lib/protonet/jquery.inview/jquery.inview.min.js')
     script(src='js/main.js')
     script(src='lib/classie/classie.js')
     script(src='lib/smooth-scroll/smooth-scroll.js')

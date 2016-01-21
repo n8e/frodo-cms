@@ -1,5 +1,5 @@
 .container
-  .row
+  .row(ng-controller='EditUserController as edUser')
     .col.s6.col-md-4.col-sm-6.col-xs-12(style='margin:0; padding:0;')
       .portfolio.col.s6
         figure.effect-julia
@@ -9,7 +9,7 @@
               h3 {{ login.user.name.last }} 
     .col.s6.offset-s7.heading
       h3.title-small Welcome {{ login.user.name.first }} 
-      form.form-sigin(method='post', ng-submit='edUser.updateUser ()')
+      form.form-sigin(method='post', ng-submit='edUser.updateUser()')
         br
         | Username: 
         label {{ login.user.username }}

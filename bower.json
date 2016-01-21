@@ -41,10 +41,12 @@
     "material": "~0.1.1",
     "bootstrap": "~3.3.6",
     "wow": "~1.1.2",
-    "ripples": "~1.0.0",
     "classie": "~1.0.1",
     "smooth-scroll": "~1.0.1",
-    "socket.io-client": "~1.4.4"
+    "robotodraft": "~1.1.0",
+    "bootstrap-material-design": "~0.5.7",
+    "animate.css": "~3.5.1",
+    "Materialize": "materialize#~0.97.5"
   },
   "devDependencies": {
     "sinonjs": "~1.17.1",
