@@ -16,11 +16,10 @@
  *   scrollSpeed: 750
  * });
  */
-
-;(function($, window, document, undefined){
+(function($, window, document, undefined) {
 
   // our plugin constructor
-  var OnePageNav = function(elem, options){
+  var OnePageNav = function(elem, options) {
     this.elem = elem;
     this.$elem = $(elem);
     this.options = options;
@@ -55,7 +54,7 @@
       this.$nav = this.$elem.find(this.config.navItems);
 
       //Filter any links out of the nav
-      if(this.config.filter !== '') {
+      if (this.config.filter !== '') {
         this.$nav = this.$nav.filter(this.config.filter);
       }
 
@@ -75,7 +74,8 @@
     },
 
     adjustNav: function(self, $parent) {
-      self.$elem.find('.' + self.config.currentClass).removeClass(self.config.currentClass);
+      self.$elem.find('.' + self.config.currentClass)
+        .removeClass(self.config.currentClass);
       $parent.addClass(self.config.currentClass);
     },
 
@@ -91,13 +91,13 @@
         docHeight = self.$doc.height();
 
         //If it was scrolled
-        if(self.didScroll) {
+        if (self.didScroll) {
           self.didScroll = false;
           self.scrollChange();
         }
 
         //If the document height changes
-        if(docHeight !== self.docHeight) {
+        if (docHeight !== self.docHeight) {
           self.docHeight = docHeight;
           self.getPositions();
         }
@@ -118,7 +118,7 @@
         linkHref = self.getHash($(this));
         $target = $('#' + linkHref);
 
-        if($target.length) {
+        if ($target.length) {
           topPos = $target.offset().top;
           self.sections[linkHref] = Math.round(topPos);
         }
@@ -127,10 +127,11 @@
 
     getSection: function(windowPos) {
       var returnValue = null;
-      var windowHeight = Math.round(this.$win.height() * this.config.scrollThreshold);
+      var windowHeight = Math.round(this.$win.height() *
+        this.config.scrollThreshold);
 
-      for(var section in this.sections) {
-        if((this.sections[section] - windowHeight) < windowPos) {
+      for (var section in this.sections) {
+        if ((this.sections[section] - windowHeight) < windowPos) {
           returnValue = section;
         }
       }
@@ -144,9 +145,9 @@
       var $parent = $link.parent();
       var newLoc = '#' + self.getHash($link);
 
-      if(!$parent.hasClass(self.config.currentClass)) {
+      if (!$parent.hasClass(self.config.currentClass)) {
         //Start callback
-        if(self.config.begin) {
+        if (self.config.begin) {
           self.config.begin();
         }
 
@@ -159,7 +160,7 @@
         //Scroll to the correct position
         self.scrollTo(newLoc, function() {
           //Do we need to change the hash?
-          if(self.config.changeHash) {
+          if (self.config.changeHash) {
             window.location.hash = newLoc;
           }
 
@@ -167,7 +168,7 @@
           self.bindInterval();
 
           //End callback
-          if(self.config.end) {
+          if (self.config.end) {
             self.config.end();
           }
         });
@@ -182,16 +183,16 @@
       var $parent;
 
       //If the position is set
-      if(position !== null) {
+      if (position !== null) {
         $parent = this.$elem.find('a[href$="#' + position + '"]').parent();
 
         //If it's not already the current section
-        if(!$parent.hasClass(this.config.currentClass)) {
+        if (!$parent.hasClass(this.config.currentClass)) {
           //Change the highlighted nav item
           this.adjustNav(this, $parent);
 
           //If there is a scrollChange callback
-          if(this.config.scrollChange) {
+          if (this.config.scrollChange) {
             this.config.scrollChange($parent);
           }
         }
@@ -220,4 +221,4 @@
     });
   };
 
-})( jQuery, window , document );
+})(jQuery, window, document);

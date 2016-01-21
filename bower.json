@@ -45,7 +45,8 @@
     "smooth-scroll": "~1.0.1",
     "robotodraft": "~1.1.0",
     "bootstrap-material-design": "~0.5.7",
-    "animate.css": "~3.5.1"
+    "animate.css": "~3.5.1",
+    "Materialize": "materialize#~0.97.5"
   },
   "devDependencies": {
     "sinonjs": "~1.17.1",

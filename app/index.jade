@@ -16,12 +16,14 @@ html(lang='en', ng-app='frodocms')
     link(href='lib/robotodraft/robotodraft.css', rel='stylesheet')
     link(href='css/responsive.css', rel='stylesheet')
     link(href='lib/animate.css/animate.min.css', rel='stylesheet')
+    link(href='lib/Materialize/dist/css/materialize.css', rel='stylesheet')
     script(src='lib/jquery/dist/jquery.min.js')
+    script(src='lib/Materialize/dist/js/materialize.js')
     script(src='lib/bootstrap/dist/js/bootstrap.min.js')
     script(src='lib/angular-route/angular-route.min.js')
     // local scripts
     script(src='js/main.js')
-  body(style='height:100%;' ng-controller='LoginController as login')
+  body(ng-controller='LoginController as login')
     header
       .navbar.navbar-invers.menu-wrap
         .navbar-header.text-center
@@ -47,8 +49,8 @@ html(lang='en', ng-app='frodocms')
           li(ng-if='login.loggedIn')
             a(href='#', ng-click='login.doLogout()') Logout
         button#close-button.close-button Close Menu
-    main
-      header#home.hero-area(ng-if='!showSection')
+    main(style='min-height:100%;')
+      header#home.hero-area(style='min-height:80%;' ng-if='!showSection')
         .col-md-12
           .navbar.navbar-inverse.sticky-navigation.navbar-fixed-top(role='navigation', data-spy='affix', data-offset-top='200')
               .container
@@ -66,7 +68,7 @@ html(lang='en', ng-app='frodocms')
               p.wow.fadeInRight(data-wow-duration='1000ms', data-wow-delay='400ms') Write and Save Documents
               a.btn.btn-lg.btn-primary.wow.fadeInUp(href='/login', data-wow-duration='1000ms', data-wow-delay='400ms' ng-if='!login.loggedIn') Sign In
               a.btn.btn-lg.btn-border.wow.fadeInUp(href='/signup', data-wow-duration='1000ms', data-wow-delay='500ms' ng-if='!login.loggedIn') Sign Up
-      header(ng-if='showSection' style='padding-top:90px;' ng-controller='MainController as main')
+      header(ng-if='showSection' style='padding-top:90px;min-height:80%;' ng-controller='MainController as main')
         .col-md-12
           .navbar.navbar-inverse.sticky-navigation.navbar-fixed-top(role='navigation', data-spy='affix', data-offset-top='200')
             .container
@@ -78,7 +80,7 @@ html(lang='en', ng-app='frodocms')
                 button#open-button.menu-icon(ng-click='main.toggleMenu()')
                   i.mdi-navigation-menu
         .ng-scope(ng-view='' ng-if='showSection')
-      section#footer
+      section#footer(style='min-height:20%;')
         .container#copyright
           .row
             .col-md-12
