@@ -1,3 +1,7 @@
+var env = process.env.NODE_ENV || 'development';
+if (env === 'development') {
+  require('dotenv').load();
+}
 var gulp = require('gulp'),
   less = require('gulp-less'),
   jade = require('gulp-jade'),

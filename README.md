@@ -1,5 +1,5 @@
-[![Code Climate](https://codeclimate.com/repos/568e1fafa1a7976ffd001394/badges/91cd88bc1645bfe89284/gpa.svg)](https://codeclimate.com/repos/568e1fafa1a7976ffd001394/feed)
-[![Test Coverage](https://codeclimate.com/repos/568e1fafa1a7976ffd001394/badges/91cd88bc1645bfe89284/coverage.svg)](https://codeclimate.com/repos/568e1fafa1a7976ffd001394/coverage)
+[![Test Coverage](https://codeclimate.com/repos/56a2211afaf90c39110062e7/badges/8df98f2fa7ab990b6850/coverage.svg)](https://codeclimate.com/repos/56a2211afaf90c39110062e7/coverage)
+
 #Frodocms
 
 ## Document Management System (Material Design, Materialize CSS, Bootstrap Material Design, Node, Express, Mongo)
