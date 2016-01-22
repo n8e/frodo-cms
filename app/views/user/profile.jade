@@ -3,13 +3,13 @@
     .col.s6.col-md-4.col-sm-6.col-xs-12(style='margin:0; padding:0;')
       .portfolio.col.s6
         figure.effect-julia
-          img(src='img/face.jpg', alt='', style='height:250px; width:175px;')
+          img(src='img/face.jpg', alt='', style='height:200px; width:140px;')
           figcaption
             .heading
               h3 {{ login.user.name.last }} 
-    .col.s6.offset-s7.heading
+    .col.s6.heading
       h3.title-small Welcome {{ login.user.username }} 
-      form.form-sigin(method='post', ng-submit='edUser.updateUser()')
+      form.form-sigin(method='post', ng-submit='edUser.updateUser(login.user._id)')
         br
         | Username: 
         label {{ login.user.username }}
@@ -28,4 +28,4 @@
         input.form-control(type='text', name='email', placeholder='New Email', ng-model='edUser.userData.email')
         br
         button.btn.btn-success(type='submit') Update User
-        button.btn.btn-danger(type='submit' ng-click='edUser.delete()') Delete {{ login.user.name.first }}
+        button.btn.btn-danger(type='submit' ng-click='edUser.delete(login.user._id)') Delete {{ login.user.name.first }}

@@ -184,6 +184,7 @@
             });
           } else {
             res.json({
+              user: users,
               success: true,
               message: 'Successfully updated User!'
             });

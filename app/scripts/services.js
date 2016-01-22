@@ -93,7 +93,6 @@
 
   .factory('User', ['$http', 'AuthToken', function($http, AuthToken) {
     var userFactory = {};
-    var id;
 
     // to create a new user
     userFactory.create = function(userData, callback) {
@@ -105,11 +104,10 @@
     };
 
     // to update one user, logged in user
-    userFactory.update = function(userData) {
-      return $http.get('/api/me')
+    userFactory.update = function(userId, userData, cb) {
+      $http.put('/api/users/' + userId, userData)
         .success(function(data) {
-          id = data._id;
-          $http.put('/api/users/' + id, userData);
+          cb(data);
         });
     };
 
@@ -119,18 +117,13 @@
     };
 
     // to delete user
-    userFactory.delete = function(cb) {
-      $http.get('/api/me')
+    userFactory.delete = function(userId, cb) {
+      $http.delete('/api/users/' + userId)
         .success(function(data) {
-          id = data._id;
-          $http.delete('/api/users/' + id)
-            .success(function(data) {
-              console.log('HERE' + JSON.stringify(data));
-              cb(null, data);
-            })
-            .error(function(err) {
-              cb(err, null);
-            });
+          cb(data);
+        })
+        .error(function(err) {
+          cb(err);
         });
     };
 
@@ -174,7 +167,6 @@
     documentFactory.delete = function(docId, cb) {
       $http.delete('/api/documents/' + docId)
         .success(function(data) {
-          console.log('HERE' + JSON.stringify(data));
           cb(data);
         })
         .error(function(err) {

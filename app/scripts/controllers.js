@@ -58,7 +58,6 @@
         Auth.login(vm.loginData, function(data) {
           vm.processing = false;
           Auth.getUser(function(err, data) {
-            console.log(JSON.stringify(data));
             vm.user = data;
           });
           if (data.success) {
@@ -101,39 +100,41 @@
     }
   ])
 
-  .controller('AllDocumentsController', ['Document', '$location',
-    function(Document, $location) {
+  .controller('AllDocumentsController', ['Document', '$window',
+    function(Document, $window) {
       var vm = this;
       vm.documents = '';
       Document.all(function(err, data) {
         vm.documents = data;
       });
       vm.delete = function(id) {
+        vm.processing = true;
         Document.delete(id, function(data) {
-            console.log('DELETE Doc ' + JSON.stringify(data));
-            if (data.success) {
-              $location.path('/myDocuments');
-            } else {
-              vm.error = data.message;
-            }
-          });
+          if (data.message._id) {
+            vm.processing = false;
+            // reload the view
+            $window.location.reload();
+          } else {
+            vm.error = data.message;
+          }
+        });
       };
     }
   ])
 
-  .controller('EditUserController', ['$rootScope', '$location', 'Auth',
-    'User',
-    function($rootScope, $location, Auth, User) {
+  .controller('EditUserController', ['$rootScope', '$location', '$window', 
+    'Auth', 'User',
+    function($rootScope, $location, $window, Auth, User) {
       var vm = this;
       vm.loggedIn = Auth.isLoggedIn();
       $rootScope.$on('$routeChangeStart', function() {
         vm.loggedIn = Auth.isLoggedIn();
         Auth.getUser(function(err, data) {
           vm.user = data;
-          console.log('LOGGED USER ' + JSON.stringify(vm.user));
         });
       });
-      vm.updateUser = function() {
+      vm.updateUser = function(id) {
+        vm.processing = true;
         Auth.getUser(function(err, data) {
           vm.user = data;
           vm.updatedUser = {
@@ -144,20 +145,25 @@
             email: vm.userData.email || vm.user.email,
             role: vm.user.role
           };
-          User.update(vm.updatedUser, function(data) {
+          User.update(id, vm.updatedUser, function(data) {
             vm.processing = false;
             if (data.success) {
-              $location.path('/myDocuments');
+              vm.user = data.user;
+              $window.location.reload();
             } else {
               vm.error = data.message;
             }
           });
         });
       };
-      vm.delete = function() {
-        User.delete(function(data) {
-          console.log('DELETE USER ' + JSON.stringify(data));
-          if (data.success) {
+      vm.delete = function(id) {
+        vm.processing = true;
+        User.delete(id, function(data) {
+          vm.processing = false;
+          if (data.message._id) {
+            // clear user
+            vm.user = {};
+            vm.userData = {};
             $location.path('/signup');
           } else {
             vm.error = data.message;
