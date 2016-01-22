@@ -50,7 +50,7 @@ html(lang='en', ng-app='frodocms')
             a(href='#', ng-click='login.doLogout()') Logout
         button#close-button.close-button Close Menu
     main(style='min-height:100%;')
-      header#home.hero-area(style='min-height:80%;' ng-if='!showSection')
+      header#home.hero-area(style='min-height:850px;' ng-if='!showSection')
         .col-md-12
           .navbar.navbar-inverse.sticky-navigation.navbar-fixed-top(role='navigation', data-spy='affix', data-offset-top='200')
               .container
@@ -68,7 +68,7 @@ html(lang='en', ng-app='frodocms')
               p.wow.fadeInRight(data-wow-duration='1000ms', data-wow-delay='400ms') Write and Save Documents
               a.btn.btn-lg.btn-primary.wow.fadeInUp(href='/login', data-wow-duration='1000ms', data-wow-delay='400ms' ng-if='!login.loggedIn') Sign In
               a.btn.btn-lg.btn-border.wow.fadeInUp(href='/signup', data-wow-duration='1000ms', data-wow-delay='500ms' ng-if='!login.loggedIn') Sign Up
-      header(ng-if='showSection' style='padding-top:90px;min-height:80%;' ng-controller='MainController as main')
+      header(ng-if='showSection' style='padding-top:90px;min-height:850;' ng-controller='MainController as main')
         .col-md-12
           .navbar.navbar-inverse.sticky-navigation.navbar-fixed-top(role='navigation', data-spy='affix', data-offset-top='200')
             .container

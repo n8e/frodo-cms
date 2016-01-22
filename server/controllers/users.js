@@ -184,6 +184,7 @@
             });
           } else {
             res.json({
+              user: users,
               success: true,
               message: 'Successfully updated User!'
             });
@@ -216,6 +217,7 @@
               });
               return;
             } else {
+              console.log('RESPONSE ' + err);
               res.json(200, {
                 message: user
               });

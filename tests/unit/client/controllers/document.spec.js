@@ -8,18 +8,10 @@ describe('Controller: DocumentController', function() {
   beforeEach(angular.mock.inject(function($injector, $controller) {
     Document = $injector.get('Document');
     $location = $injector.get('$location');
-    Document.all = sinon.spy();
     controller = $controller('DocumentController');
   }));
 
   describe('Initialization', function() {
-    it('Document.all should be a function and should be defined', function() {
-      expect(Document.all.called).toBe(true);
-      expect(typeof Document.all).toBe('function');
-      Document.all.args[0][0]('data');
-      expect(controller.documents).toBeDefined();
-      expect(controller.documents).toBe('data');
-    });
     it('createDocument is a function and should call Document.create',
       function() {
         Document.create = sinon.spy();

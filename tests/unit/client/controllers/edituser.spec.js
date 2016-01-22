@@ -30,9 +30,7 @@ describe('Controller: EditUser Controller', function() {
       expect(controller.loggedIn).toBe(true);
       expect(Auth.isLoggedIn.calledTwice).toBe(true);
       expect(Auth.getUser.called).toBe(true);
-      Auth.getUser.args[0][0]({
-        data: 'data'
-      });
+      Auth.getUser.args[0][0]('err', 'data');
       expect(controller.user).toBeDefined();
       expect(controller.user).toBe('data');
     });
@@ -54,37 +52,52 @@ describe('Controller: EditUser Controller', function() {
           'firstname': 'Nate',
           'lastname': 'Martin'
         };
-        Auth.getUser.args[0][0]({
-          data: {
-            '_id': '568e2ea558bfb289851fed8e',
-            'role': 'Administrator',
-            'email': 'godmetweenciati@gmail.com',
-            'username': 'nate',
-            'password': '$2a$10$A6mxqRXzulVIHqCXiHRiae28' +
-              'pRl.gD1wvU7XvBUoBHmk8C.bpRH7G',
-            '__v': 0,
-            'name': {
-              'first': 'Nate',
-              'last': 'Martin'
-            }
+        Auth.getUser.args[0][0]('err', {
+          '_id': '568e2ea558bfb289851fed8e',
+          'role': 'Administrator',
+          'email': 'godmetweenciati@gmail.com',
+          'username': 'nate',
+          'password': '$2a$10$A6mxqRXzulVIHqCXiHRiae28' +
+            'pRl.gD1wvU7XvBUoBHmk8C.bpRH7G',
+          '__v': 0,
+          'name': {
+            'first': 'Nate',
+            'last': 'Martin'
           }
         });
         expect(User.update.called).toBe(true);
         $location.path = sinon.stub();
-        User.update.args[0][1]({
+        User.update.args[0][2]({
           success: true,
           message: 'message'
         });
         expect(controller.processing).toBeDefined();
         expect(controller.processing).toBe(false);
-        expect($location.path.called).toBe(true);
-        User.update.args[0][1]({
+        // expect($location.path.called).toBe(true);
+        User.update.args[0][2]({
           success: false,
           message: 'message'
         });
-        expect($location.path.calledOnce).toBe(true);
+        // expect($location.path.calledOnce).toBe(true);
         expect(controller.error).toBeDefined();
         expect(controller.error).toBe('message');
       });
+    it('delete should be a function and should call User.delete', function() {
+      User.delete = sinon.spy();
+      controller.delete('id');
+      expect(User.delete.called).toBe(true);
+      expect(typeof User.delete).toBe('function');
+      $location.path = sinon.stub();
+      User.delete.args[0][1]({
+        message: {
+          _id: 'id'
+        }
+      });
+      expect($location.path.called).toBe(true);
+      User.delete.args[0][1]({
+        message: 'message'
+      });
+      expect(controller.error).toBeDefined();
+    });
   });
 });
