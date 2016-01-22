@@ -44,7 +44,7 @@ var gulp = require('gulp'),
     styles: 'app/styles/*.+(less|css)'
   };
 var Server = require('karma').Server;
-var jasmineNode = require('gulp-jasmine-node');
+var jasmineNode = require('gulp-jasmine');
 
 gulp.task('browser-sync', function() {
   browserSync({
@@ -100,7 +100,7 @@ gulp.task('test:fend', function(done) {
 gulp.task('test:bend', function() {
   return gulp.src(['tests/server/**/*.spec.js'])
     .pipe(jasmineNode({
-      timeout: 10000
+      verbose: true
     }));
 });
 
@@ -126,7 +126,7 @@ gulp.task('less', function() {
 
 gulp.task('bower', function() {
   return bower()
-    .pipe(gulp.dest('public/lib/'));  
+    .pipe(gulp.dest('public/lib/'));
 });
 
 gulp.task('lint', function() {
