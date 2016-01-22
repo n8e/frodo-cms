@@ -110,8 +110,8 @@
       vm.delete = function(id) {
         vm.processing = true;
         Document.delete(id, function(data) {
+          vm.processing = false;
           if (data.message._id) {
-            vm.processing = false;
             // reload the view
             $window.location.reload();
           } else {
@@ -122,7 +122,7 @@
     }
   ])
 
-  .controller('EditUserController', ['$rootScope', '$location', '$window', 
+  .controller('EditUserController', ['$rootScope', '$location', '$window',
     'Auth', 'User',
     function($rootScope, $location, $window, Auth, User) {
       var vm = this;

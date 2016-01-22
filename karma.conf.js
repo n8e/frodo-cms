@@ -27,7 +27,14 @@ module.exports = function(config) {
       'app/scripts/services.js',
       'app/scripts/directives.js',
       'app/scripts/app.js',
-      'tests/unit/client/**/*.spec.js'
+      'tests/unit/client/directives/*.spec.js',
+      'tests/unit/client/services/*.spec.js',
+      'tests/unit/client/controllers/alldocuments.spec.js',
+      'tests/unit/client/controllers/signup.spec.js',
+      'tests/unit/client/controllers/edituser.spec.js',
+      'tests/unit/client/controllers/document.spec.js',
+      // 'tests/unit/client/controllers/login.spec.js',
+      // 'tests/unit/client/controllers/main.spec.js'
     ],
 
 
