@@ -11,7 +11,9 @@ describe('Controller: LoginController', function() {
     $location = $injector.get('$location');
     Auth = $injector.get('Auth');
     Auth.isLoggedIn = sinon.stub().returns(true);
-    controller = $controller('LoginController');
+    controller = $controller('LoginController', {
+      $rootScope: $rootScope
+    });
     controller.loginData = {
       username: 'smalik',
       password: '12345'
@@ -34,9 +36,7 @@ describe('Controller: LoginController', function() {
       expect(controller.loggedIn).toBe(true);
       expect(Auth.isLoggedIn.calledTwice).toBe(true);
       expect(Auth.getUser.called).toBe(true);
-      Auth.getUser.args[0][0]({
-        data: 'data'
-      });
+      Auth.getUser.args[0][0]('err', 'data');
       expect(controller.user).toBeDefined();
       expect(controller.user).toBe('data');
     });
@@ -71,9 +71,7 @@ describe('Controller: LoginController', function() {
         expect($location.path.calledOnce).toBe(true);
         expect(controller.error).toBeDefined();
         expect(controller.error).toBe('message');
-        Auth.getUser.args[0][0]({
-          data: 'data'
-        });
+        Auth.getUser.args[0][0]('err', 'data');
         expect(controller.user).toBeDefined();
         expect(controller.user).toBe('data');
         expect(Auth.getUser.called).toBe(true);
