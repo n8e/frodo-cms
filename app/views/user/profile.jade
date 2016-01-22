@@ -8,7 +8,7 @@
             .heading
               h3 {{ login.user.name.last }} 
     .col.s6.offset-s7.heading
-      h3.title-small Welcome {{ login.user.name.first }} 
+      h3.title-small Welcome {{ login.user.username }} 
       form.form-sigin(method='post', ng-submit='edUser.updateUser()')
         br
         | Username: 
@@ -28,4 +28,4 @@
         input.form-control(type='text', name='email', placeholder='New Email', ng-model='edUser.userData.email')
         br
         button.btn.btn-success(type='submit') Update User
-        button.btn.btn-danger(type='submit') Delete {{ login.user.name.first }}
+        button.btn.btn-danger(type='submit' ng-click='edUser.delete()') Delete {{ login.user.name.first }}

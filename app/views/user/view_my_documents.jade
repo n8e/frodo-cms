@@ -2,20 +2,10 @@
   section
     .heading
         h3 {{ login.user.name.last }}'s documents
-      .panel-body(ng-repeat='each in document.documents | reverse')
+      .panel-body(ng-repeat='each in document.documents')
         h3.title-small {{ each.title }}
         p {{ each.content }}
         p Created: {{ each.dateCreated }}
         br
         button.btn.btn-success(type='submit') Update
-        button.btn.btn-danger(type='submit') Delete
-  section
-    .heading
-        h3 {{ login.user.name.last }}'s documents
-      .panel-body(ng-repeat='each in document.documents | reverse')
-        h3.title-small {{ each.title }}
-        p {{ each.content }}
-        p Created: {{ each.dateCreated }}
-        br
-        button.btn.btn-success(type='submit') Update
-        button.btn.btn-danger(type='submit') Delete
+        button.btn.btn-danger(type='submit' ng-click='document.delete(each._id)') Delete
