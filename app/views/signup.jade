@@ -7,6 +7,10 @@
         a.close(href='#', data-dismiss='alert', aria-label='close') ×
         strong Info!
         |  Please fill every entry to signup!
+      .alert.alert-danger(ng-if='signup.error')
+        a.close(href='#', data-dismiss='alert', aria-label='close') ×
+        strong Error!
+        | {{ signup.error }}
       br
       | Username
       input.form-control(type='text', name='username', ng-model='signup.signupData.username')
@@ -25,9 +29,9 @@
       br
       | Role
       br
-      input.form-control(type='radio', name='role', value='1' ng-model='signup.signupData.role' style='position:static;visibility:visible')
+      input.form-control(type='radio', name='role', value='1' ng-model='signup.signupData.role')
       |  Administrator
-      input.form-control(type='radio', name='role', value='2', checked='true' ng-model='signup.signupData.role' style='position:static;visibility:visible')
+      input.form-control(type='radio', name='role', value='2', checked='true' ng-model='signup.signupData.role')
       |  User
       br
       button.btn.btn-success(type='submit') Signup
