@@ -4,12 +4,21 @@ describe('Controller: AllDocuments Controller', function() {
 
   var controller, Document, $window;
   // instantiate the main controller
-  beforeEach(angular.mock.inject(function($injector, $controller) {
-    $window = $injector.get('$window');
-    Document = $injector.get('Document');
-    Document.all = sinon.spy();
-    controller = $controller('AllDocumentsController');
-  }));
+  beforeEach(function() {
+    $window = {
+      location: {
+        reload: sinon.stub()
+      }
+    };
+    angular.mock.module(function($provide) {
+      $provide.value('$window', $window);
+    });
+    angular.mock.inject(function($injector, $controller) {
+      Document = $injector.get('Document');
+      Document.all = sinon.spy();
+      controller = $controller('AllDocumentsController');
+    });
+  });
 
   describe('Initialization', function() {
     it('should verify that Document.all function is defined and is called',
@@ -31,7 +40,6 @@ describe('Controller: AllDocuments Controller', function() {
         expect(Document.delete.called).toBe(true);
         expect(typeof Document.delete).toBe('function');
         expect(controller.processing).toBe(true);
-        $window.location.reload = sinon.stub();
         var data = {
           message: {
             _id: true

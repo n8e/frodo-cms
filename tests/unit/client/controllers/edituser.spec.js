@@ -2,18 +2,28 @@ describe('Controller: EditUser Controller', function() {
   // new instance of the module
   beforeEach(angular.mock.module('frodocms'));
 
-  var controller, $rootScope, Auth, User, $location;
+  var controller, $window, $rootScope, Auth, User, $location;
 
   // instantiate the main controller
-  beforeEach(angular.mock.inject(function($injector, $controller) {
-    $rootScope = $injector.get('$rootScope');
-    $rootScope.$on = sinon.spy();
-    Auth = $injector.get('Auth');
-    Auth.isLoggedIn = sinon.stub().returns(true);
-    User = $injector.get('User');
-    $location = $injector.get('$location');
-    controller = $controller('EditUserController');
-  }));
+  beforeEach(function() {
+    $window = {
+      location: {
+        reload: sinon.stub()
+      }
+    };
+    angular.mock.module(function($provide) {
+      $provide.value('$window', $window);
+    });
+    angular.mock.inject(function($injector, $controller) {
+      $rootScope = $injector.get('$rootScope');
+      $rootScope.$on = sinon.spy();
+      Auth = $injector.get('Auth');
+      Auth.isLoggedIn = sinon.stub().returns(true);
+      User = $injector.get('User');
+      $location = $injector.get('$location');
+      controller = $controller('EditUserController');
+    });
+  });
 
   describe('Initialization', function() {
     it('loggedIn should be a function and should call Auth.isLoggedIn',

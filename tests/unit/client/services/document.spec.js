@@ -7,25 +7,31 @@ describe('Service: Document Service', function() {
   beforeEach(angular.mock.inject(function($injector) {
     $http = $injector.get('$http');
     Document = $injector.get('Document');
-    spyOn(Document, 'allDocuments').and.callThrough();
-    spyOn(Document, 'all').and.callThrough();
-    spyOn(Document, 'create').and.callThrough();
-    Document.allDocuments();
-    Document.all();
-    Document.create();
   }));
 
-  it('should verify that allDocuments function exists and is called',
-    function() {
-      expect(Document.allDocuments).toBeDefined();
-      expect(Document.allDocuments).toHaveBeenCalled();
-    });
-  it('should verify that all function exists and is called', function() {
-    expect(Document.all).toBeDefined();
-    expect(Document.all).toHaveBeenCalled();
+  it('allDocuments should be a function and should be defined', function() {
+    Document.allDocuments();
+    expect(Document.allDocuments).toBeDefined();
+    expect(typeof Document.allDocuments).toBe('function');
   });
-  it('should verify that create function exists and is called', function() {
+  it('all should be a function and should be defined', function() {
+    Document.all();
+    expect(Document.all).toBeDefined();
+    expect(typeof Document.all).toBe('function');
+  });
+  it('create should be a function and should be defined', function() {
+    $http.get = sinon.stub();
+    Document.create();
     expect(Document.create).toBeDefined();
-    expect(Document.create).toHaveBeenCalled();
+    expect(typeof Document.create).toBe('function');
+    // $http.success.args[0][0]({
+    //   id: 'id'
+    // });
+    // expect($http.get.called).toBe(true);
+  });
+  it('delete should be a function and should be defined', function() {
+    //   Document.delete();
+    expect(Document.delete).toBeDefined();
+    expect(typeof Document.delete).toBe('function');
   });
 });
