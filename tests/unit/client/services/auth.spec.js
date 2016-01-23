@@ -10,6 +10,7 @@ describe('Service: Auth', function() {
     $q = $injector.get('$q');
     AuthToken = $injector.get('AuthToken');
     Auth = $injector.get('Auth');
+    
     spyOn(Auth, 'login').and.callThrough();
     spyOn(Auth, 'isLoggedIn').and.callThrough();
     spyOn(Auth, 'logout').and.callThrough();

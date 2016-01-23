@@ -33,8 +33,8 @@ module.exports = function(config) {
       'tests/unit/client/controllers/signup.spec.js',
       'tests/unit/client/controllers/edituser.spec.js',
       'tests/unit/client/controllers/document.spec.js',
-      // 'tests/unit/client/controllers/login.spec.js',
-      // 'tests/unit/client/controllers/main.spec.js'
+      'tests/unit/client/controllers/login.spec.js',
+      'tests/unit/client/controllers/main.spec.js'
     ],
 
 
