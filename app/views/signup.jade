@@ -29,11 +29,12 @@
       br
       | Role
       br
-      input.form-control(type='radio', name='role', value='1' ng-model='signup.signupData.role')
-      |  Administrator
-      input.form-control(type='radio', name='role', value='2', checked='true' ng-model='signup.signupData.role')
-      |  User
-      br
+      p
+        input#test1(name='role', type='radio', value='1', ng-model='signup.signupData.role')
+        label(for='test1') Administrator
+      p
+        input#test2(name='role', type='radio', value='2', checked='true', ng-model='signup.signupData.role')
+        label(for='test2') User
       button.btn.btn-success(type='submit') Signup
     p
       a(href='/login') Already Registered? Login here.
