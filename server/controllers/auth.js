@@ -21,7 +21,11 @@
               message: 'Failed to authenticate user'
             });
           } else {
-            req.decoded = decoded;
+            if (decoded._doc) {
+              req.decoded = decoded._doc;
+            } else {
+              req.decoded = decoded;
+            }
             next();
           }
         });
