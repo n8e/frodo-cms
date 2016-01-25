@@ -7,13 +7,14 @@
         a.close(href='#', data-dismiss='alert', aria-label='close') ×
         strong Error!
         |  {{ login.error }}
-      br
-      | Username:
-      input.form-control(type='text', name='username', ng-model='login.loginData.username')
-      br
-      | Password:
-      input.form-control(type='password', name='password', ng-model='login.loginData.password')
-      br
+      .row
+        .input-field.col.s12
+          input#user_name.validate(type='text', name='username', ng-model='login.loginData.username')
+          label(for='user_name') Username
+      .row
+        .input-field.col.s12
+          input#password.validate(type='password', name='password', ng-model='login.loginData.password')
+          label(for='password') Password
       button.btn.btn-success(type='submit') Login
     p
       a(href='/signup') Not Registered? Sign up here.
