@@ -12,23 +12,25 @@
         strong Error!
         | {{ signup.error }}
       br
-      | Username
-      input.form-control(type='text', name='username', ng-model='signup.signupData.username')
-      br
-      | Password
-      input.form-control(type='password', name='password', ng-model='signup.signupData.password')
-      br
-      | First Name
-      input.form-control(type='text', name='firstname', ng-model='signup.signupData.firstname')
-      br
-      | Last Name
-      input.form-control(type='text', name='lastname', ng-model='signup.signupData.lastname')
-      br
-      | Email
-      input.form-control(type='text', name='email', ng-model='signup.signupData.email')
-      br
-      | Role
-      br
+      .row  
+        .input-field.col.s6
+          input#first_name.validate(type='text', ng-model='signup.signupData.firstname')
+          label(for='first_name') First Name
+        .input-field.col.s6
+          input#last_name.validate(type='text', ng-model='signup.signupData.lastname')
+          label(for='last_name') Last Name
+      .row
+        .input-field.col.s12
+          input#password.validate(type='password', ng-model='signup.signupData.password')
+          label(for='password') Password
+      .row
+        .input-field.col.s12
+          input#user_name.validate(type='text', name='username', ng-model='signup.signupData.username')
+          label(for='user_name') Username
+      .row
+        .input-field.col.s12
+          input#email.validate(type='text', name='email', ng-model='signup.signupData.email')
+          label(for='email') Email
       p
         input#test1(name='role', type='radio', value='1', ng-model='signup.signupData.role')
         label(for='test1') Administrator
