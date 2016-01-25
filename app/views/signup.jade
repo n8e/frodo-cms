@@ -7,6 +7,10 @@
         a.close(href='#', data-dismiss='alert', aria-label='close') ×
         strong Info!
         |  Please fill every entry to signup!
+      .alert.alert-danger(ng-if='signup.error')
+        a.close(href='#', data-dismiss='alert', aria-label='close') ×
+        strong Error!
+        | {{ signup.error }}
       br
       .row  
         .input-field.col.s6
