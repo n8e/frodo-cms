@@ -19,10 +19,12 @@ describe('Service: User Service', function() {
     expect(User.create).toBeDefined();
     expect(User.create).toHaveBeenCalled();
   });
+
   it('should verify that all function exists and is called', function() {
     expect(User.update).toBeDefined();
     expect(User.update).toHaveBeenCalled();
   });
+  
   it('should verify that create function exists and is called', function() {
     expect(User.all).toBeDefined();
     expect(User.all).toHaveBeenCalled();

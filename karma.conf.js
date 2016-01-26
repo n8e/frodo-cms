@@ -22,19 +22,14 @@ module.exports = function(config) {
       'public/lib/socket.io-client/socket.io.js',
       'public/lib/classie/classie.js',
       'public/lib/sinonjs/sinon.js',
+
       'app/scripts/app.routes.js',
-      'app/scripts/controllers.js',
-      'app/scripts/services.js',
-      'app/scripts/directives.js',
+      'app/scripts/services/*.js',
+      'app/scripts/controllers/*.js',
+      'app/scripts/directives/reverse.js',
       'app/scripts/app.js',
-      'tests/unit/client/directives/*.spec.js',
-      'tests/unit/client/services/*.spec.js',
-      'tests/unit/client/controllers/alldocuments.spec.js',
-      'tests/unit/client/controllers/signup.spec.js',
-      'tests/unit/client/controllers/edituser.spec.js',
-      'tests/unit/client/controllers/document.spec.js',
-      'tests/unit/client/controllers/login.spec.js',
-      'tests/unit/client/controllers/main.spec.js'
+
+      'tests/unit/client/controllers/alldocuments.spec.js'
     ],
 
 
@@ -47,9 +42,9 @@ module.exports = function(config) {
     // https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
       'app/scripts/app.js': 'coverage',
-      'app/scripts/controllers.js': 'coverage',
-      'app/scripts/services.js': 'coverage',
-      'app/scripts/directives.js': 'coverage'
+      'app/scripts/services/*.js': 'coverage',
+      'app/scripts/controllers/*.js': 'coverage',
+      'app/scripts/directives/*.js': 'coverage'
     },
 
 
