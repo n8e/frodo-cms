@@ -7,5 +7,4 @@
         p {{ each.content }}
         p Created: {{ each.dateCreated | date }}
         br
-        button.btn.btn-lg.btn-material-teal(type='submit') Update
-        button.btn.btn-lg.btn-border(type='submit' ng-click='document.delete(each._id)') Delete
+        button.btn.btn-lg.btn-material-red(type='submit' ng-click='document.delete(each._id)') Delete

@@ -28,4 +28,4 @@
         input.form-control(type='text', name='email', placeholder='New Email', ng-model='edUser.userData.email')
         br
         button.btn.btn-lg.btn-material-teal(type='submit') Update User
-        button.btn.btn-lg.btn-border(type='submit' ng-click='edUser.delete(login.user._id)') Delete {{ login.user.name.first }}
+        button.btn.btn-lg.btn-material-red(type='submit' ng-click='edUser.delete(login.user._id)') Delete {{ login.user.name.first }}
