@@ -1,6 +1,10 @@
 (function() {
-  angular.module('frodocms', ['frodocms.services', 'frodocms.controllers', 
-    'appRoutes', 'reverseDirective'])
+  angular.module('frodocms', [
+      'appRoutes',
+      'frodocms.services',
+      'frodocms.controllers',
+      'reverseDirective'
+    ])
     .config(function($httpProvider) {
       $httpProvider.interceptors.push('AuthInterceptor');
     });

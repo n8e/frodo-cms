@@ -1,9 +1,3 @@
 vendor/*
 public/*
-app/scripts/smooth-on-scroll.js
-app/scripts/ripples.min.js
-app/scripts/count-to.js
-app/scripts/main.js
-app/scripts/material.js
-app/scripts/jquery.nav.js
-app/scripts/jquery.mmenu.min.all.js
+app/scripts/lib/
