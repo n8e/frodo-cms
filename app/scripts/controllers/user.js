@@ -1,5 +1,5 @@
 (function() {
-  angular.module('frodocms.controllers', [])
+  angular.module('frodocms.controllers')
     .controller('EditUserController', ['$rootScope', '$location', '$window',
       'Auth', 'User',
       function($rootScope, $location, $window, Auth, User) {

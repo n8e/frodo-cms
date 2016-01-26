@@ -1,5 +1,5 @@
 (function() {
-  angular.module('frodocms.services', [])
+  angular.module('frodocms.services')
     .factory('User', ['$http', 'AuthToken', function($http, AuthToken) {
       var userFactory = {};
 

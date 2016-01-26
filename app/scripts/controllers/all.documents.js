@@ -1,5 +1,5 @@
 (function() {
-  angular.module('frodocms.controllers', [])
+  angular.module('frodocms.controllers')
     .controller('AllDocumentsController', ['Document', '$window',
       function(Document, $window) {
         var self = this;

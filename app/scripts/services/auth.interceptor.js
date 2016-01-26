@@ -1,5 +1,5 @@
 (function() {
-  angular.module('frodocms.services', [])
+  angular.module('frodocms.services')
     .factory('AuthInterceptor', ['$q', '$location',
       'AuthToken',
       function($q, $location, AuthToken) {

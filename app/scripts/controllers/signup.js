@@ -1,5 +1,5 @@
 (function() {
-  angular.module('frodocms.controllers', [])
+  angular.module('frodocms.controllers')
     .controller('SignupController', ['$rootScope', '$location',
       'User',
       function($rootScope, $location, User) {

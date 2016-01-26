@@ -1,5 +1,5 @@
 (function() {
-  angular.module('frodocms.services', [])
+  angular.module('frodocms.services')
     .factory('Document', ['$http', function($http) {
       var documentFactory = {};
       var id;

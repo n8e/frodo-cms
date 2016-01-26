@@ -1,5 +1,5 @@
 (function() {
-  angular.module('frodocms.controllers', [])
+  angular.module('frodocms.controllers')
     .controller('MainController', function() {
       var self = this;
       var isOpen = false;
