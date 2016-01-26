@@ -66,11 +66,11 @@ html(lang='en', ng-app='frodocms')
             .contents.text-right
               h1.wow.fadeInRight(data-wow-duration='1000ms', data-wow-delay='300ms') Frodocms - Managing your Documents
               p.wow.fadeInRight(data-wow-duration='1000ms', data-wow-delay='400ms') Write and Save Documents
-              a.btn.btn-lg.btn-primary.wow.fadeInUp(href='/login', data-wow-duration='1000ms', data-wow-delay='400ms' ng-if='!login.loggedIn') Sign In
+              a.btn.btn-lg.btn-material-teal.wow.fadeInUp(href='/login', data-wow-duration='1000ms', data-wow-delay='400ms' ng-if='!login.loggedIn') Sign In
               a.btn.btn-lg.btn-border.wow.fadeInUp(href='/signup', data-wow-duration='1000ms', data-wow-delay='500ms' ng-if='!login.loggedIn') Sign Up
       header(ng-if='showSection' style='padding-top:90px;min-height:850;' ng-controller='MainController as main')
         .col-md-12
-          .navbar.navbar-inverse.sticky-navigation.navbar-fixed-top(role='navigation', data-spy='affix', data-offset-top='200')
+          .navbar.navbar-inverse.sticky-navigation.navbar-fixed-top(role='navigation', data-spy='affix', data-offset-top='200', style='background-color:#222;')
             .container
               .navbar-header
                 a.logo-left(href='/')
