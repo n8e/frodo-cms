@@ -28,7 +28,25 @@ var gulp = require('gulp'),
   paths = {
     public: 'public/**',
     jade: ['!app/shared/**', 'app/**/*.jade'],
-    scripts: 'app/**/*.js',
+    scripts: [
+      'app/scripts/services/index.js',
+      'app/scripts/services/auth.js',
+      'app/scripts/services/auth.token.js',
+      'app/scripts/services/auth.interceptor.js',
+      'app/scripts/services/user.js',
+      'app/scripts/services/document.js',
+      'app/scripts/controllers/index.js',
+      'app/scripts/controllers/main.js',
+      'app/scripts/controllers/signup.js',
+      'app/scripts/controllers/login.js',
+      'app/scripts/controllers/document.js',
+      'app/scripts/controllers/all.documents.js',
+      'app/scripts/controllers/user.js',
+      'app/scripts/app.routes.js',
+      'app/scripts/directives/reverse.js',
+      'app/scripts/app.js',
+      'app/scripts/lib/**/*.js'
+    ],
     staticFiles: [
       '!app/**/*.+(less|css|js|jade)',
       '!app/images/**/*',
@@ -59,7 +77,7 @@ gulp.task('bs-reload', function() {
 });
 
 gulp.task('scripts', function() {
-  return gulp.src('app/scripts/**/*.js')
+  return gulp.src(paths.scripts)
     .pipe(plumber({
       errorHandler: function(error) {
         console.log(error.message);
