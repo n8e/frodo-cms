@@ -24,7 +24,8 @@
     "beforeEach",
     "module",
     "spyOn",
-    "sinon"
+    "sinon",
+    "classie"
   ],
   "quotmark": true,
   "trailing": true,

@@ -20,21 +20,18 @@ module.exports = function(config) {
       'public/lib/angular-mocks/angular-mocks.js',
       'public/lib/angular-resource/angular-resource.js',
       'public/lib/socket.io-client/socket.io.js',
+      'public/lib/jquery/dist/jquery.min.js',
+      'public/lib/wow/dist/wow.min.js',
       'public/lib/classie/classie.js',
       'public/lib/sinonjs/sinon.js',
       'app/scripts/app.routes.js',
-      'app/scripts/controllers.js',
-      'app/scripts/services.js',
-      'app/scripts/directives.js',
+      'app/scripts/controllers/index.js',
+      'app/scripts/controllers/*.js',
+      'app/scripts/services/index.js',      
+      'app/scripts/services/*.js',      
+      'app/scripts/directives/reverse.js',
       'app/scripts/app.js',
-      'tests/unit/client/directives/*.spec.js',
-      'tests/unit/client/services/*.spec.js',
-      'tests/unit/client/controllers/alldocuments.spec.js',
-      'tests/unit/client/controllers/signup.spec.js',
-      'tests/unit/client/controllers/edituser.spec.js',
-      'tests/unit/client/controllers/document.spec.js',
-      'tests/unit/client/controllers/login.spec.js',
-      'tests/unit/client/controllers/main.spec.js'
+      'tests/unit/client/**/*.spec.js'
     ],
 
 
@@ -46,10 +43,10 @@ module.exports = function(config) {
     // available preprocessors: 
     // https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'app/scripts/app.js': 'coverage',
-      'app/scripts/controllers.js': 'coverage',
-      'app/scripts/services.js': 'coverage',
-      'app/scripts/directives.js': 'coverage'
+      // 'app/scripts/app.js': 'coverage',
+      // 'app/scripts/services/*.js': 'coverage',
+      'app/scripts/controllers/login.js': 'coverage',
+      // 'app/scripts/directives/*.js': 'coverage'
     },
 
 
