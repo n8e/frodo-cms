@@ -47,9 +47,10 @@
           User.delete(id, function(data) {
             self.processing = false;
             if (data.message._id) {
-              // clear user
+              // clear cache with logout
               self.user = {};
               self.userData = {};
+              Auth.logout();
               $location.path('/signup');
             } else {
               self.error = data.message;

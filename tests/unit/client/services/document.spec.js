@@ -14,11 +14,13 @@ describe('Service: Document Service', function() {
     expect(Document.allDocuments).toBeDefined();
     expect(typeof Document.allDocuments).toBe('function');
   });
+
   it('all should be a function and should be defined', function() {
     Document.all();
     expect(Document.all).toBeDefined();
     expect(typeof Document.all).toBe('function');
   });
+
   it('create should be a function and should be defined', function() {
     $http.get = sinon.stub();
     Document.create();
@@ -29,6 +31,7 @@ describe('Service: Document Service', function() {
     // });
     // expect($http.get.called).toBe(true);
   });
+  
   it('delete should be a function and should be defined', function() {
     //   Document.delete();
     expect(Document.delete).toBeDefined();

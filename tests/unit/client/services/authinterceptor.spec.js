@@ -21,6 +21,7 @@ describe('Service: AuthInterceptor Service', function() {
     expect(AuthInterceptor.request).toBeDefined();
     expect(AuthInterceptor.request).toHaveBeenCalled();
   });
+  
   it('should verify that responseError function exists and is called',
     function() {
       expect(AuthInterceptor.responseError).toBeDefined();

@@ -15,9 +15,11 @@ describe('Controller: Main Controller', function() {
       expect(controller.toggleMenu).toBeDefined();
       expect(controller.toggleMenu).toHaveBeenCalled();
     });
+
     it('should verify that isOpen is defined', function() {
       expect(controller.isOpen).toBeDefined();
     });
+    
     it('should verify that isOpen is a falsy value', function() {
       expect(controller.isOpen).toBe(false);
     });

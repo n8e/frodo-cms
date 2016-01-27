@@ -17,6 +17,7 @@ describe('Service: AuthToken Service', function() {
     expect(AuthToken.getToken).toBeDefined();
     expect(AuthToken.getToken).toHaveBeenCalled();
   });
+  
   it('should verify that setToken function exists and is called', function() {
     expect(AuthToken.setToken).toBeDefined();
     expect(AuthToken.setToken).toHaveBeenCalled();

@@ -25,14 +25,17 @@ describe('Service: Auth', function() {
     expect(Auth.login).toBeDefined();
     expect(Auth.login).toHaveBeenCalled();
   });
+
   it('should verify that getUser function exists and is called', function() {
     expect(Auth.getUser).toBeDefined();
     expect(Auth.getUser).toHaveBeenCalled();
   });
+
   it('should verify that isLoggedIn function exists and is called', function() {
     expect(Auth.isLoggedIn).toBeDefined();
     expect(Auth.isLoggedIn).toHaveBeenCalled();
   });
+  
   it('should verify that logout function exists and is called', function() {
     expect(Auth.logout).toBeDefined();
     expect(Auth.logout).toHaveBeenCalled();
