@@ -65,13 +65,13 @@
           throw err;
         }
         if (!user) {
-          res.status(500).send({
+          res.status(401).send({
             message: 'User does not exist'
           });
         } else if (user) {
           var validPassword = user.comparePassword(req.body.password);
           if (!validPassword) {
-            res.status(500).send({
+            res.status(401).send({
               message: 'Invalid Password'
             });
           } else {

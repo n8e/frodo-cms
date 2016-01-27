@@ -14,13 +14,21 @@
         $http.get('/api/me')
           .success(function(data) {
             id = data._id;
-            $http.get('/api/users/' + id + '/documents')
-              .success(function(data) {
-                cb(null, data);
-              })
-              .error(function(err) {
-                cb(err, null);
-              });
+            if (data.role === 'Administrator') {
+              console.log('USERS ROLE ' + data.role);
+              return $http.get('/api/documents')
+                .success(function(data) {
+                  cb(null, data);
+                });
+            } else {
+              $http.get('/api/users/' + id + '/documents')
+                .success(function(data) {
+                  cb(null, data);
+                })
+                .error(function(err) {
+                  cb(err, null);
+                });
+            }
           });
       };
 
