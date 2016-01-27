@@ -33,6 +33,7 @@ describe('Controller: AllDocuments Controller', function() {
         expect(controller.documents).toBeDefined();
         expect(controller.documents.data).toBe('data');
       });
+    
     it('should verify that Document.delete function is defined and is called',
       function() {
         Document.delete = sinon.spy();
