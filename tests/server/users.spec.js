@@ -101,7 +101,7 @@ describe('Users', function() {
         password: '67891'
       })
       .end(function(err, res) {
-        expect(res.status).toEqual(500);
+        expect(res.status).toEqual(401);
         expect(res.body.message).toBe('User does not exist');
         done();
       });
