@@ -11,9 +11,11 @@ describe('Controller: EditUser Controller', function() {
         reload: sinon.stub()
       }
     };
+
     angular.mock.module(function($provide) {
       $provide.value('$window', $window);
     });
+
     angular.mock.inject(function($injector, $controller) {
       $rootScope = $injector.get('$rootScope');
       $rootScope.$on = sinon.spy();
@@ -33,6 +35,7 @@ describe('Controller: EditUser Controller', function() {
         expect(Auth.isLoggedIn.called).toBe(true);
         expect(controller.loggedIn).toBe(true);
       });
+
     it('$rootScope.$on should be called', function() {
       expect($rootScope.$on.called).toBe(true);
       Auth.getUser = sinon.spy();
@@ -44,6 +47,7 @@ describe('Controller: EditUser Controller', function() {
       expect(controller.user).toBeDefined();
       expect(controller.user).toBe('data');
     });
+
     it('updateUser should be a function and should call Auth.getUser and ' +
       'User.update',
       function() {
@@ -62,6 +66,7 @@ describe('Controller: EditUser Controller', function() {
           'firstname': 'Nate',
           'lastname': 'Martin'
         };
+
         Auth.getUser.args[0][0]('err', {
           '_id': '568e2ea558bfb289851fed8e',
           'role': 'Administrator',
@@ -75,6 +80,7 @@ describe('Controller: EditUser Controller', function() {
             'last': 'Martin'
           }
         });
+
         expect(User.update.called).toBe(true);
         $location.path = sinon.stub();
         User.update.args[0][2]({
@@ -92,11 +98,13 @@ describe('Controller: EditUser Controller', function() {
         expect(controller.error).toBeDefined();
         expect(controller.error).toBe('message');
       });
+
     it('delete should be a function and should call User.delete', function() {
       User.delete = sinon.spy();
       controller.delete('id');
       expect(User.delete.called).toBe(true);
       expect(typeof User.delete).toBe('function');
+      Auth.logout = sinon.spy();
       $location.path = sinon.stub();
       User.delete.args[0][1]({
         message: {
