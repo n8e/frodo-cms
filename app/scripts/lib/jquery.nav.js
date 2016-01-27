@@ -158,20 +158,20 @@
         self.unbindInterval();
 
         //Scroll to the correct position
-        self.scrollTo(newLoc, function() {
-          //Do we need to change the hash?
-          if (self.config.changeHash) {
-            window.location.hash = newLoc;
-          }
+      //   self.scrollTo(newLoc, function() {
+      //     //Do we need to change the hash?
+      //     if (self.config.changeHash) {
+      //       window.location.hash = newLoc;
+      //     }
 
-          //Add the auto-adjust on scroll back in
-          self.bindInterval();
+      //     //Add the auto-adjust on scroll back in
+      //     self.bindInterval();
 
-          //End callback
-          if (self.config.end) {
-            self.config.end();
-          }
-        });
+      //     //End callback
+      //     if (self.config.end) {
+      //       self.config.end();
+      //     }
+      //   });
       }
 
       e.preventDefault();
