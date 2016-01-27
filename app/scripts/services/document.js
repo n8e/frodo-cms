@@ -15,7 +15,6 @@
           .success(function(data) {
             id = data._id;
             if (data.role === 'Administrator') {
-              console.log('USERS ROLE ' + data.role);
               return $http.get('/api/documents')
                 .success(function(data) {
                   cb(null, data);
