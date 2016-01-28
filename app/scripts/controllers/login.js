@@ -13,6 +13,8 @@
           });
         });
 
+        
+
         // login function
         self.doLogin = function() {
           self.processing = true;

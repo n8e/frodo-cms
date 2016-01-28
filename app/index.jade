@@ -17,10 +17,12 @@ html(lang='en', ng-app='frodocms')
     link(href='css/responsive.css', rel='stylesheet')
     link(href='lib/animate.css/animate.min.css', rel='stylesheet')
     link(href='lib/Materialize/dist/css/materialize.css', rel='stylesheet')
+    link(href='lib/ng-dialog/css/ngDialog.css', rel='stylesheet')
     script(src='lib/jquery/dist/jquery.min.js')
     script(src='lib/Materialize/dist/js/materialize.js')
     script(src='lib/bootstrap/dist/js/bootstrap.min.js')
     script(src='lib/angular-route/angular-route.min.js')
+    script(src='lib/ng-dialog/js/ngDialog.min.js')
     // local scripts
     //- script(src='js/main.js')
   body(ng-controller='LoginController as login')
@@ -37,6 +39,8 @@ html(lang='en', ng-app='frodocms')
             a(href='/myDocuments') My Documents
           li(ng-if='login.loggedIn')
             a(href='/document') Create Document
+          li(ng-if='login.user.role == "Administrator"')
+            a(href='/allDocuments') All Documents
         ul.nav.navbar-nav.main-navigation
           li.active
             a(href='/') Home
