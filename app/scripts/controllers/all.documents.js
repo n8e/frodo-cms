@@ -14,22 +14,17 @@
           self.documents = data;
         });
 
-        self.findWithAttr = function(array, attr, value) {
-          for (var i = 0; i < array.length; i += 1) {
-            if (array[i][attr] === value) {
-              return i;
-            }
-          }
-        };
-
         self.delete = function(id) {
           self.processing = true;
           Document.delete(id, function(data) {
             self.processing = false;
             if (data.message._id) {
+              var documentRemovedID = data.message._id;
               // a new array for the documents
-              self.documents = self.documents.splice(
-                self.findWithAttr(self.documents, 'self.documents._id', id), 1);
+              console.log(self.documents);
+              self.documents = self.documents.filter(function(doc) {
+                return doc._id !== documentRemovedID;
+              });
             } else {
               self.error = data.message;
             }

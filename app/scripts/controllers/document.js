@@ -3,7 +3,6 @@
     .controller('DocumentController', ['Document', '$location',
       function(Document, $location) {
         var self = this;
-
         // to create a new document
         self.createDocument = function() {
           self.processing = true;

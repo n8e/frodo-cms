@@ -31,7 +31,9 @@
           controllerAs: 'document',
           resolve: {
             documents: function(Document) {
-              return Document.allDocuments();
+              return Document.allDocuments(function(err, data){
+                return {error: err, date: data};
+              });
             }
           }
         })
@@ -41,7 +43,9 @@
           controllerAs: 'document',
           resolve: {
             documents: function(Document) {
-              return Document.all();
+              return Document.all(function(err, data){
+                return {error: err, date: data};
+              });
             }
           }
         });

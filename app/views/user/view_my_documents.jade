@@ -7,4 +7,14 @@
         p {{ each.content }}
         p Created: {{ each.dateCreated | date }}
         br
-        button.btn.btn-lg.btn-material-red(type='submit' ng-click='document.delete(each._id)') Delete
+        button.btn.btn-lg.btn-material-red(type='button' data-toggle="modal" data-target="#myModal") Delete
+        #myModal.modal.fade(role='dialog', style='height:325px;')
+          .modal-content
+            .modal-header(style='padding:35px 50px;')
+              button.close(type='button', data-dismiss='modal') ×
+              h4.modal-title Warning!
+            .modal-body(style='padding:40px 50px;')
+              h6 Do you want to delete this document?
+            .modal-footer
+              button.btn.btn-default(type='submit', ng-click='document.delete(each._id)') Delete
+              button.btn.btn-default(type='button', data-dismiss='modal') Close

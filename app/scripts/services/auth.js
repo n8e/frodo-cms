@@ -4,6 +4,7 @@
       function($http, $q, AuthToken) {
         var authFactory = {};
 
+
         // user login service
         authFactory.login = function(credentials, callback) {
           return $http.post('/api/users/login', credentials)
