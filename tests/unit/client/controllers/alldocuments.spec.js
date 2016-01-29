@@ -33,7 +33,7 @@ describe('Controller: AllDocuments Controller', function() {
         expect(controller.documents).toBeDefined();
         expect(controller.documents.data).toBe('data');
       });
-    
+
     it('should verify that Document.delete function is defined and is called',
       function() {
         Document.delete = sinon.spy();
@@ -44,6 +44,11 @@ describe('Controller: AllDocuments Controller', function() {
         var data = {
           message: {
             _id: true
+          }
+        };
+        controller.documents = {
+          filter: function() {
+            return 'filter';
           }
         };
         Document.delete.args[0][1](data);
