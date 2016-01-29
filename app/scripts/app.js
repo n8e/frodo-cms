@@ -5,10 +5,10 @@
       'frodocms.controllers',
       'reverseDirective'
     ])
-  .config(function($httpProvider) {
+    .config(['$httpProvider', function($httpProvider) {
       var token = window.localStorage.getItem('token');
-      if(token) {
+      if (token) {
         $httpProvider.defaults.headers.common['x-access-token'] = token;
       }
-    });
+    }]);
 })();
