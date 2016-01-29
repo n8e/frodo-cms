@@ -3,7 +3,7 @@
     .factory('AuthToken', ['$window', '$http', function($window, $http) {
       var authTokenFactory = {};
 
-      // get the token fro  the window
+      // get the token from  the window
       authTokenFactory.getToken = function() {
         return $window.localStorage.getItem('token');
       };

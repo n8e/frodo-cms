@@ -1,10 +1,17 @@
 (function() {
   angular.module('frodocms.controllers')
-    .controller('AllDocumentsController', ['Document',
-      function(Document) {
+    .controller('AllDocumentsController', ['$rootScope', 'Document', 'Auth',
+      function($rootScope, Document, Auth) {
         var self = this;
         self.documents = '';
         self.allDocuments = '';
+
+        $rootScope.$on('$routeChangeStart', function() {
+          self.loggedIn = Auth.isLoggedIn();
+          Auth.getUser(function(err, data) {
+            self.user = data;
+          });
+        });
 
         Document.allDocuments(function(err, data) {
           self.allDocuments = data;
@@ -21,7 +28,6 @@
             if (data.message._id) {
               var documentRemovedID = data.message._id;
               // a new array for the documents
-              console.log(self.documents);
               self.documents = self.documents.filter(function(doc) {
                 return doc._id !== documentRemovedID;
               });
