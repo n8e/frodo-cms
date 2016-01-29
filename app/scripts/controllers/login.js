@@ -29,7 +29,7 @@
             }
           });
         };
-        
+
         // logout function
         self.doLogout = function() {
           Auth.logout();
