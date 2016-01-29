@@ -8,9 +8,12 @@
         // user login service
         authFactory.login = function(credentials, callback) {
           return $http.post('/api/users/login', credentials)
-            .success(function(data) {
+            .success(function(err, data) {
               AuthToken.setToken(data.token);
-              callback(data);
+              callback(err, data);
+            })
+            .error(function(err){
+              callback(err);
             });
         };
 
