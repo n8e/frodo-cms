@@ -5,8 +5,11 @@
       var id;
 
       // all documents indiscriminately
-      documentFactory.allDocuments = function() {
-        return $http.get('/api/documents');
+      documentFactory.allDocuments = function(cb) {
+        return $http.get('/api/documents')
+          .success(function(data) {
+            cb(null, data);
+          });
       };
 
       // all documents for a specific user
@@ -14,20 +17,13 @@
         $http.get('/api/me')
           .success(function(data) {
             id = data._id;
-            if (data.role === 'Administrator') {
-              return $http.get('/api/documents')
-                .success(function(data) {
-                  cb(null, data);
-                });
-            } else {
-              $http.get('/api/users/' + id + '/documents')
-                .success(function(data) {
-                  cb(null, data);
-                })
-                .error(function(err) {
-                  cb(err, null);
-                });
-            }
+            $http.get('/api/users/' + id + '/documents')
+              .success(function(data) {
+                cb(null, data);
+              })
+              .error(function(err) {
+                cb(err, null);
+              });
           });
       };
 

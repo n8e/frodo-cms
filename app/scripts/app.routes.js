@@ -25,13 +25,27 @@
         .when('/error', {
           templateUrl: 'views/error.html'
         })
+        .when('/allDocuments', {
+          templateUrl: 'views/user/all_documents.html',
+          controller: 'AllDocumentsController',
+          controllerAs: 'document',
+          resolve: {
+            documents: function(Document) {
+              return Document.allDocuments(function(err, data){
+                return {error: err, date: data};
+              });
+            }
+          }
+        })
         .when('/myDocuments', {
           templateUrl: 'views/user/view_my_documents.html',
           controller: 'AllDocumentsController',
           controllerAs: 'document',
           resolve: {
             documents: function(Document) {
-              return Document.allDocuments();
+              return Document.all(function(err, data){
+                return {error: err, date: data};
+              });
             }
           }
         });

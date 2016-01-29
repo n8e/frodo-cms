@@ -1,0 +1,10 @@
+.container
+  section
+    .heading
+        h3 All documents
+      .panel-body(ng-repeat='each in document.allDocuments')
+        h3.title-small {{ each.title }}
+        p {{ each.content }}
+        p Created: {{ each.dateCreated | date }}
+        br
+        button.btn.btn-lg.btn-material-red(type='submit' ng-click='document.delete(each._id)') Delete

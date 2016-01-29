@@ -37,6 +37,8 @@ html(lang='en', ng-app='frodocms')
             a(href='/myDocuments') My Documents
           li(ng-if='login.loggedIn')
             a(href='/document') Create Document
+          li(ng-if='login.user.role == "Administrator"')
+            a(href='/allDocuments') All Documents
         ul.nav.navbar-nav.main-navigation
           li.active
             a(href='/') Home

@@ -1,8 +1,16 @@
 (function() {
   angular.module('frodocms.controllers')
-    .controller('DocumentController', ['Document', '$location',
-      function(Document, $location) {
+    .controller('DocumentController', ['$rootScope', 'Document',
+      '$location', 'Auth',
+      function($rootScope, Document, $location, Auth) {
         var self = this;
+
+        $rootScope.$on('$routeChangeStart', function() {
+          self.loggedIn = Auth.isLoggedIn();
+          Auth.getUser(function(err, data) {
+            self.user = data;
+          });
+        });
 
         // to create a new document
         self.createDocument = function() {
