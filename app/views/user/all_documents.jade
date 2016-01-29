@@ -19,6 +19,6 @@
               button.btn.btn-default(type='submit', ng-click='document.delete(each._id)', data-dismiss='modal') Delete
               button.btn.btn-default(type='button', data-dismiss='modal') Close
       script.
-        | $('#modalElement').on('hidden', function(){
+        | $('#myModal').on('hidden', function(){
         | $(this).data('modal', null);
         | });
