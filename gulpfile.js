@@ -185,6 +185,7 @@ gulp.task('codeclimate-reporter', ['test:fend', 'test:bend'], function() {
 gulp.task('watch', function() {
   gulp.watch(paths.jade, ['jade']);
   gulp.watch(paths.styles, ['less']);
+  gulp.watch(paths.scripts, ['scripts']);
 });
 
 gulp.task('build', ['jade', 'less', 'static-files', 'scripts',

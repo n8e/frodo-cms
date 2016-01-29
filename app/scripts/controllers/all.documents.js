@@ -7,7 +7,16 @@
         self.allDocuments = '';
 
         $rootScope.$on('$routeChangeStart', function() {
-          self.loggedIn = Auth.isLoggedIn();
+          // self.loggedIn = Auth.isLoggedIn();
+          self.checkLoggedIn = function() {
+            if ($rootScope.currentUser) {
+              self.loggedIn = true;
+              return self.loggedIn;
+            } else {
+              self.loggedIn = false;
+              return self.loggedIn;
+            }
+          };
           Auth.getUser(function(err, data) {
             self.user = data;
           });
