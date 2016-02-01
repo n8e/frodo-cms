@@ -21,24 +21,6 @@
           self.documents = data;
         });
 
-        self.update = function(id) {
-          self.processing = true;
-          self.updatedDoc = {
-            title: self.docData.title || self.documentData.title,
-            content: self.docData.content || self.documentData.content
-          };
-          Document.update(id, self.docData, function(data) {
-            self.processing = false;
-            if (data.success) {
-              Document.all(function(err, data) {
-                self.documents = data;
-              });
-            } else {
-              self.error = data.message;
-            }
-          });
-        };
-
         self.delete = function(id) {
           self.processing = true;
           Document.delete(id, function(data) {
