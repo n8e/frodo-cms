@@ -21,8 +21,6 @@
             self.processing = false;
             Auth.getUser(function(err, data) {
               self.user = data;
-              console.log('DATA getUser ' + JSON.stringify(data));
-              console.log('ERR' + JSON.stringify(err));
             });
             if (data.success) {
               $location.path('/profile');
