@@ -35,22 +35,10 @@
           });
       };
 
-      // to delete document
+      // to delete user
       documentFactory.delete = function(docId, cb) {
         $http.delete('/api/documents/' + docId)
           .success(function(data) {
-            cb(data);
-          })
-          .error(function(err) {
-            cb(err);
-          });
-      };
-
-      // to update document
-      documentFactory.update = function(docId, docData, cb) {
-        $http.put('/api/documents/' + docId, docData)
-          .success(function(data) {
-            console.log(JSON.stringify(data));
             cb(data);
           })
           .error(function(err) {

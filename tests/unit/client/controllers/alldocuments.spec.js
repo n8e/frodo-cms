@@ -59,32 +59,5 @@ describe('Controller: AllDocuments Controller', function() {
         expect(controller.error).toBeDefined();
         expect(controller.error).toBe('message');
       });
-
-    it('should verify that Document.update function is defined and is called',
-      function() {
-        Document.update = sinon.spy();
-        controller.docData = {
-          title: 'title',
-          content: 'content'
-        };
-        controller.update('id');
-        expect(Document.update.called).toBe(true);
-        expect(typeof Document.delete).toBe('function');
-        expect(controller.processing).toBe(true);
-        expect(controller.docData).toBeDefined();
-        Document.all = sinon.spy();
-        Document.update.args[0][2]({
-          success: true
-        });
-        expect(Document.all.called).toBe(true);
-        Document.all.args[0][0]('err','data');
-        expect(controller.documents).toEqual('data');
-        Document.update.args[0][2]({
-          success: false,
-          message: 'message'
-        });
-        expect(controller.error).toBeDefined();
-        expect(controller.error).toEqual('message');
-      });
   });
 });
