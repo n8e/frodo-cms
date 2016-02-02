@@ -72,11 +72,13 @@ describe('Controller: AllDocuments Controller', function() {
         expect(typeof Document.delete).toBe('function');
         expect(controller.processing).toBe(true);
         expect(controller.docData).toBeDefined();
+
         Document.all = sinon.spy();
         Document.update.args[0][2]({
           success: true
         });
         expect(Document.all.called).toBe(true);
+
         Document.all.args[0][0]('err','data');
         expect(controller.documents).toEqual('data');
         Document.update.args[0][2]({
