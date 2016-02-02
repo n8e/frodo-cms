@@ -24,8 +24,8 @@
         self.update = function(id) {
           self.processing = true;
           self.updatedDoc = {
-            title: self.docData.title || self.documentData.title,
-            content: self.docData.content || self.documentData.content
+            title: self.docData.title,
+            content: self.docData.content
           };
           Document.update(id, self.docData, function(data) {
             self.processing = false;
