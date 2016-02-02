@@ -50,7 +50,6 @@
       documentFactory.update = function(docId, docData, cb) {
         $http.put('/api/documents/' + docId, docData)
           .success(function(data) {
-            console.log(JSON.stringify(data));
             cb(data);
           })
           .error(function(err) {
