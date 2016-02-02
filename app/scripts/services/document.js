@@ -46,6 +46,17 @@
           });
       };
 
+      // to update document
+      documentFactory.update = function(docId, docData, cb) {
+        $http.put('/api/documents/' + docId, docData)
+          .success(function(data) {
+            cb(data);
+          })
+          .error(function(err) {
+            cb(err);
+          });
+      };
+
       // return self
       return documentFactory;
     }]);
