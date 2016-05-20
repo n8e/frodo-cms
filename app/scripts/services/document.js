@@ -35,7 +35,7 @@
           });
       };
 
-      // to delete document
+      // to delete user
       documentFactory.delete = function(docId, cb) {
         $http.delete('/api/documents/' + docId)
           .success(function(data) {
