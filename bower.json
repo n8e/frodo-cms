@@ -33,6 +33,7 @@
     "angular-resource": "^1.5.5",
     "angular-route": "^1.5.5",
     "angular-ui-router": "^0.3.0",
+    "classie": "^1.0.1",
     "font-awesome": "^4.6.3",
     "lodash": "^4.12.0",
     "moment": "^2.13.0",
