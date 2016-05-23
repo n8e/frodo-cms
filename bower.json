@@ -40,11 +40,11 @@
     "material": "^0.1.1",
     "bootstrap": "^3.3.6",
     "wow": "^1.1.2",
-    "classie": "^1.0.1",
     "smooth-scroll": "^1.0.1",
     "robotodraft": "^1.1.0",
     "bootstrap-material-design": "^0.5.9",
-    "Materialize": "materialize#^0.97.6"
+    "Materialize": "materialize#^0.97.6",
+    "animate.css": "^3.5.1"
   },
   "devDependencies": {
     "sinonjs": "~1.17.1",

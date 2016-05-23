@@ -3,13 +3,14 @@ html(lang='en', ng-app='frodocms')
   head
     title Frodocms
     base(href='/')
-    // cdns
     script(src='lib/angular/angular.min.js')
+    script(src='lib/angular-route/angular-route.min.js')
+    script(src='lib/angular-ui-router/release/angular-ui-router.min.js')
+    script(src='lib/angular-animate/angular-animate.min.js')
     link(rel='stylesheet', href='lib/bootstrap/dist/css/bootstrap.min.css')
-    // Font Awesome CSS
+    link(rel='stylesheet', href='lib/animate.css/animate.min.css')
     link(rel='stylesheet', href='lib/font-awesome/css/font-awesome.min.css', type='text/css', media='screen')
     link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
-    // Include roboto.css to use the Roboto web font, material.css to include the theme and ripples.css to style the ripple effect
     link(href='css/material.css', rel='stylesheet')
     link(href='lib/bootstrap-material-design/dist/css/ripples.min.css', rel='stylesheet')
     link(href='lib/bootstrap-material-design/dist/css/bootstrap-material-design.min.css', rel='stylesheet')
@@ -19,9 +20,13 @@ html(lang='en', ng-app='frodocms')
     link(href='lib/animate.css/animate.min.css', rel='stylesheet')
     link(href='lib/Materialize/dist/css/materialize.css', rel='stylesheet')
     script(src='lib/jquery/dist/jquery.min.js')
+    script(src='lib/bootstrap-material-design/dist/js/ripples.min.js')
+    script(src='lib/bootstrap-material-design/dist/js/material.min.js')
+    script(src='lib/bootstrap/dist/js/bootstrap.min.js')
+    script(src='lib/material/js/material.js')
     script(src='lib/Materialize/dist/js/materialize.js')
     script(src='lib/bootstrap/dist/js/bootstrap.min.js')
-    script(src='lib/angular-route/angular-route.min.js')
+    script(src='js/main.js')
   body(ng-controller='LoginController as login')
     header
       .navbar.navbar-invers.menu-wrap
@@ -67,8 +72,8 @@ html(lang='en', ng-app='frodocms')
             .contents.text-right
               h1.wow.fadeInRight(data-wow-duration='1000ms', data-wow-delay='300ms') Frodocms - A notebook for all your scribbles and sketches.
               p.wow.fadeInRight(data-wow-duration='1000ms', data-wow-delay='400ms') Write and Save Notes
-              a.btn.btn-lg.btn-material-teal.wow.fadeInUp(href='/login', data-wow-duration='1000ms', data-wow-delay='400ms' ng-if='!login.loggedIn') Sign In
-              a.btn.btn-lg.btn-border.wow.fadeInUp(href='/signup', data-wow-duration='1000ms', data-wow-delay='500ms' ng-if='!login.loggedIn') Sign Up
+              a.btn.btn-lg.btn-material-teal.wow.fadeInUp(ng-href='/login', data-wow-duration='1000ms', data-wow-delay='400ms' ng-if='!login.loggedIn') Sign In
+              a.btn.btn-lg.btn-border.wow.fadeInUp(ng-href='/signup', data-wow-duration='1000ms', data-wow-delay='500ms' ng-if='!login.loggedIn') Sign Up
       header(ng-if='showSection', style='padding-top:90px;min-height:850;', ng-controller='MainController as main')
         .col-md-12
           .navbar.navbar-inverse.sticky-navigation.navbar-fixed-top(role='navigation', data-spy='affix', data-offset-top='200', style='background-color:#009090;')
@@ -89,14 +94,8 @@ html(lang='en', ng-app='frodocms')
               | © Frodocms 2015 All right reserved. Designed and Developed by 
               a(href='https://github.com/andela-nmartin/')
                 | NM
-
-    script(src='lib/jquery/dist/jquery.min.js')
-    script(src='lib/bootstrap-material-design/dist/js/ripples.min.js')
-    script(src='lib/bootstrap/dist/js/bootstrap.min.js')
-    script(src='lib/material/js/material.js')
     script(src='lib/wow/dist/wow.js')
     script(src='js/main.js')
-    script(src='lib/classie/classie.js')
     script(src='lib/smooth-scroll/smooth-scroll.js')
     script.
       $(document).ready(function() {
