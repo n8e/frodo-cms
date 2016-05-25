@@ -5,7 +5,6 @@
       function($rootScope, $location, Auth) {
         var self = this;
         self.loggedIn = Auth.isLoggedIn();
-
         $rootScope.$on('$routeChangeStart', function() {
           self.loggedIn = Auth.isLoggedIn();
           Auth.getUser(function(err, data) {
@@ -21,8 +20,7 @@
             self.processing = false;
             Auth.getUser(function(err, data) {
               self.user = data;
-              console.log('DATA getUser ' + JSON.stringify(data));
-              console.log('ERR' + JSON.stringify(err));
+              $rootScope.currentUser = data;
             });
             if (data.success) {
               $location.path('/profile');
