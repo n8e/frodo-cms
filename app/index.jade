@@ -27,7 +27,7 @@ html(lang='en', ng-app='frodocms')
     script(src='lib/Materialize/dist/js/materialize.js')
     script(src='lib/bootstrap/dist/js/bootstrap.min.js')
     script(src='js/main.js')
-  body
+  body(ng-controller='MainController as main')
     header
       .navbar.navbar-invers.menu-wrap
         .navbar-header.text-center
@@ -53,7 +53,7 @@ html(lang='en', ng-app='frodocms')
           li(ng-if='currentUser')
             a(href='#') Hello {{ currentUser.username }}
           li(ng-if='currentUser')
-            a(href='#', ng-click='login.doLogout()') Logout
+            .btn.btn-lg.btn-material-teal(ng-click='main.doLogout()') {{ main.message}}
         button#close-button.close-button Close Menu
     main(style='min-height:100%;')
       header#home.hero-area(ng-show='!showSection', style='min-height:850px;')
