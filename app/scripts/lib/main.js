@@ -39,6 +39,7 @@ jQuery(function($) {
     var bodyEl = document.body,
       content = document.querySelector('.contents'),
       openbtn = document.getElementById('open-button'),
+      opnbtn = document.getElementById('open-button-2'),
       closebtn = document.getElementById('close-button'),
       isOpen = false;
 
@@ -48,13 +49,15 @@ jQuery(function($) {
 
     function initEvents() {
       openbtn.addEventListener('click', toggleMenu);
+      opnbtn.addEventListener('click', toggleMenu);
       if (closebtn) {
         closebtn.addEventListener('click', toggleMenu);
       }
-      // close the menu element if the target it´s not the menu element or one of its descendants..
+      // close the menu element if the target its not the menu element
+      // or one of its descendants
       content.addEventListener('click', function(ev) {
         var target = ev.target;
-        if (isOpen && target !== openbtn) {
+        if (isOpen && target !== openbtn || isOpen && target !== opnbtn) {
           toggleMenu();
         }
       });
