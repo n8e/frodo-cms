@@ -27,7 +27,7 @@ html(lang='en', ng-app='frodocms')
     script(src='lib/Materialize/dist/js/materialize.js')
     script(src='lib/bootstrap/dist/js/bootstrap.min.js')
     script(src='js/main.js')
-  body(ng-controller='LoginController as login')
+  body
     header
       .navbar.navbar-invers.menu-wrap
         .navbar-header.text-center
@@ -35,28 +35,28 @@ html(lang='en', ng-app='frodocms')
             i.mdi-image-timelapse
             | Frodocms
         ul.nav.navbar-nav.main-navigation
-          li(ng-if='login.loggedIn')
+          li(ng-if='currentUser')
             a(href='/profile') My Profile
-          li(ng-if='login.loggedIn')
+          li(ng-if='currentUser')
             a(href='/myDocuments') My Documents
-          li(ng-if='login.loggedIn')
+          li(ng-if='currentUser')
             a(href='/document') Create Document
-          li(ng-if='login.user.role == "Administrator"')
+          li(ng-if='currentUser.user.role == "Administrator"')
             a(href='/allDocuments') All Documents
         ul.nav.navbar-nav.main-navigation
           li.active
             a(href='/') Home
-          li(ng-if='!login.loggedIn')
+          li(ng-if='!currentUser')
             a(href='/login') Login
-          li(ng-if='!login.loggedIn')
+          li(ng-if='!currentUser')
             a(href='/signup') Signup
-          li(ng-if='login.loggedIn')
+          li(ng-if='currentUser')
             a(href='#') Hello {{ login.user.username }}
-          li(ng-if='login.loggedIn')
+          li(ng-if='currentUser')
             a(href='#', ng-click='login.doLogout()') Logout
         button#close-button.close-button Close Menu
     main(style='min-height:100%;')
-      header#home.hero-area(style='min-height:850px;', ng-if='!showSection', ng-controller='MainController as main')
+      header#home.hero-area(ng-show='!showSection', style='min-height:850px;')
         .col-md-12
           .navbar.navbar-inverse.sticky-navigation.navbar-fixed-top(role='navigation', data-spy='affix', data-offset-top='200')
               .container
@@ -72,9 +72,9 @@ html(lang='en', ng-app='frodocms')
             .contents.text-right
               h1.wow.fadeInRight(data-wow-duration='1000ms', data-wow-delay='300ms') Frodocms - A notebook for all your scribbles and sketches.
               p.wow.fadeInRight(data-wow-duration='1000ms', data-wow-delay='400ms') Write and Save Notes
-              a.btn.btn-lg.btn-material-teal.wow.fadeInUp(ng-href='/login', data-wow-duration='1000ms', data-wow-delay='400ms' ng-if='!login.loggedIn') Sign In
-              a.btn.btn-lg.btn-border.wow.fadeInUp(ng-href='/signup', data-wow-duration='1000ms', data-wow-delay='500ms' ng-if='!login.loggedIn') Sign Up
-      header(ng-if='showSection', style='padding-top:90px;min-height:850;', ng-controller='MainController as main')
+              a.btn.btn-lg.btn-material-teal.wow.fadeInUp(ng-href='/login' data-wow-duration='1000ms' data-wow-delay='400ms' ng-if='!currentUser') Sign In
+              a.btn.btn-lg.btn-border.wow.fadeInUp(ng-href='/signup' data-wow-duration='1000ms' data-wow-delay='500ms' ng-if='!currentUser') Sign Up
+      header(ng-show="showSection", style='padding-top:90px;min-height:850;')
         .col-md-12
           .navbar.navbar-inverse.sticky-navigation.navbar-fixed-top(role='navigation', data-spy='affix', data-offset-top='200', style='background-color:#009090;')
             .container
@@ -85,7 +85,7 @@ html(lang='en', ng-app='frodocms')
               .navbar-right
                 button#open-button.menu-icon(ng-click='main.toggleMenu()')
                   i.mdi-navigation-menu
-        .ng-scope(ng-view='' ng-if='showSection')
+        div(ng-view)
       section#footer(style='min-height:20%;')
         .container#copyright
           .row
@@ -94,6 +94,7 @@ html(lang='en', ng-app='frodocms')
               | © Frodocms 2015 All right reserved. Designed and Developed by 
               a(href='https://github.com/andela-nmartin/')
                 | NM
+
     script(src='lib/wow/dist/wow.js')
     script(src='js/main.js')
     script(src='lib/smooth-scroll/smooth-scroll.js')
