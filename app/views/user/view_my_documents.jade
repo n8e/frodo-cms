@@ -1,7 +1,7 @@
 .container
   section
     .heading
-        h3 {{ currentUser.name.last }}'s documents
+        h3 My Documents
       .panel-body(ng-repeat='each in document.documents')
         h3.title-small {{ each.title }}
         p {{ each.content }}
