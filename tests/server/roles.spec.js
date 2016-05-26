@@ -33,7 +33,7 @@ describe('Roles', function() {
         expect(res.status).toEqual(409);
         expect(res.body.code).toEqual(11000);
         expect(res.body.index).toEqual(0);
-        expect(res.body.errmsg).toContain('E11000 duplicate key error index');
+        expect(res.body.errmsg).toContain('E11000 duplicate key error');
         done();
       });
   });

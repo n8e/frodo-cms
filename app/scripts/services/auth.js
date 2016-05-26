@@ -13,7 +13,6 @@
               callback(data);
             })
             .error(function(err){
-              // console.log('DATA', JSON.stringify(err));
               callback(err);
             });
         };

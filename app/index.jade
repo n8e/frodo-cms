@@ -34,7 +34,7 @@ html(lang='en', ng-app='frodocms')
           a.navbar-brand.logo-right(href='')
             i.mdi-image-timelapse
             | Frodocms
-        ul.nav.navbar-nav.main-navigation
+        ul.nav.navbar-nav
           li(ng-if='currentUser')
             a(href='/profile') My Profile
           li(ng-if='currentUser')
@@ -43,7 +43,7 @@ html(lang='en', ng-app='frodocms')
             a(href='/document') Create Document
           li(ng-if='currentUser.user.role == "Administrator"')
             a(href='/allDocuments') All Documents
-        ul.nav.navbar-nav.main-navigation
+        ul.nav.navbar-nav
           li.active
             a(href='/') Home
           li(ng-if='!currentUser')
@@ -51,7 +51,7 @@ html(lang='en', ng-app='frodocms')
           li(ng-if='!currentUser')
             a(href='/signup') Signup
           li(ng-if='currentUser')
-            a(href='#') Hello {{ login.user.username }}
+            a(href='#') Hello {{ currentUser.username }}
           li(ng-if='currentUser')
             a(href='#', ng-click='login.doLogout()') Logout
         button#close-button.close-button Close Menu
