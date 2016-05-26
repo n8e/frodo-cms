@@ -18,7 +18,7 @@
         self.doLogout = function() {
           Auth.logout();
           self.user = '';
-          $rootScope.currentUser = {};
+          $rootScope.currentUser = '';
           $location.path('/logout');
         };
 
