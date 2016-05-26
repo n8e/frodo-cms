@@ -6,26 +6,26 @@
           img(src='img/face.jpg', alt='', style='height:200px; width:140px;')
           figcaption
             .heading
-              h3 {{ login.user.name.last }} 
+              h3 {{ currentUser.name.last }} 
     .col.s6.heading
-      h3.title-small Welcome {{ login.user.username }} 
-      form.form-sigin(method='post', ng-submit='edUser.updateUser(login.user._id)')
+      h3.title-small Welcome {{ currentUser.username }} 
+      form.form-sigin(method='post', ng-submit='edUser.updateUser(currentUser._id)')
         br
         | Username: 
-        label {{ login.user.username }}
+        label {{ currentUser.username }}
         br
         | Role: 
-        label {{ login.user.role }}
+        label {{ currentUser.role }}
         br
         | First Name: 
-        label {{ login.user.name.first }}
+        label {{ currentUser.name.first }}
         input.form-control(type='text', name='firstname', placeholder='New First Name', ng-model='edUser.userData.firstname')
         | Last Name: 
-        label {{ login.user.name.last }}
+        label {{ currentUser.name.last }}
         input.form-control(type='text', name='lastname', placeholder='New Last Name', ng-model='edUser.userData.lastname')
         | Email: 
-        label {{ login.user.email }}
+        label {{ currentUser.email }}
         input.form-control(type='text', name='email', placeholder='New Email', ng-model='edUser.userData.email')
         br
         button.btn.btn-lg.btn-material-teal(type='submit') Update User
-        button.btn.btn-lg.btn-material-red(type='submit' ng-click='edUser.delete(login.user._id)') Delete {{ login.user.name.first }}
+        button.btn.btn-lg.btn-material-red(type='submit' ng-click='edUser.delete(currentUser._id)') Delete {{ currentUser.name.first }}

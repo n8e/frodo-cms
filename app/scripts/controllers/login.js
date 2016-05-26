@@ -22,7 +22,7 @@
               self.user = data;
               $rootScope.currentUser = data;
             });
-            if (data.success) {
+            if (data) {
               $location.path('/profile');
             } else {
               self.error = data.message;
