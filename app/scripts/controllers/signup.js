@@ -23,6 +23,7 @@
           User.create(self.newUser, function(data) {
             self.processing = false;
             if (data.success) {
+              $rootScope.currentUser = self.newUser;
               $location.path('/profile');
             } else {
               self.error = data.message;
