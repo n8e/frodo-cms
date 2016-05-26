@@ -1,7 +1,7 @@
 (function() {
   angular.module('frodocms.controllers')
-    .controller('MainController', ['Auth', '$location',
-      function(Auth, $location) {
+    .controller('MainController', ['Auth', '$location', '$rootScope',
+      function(Auth, $location, $rootScope) {
         var self = this;
         var isOpen = false;
         self.isOpen = isOpen;
@@ -18,6 +18,7 @@
         self.doLogout = function() {
           Auth.logout();
           self.user = '';
+          $rootScope.currentUser = {};
           $location.path('/logout');
         };
 
