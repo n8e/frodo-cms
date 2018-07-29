@@ -19,15 +19,17 @@ var main = {
   },
 
   seedUser: function(userData) {
-    return Role.findOne({ 'id': userData.role }, 'title', function (err, role) {
-      if (err) return err;
-  
-      userData.role = role.title;
-  
-      return userData.save(function (err) {
-        if (err) return err;
-  
-        return 'Seeded ' + userData.role + ' ' + userData.firstName;
+    return new Promise(function(resolve, reject) {
+      return Role.findOne({ 'id': userData.role }, 'title', function (err, role) {
+        if (err) reject(err);
+    
+        userData.role = role.title;
+    
+        return userData.save(function (err) {
+          if (err) reject(err);
+    
+          resolve('Seeded ' + userData.role + ' ' + userData.username);
+        });
       });
     });
   }
