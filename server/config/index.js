@@ -1,5 +1,5 @@
 var envVariables =  {
-  'database': process.env.DATABASE_URL,
+  'database': process.env.DATABASE,
   'port': process.env.PORT,
   'secretKey': process.env.SECRET_KEY,
   'codeClimateRepoToken': process.env.CODECLIMATE_REPO_TOKEN
