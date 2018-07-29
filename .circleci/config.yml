@@ -1,0 +1,40 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: buildpack-deps:trusty
+    environment:
+      NODE_ENV: test
+      CIRCLE_ENV: test
+      DATABASE_USERNAME:
+      DATABASE_PASSWORD:
+      DATABASE_URL: localhost
+      DATABASE_NAME: circle_test
+      DATABASE_DIALECT: mongodb
+      DATABASE_PORT: 27019
+      DATABASE_URL: mongodb://ubuntu:@127.0.0.1:27019/circle_test
+      CODECLIMATE_REPO_TOKEN: a4d81229cf6e3f8eb5db81da85fbcd0d0bfff505ea88f46a14013a38c7167a12
+    parallelism: 3
+    resource_class: large
+    working_directory: ~/my-app
+    branches:
+      only:
+        - master
+        - /rc-.*/
+    steps:
+      - checkout
+      - run:
+          name: install-dependencies
+          command: npm install
+      - run:
+          name: install-globals
+          command: npm install -g gulp karma
+      - run:
+          name: build
+          command: ./node_modules/gulp/bin/gulp build
+      - run:
+          name: test
+          command: npm run test
+      - run:
+          name: start
+          command: npm start
