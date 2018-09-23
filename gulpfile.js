@@ -13,7 +13,7 @@ var gulp = require('gulp'),
   minifycss = require('gulp-minify-css'),
   gutil = require('gulp-util'),
   uglify = require('gulp-uglify'),
-  jshint = require('jshint'),
+  eslint = require('gulp-eslint'),
   plumber = require('gulp-plumber'),
   reporter = require('gulp-codeclimate-reporter'),
   browserify = require('browserify'),
@@ -153,8 +153,9 @@ gulp.task('lint', function() {
   return gulp.src(['./app/**/*.js', './index.js', +
       './server/**/*.js', './tests/**/*.js'
     ])
-    .pipe(jshint())
-    .pipe(jshint.reporter('default'));
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
 });
 
 gulp.task('static-files', function() {

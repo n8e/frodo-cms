@@ -23,6 +23,7 @@
     "gulp-cache": "^0.4.1",
     "gulp-codeclimate-reporter": "^1.2.0",
     "gulp-concat": "^2.6.0",
+    "gulp-eslint": "^5.0.0",
     "gulp-imagemin": "^2.4.0",
     "gulp-jade": "^1.1.0",
     "gulp-jasmine": "^2.2.1",
@@ -38,13 +39,13 @@
     "gulp-util": "^3.0.7",
     "jade": "~1.11.0",
     "jasmine-node": "^1.16.2",
-    "jshint": "^2.9.6",
     "jsonwebtoken": "^5.4.0",
     "karma": "^0.13.15",
     "moment": "^2.10.6",
     "mongoose": "4.3.7",
     "morgan": "^1.9.1",
     "node-promise": "^0.5.12",
+    "npm": "^6.4.1",
     "path": "^0.12.7",
     "promised-io": "^0.3.5",
     "protractor": "^3.0.0",
@@ -54,6 +55,7 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "devDependencies": {
+    "eslint": "^5.6.0",
     "karma-chrome-launcher": "^0.2.2",
     "karma-coverage": "^0.5.3",
     "karma-firefox-launcher": "^0.1.7",
@@ -72,7 +74,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/andela-nmartin/frodocms.git"
+    "url": "git+https://github.com/n8e/frodocms.git"
   },
   "keywords": [
     "document",
@@ -85,7 +87,7 @@
     "node": "0.12.5"
   },
   "bugs": {
-    "url": "https://github.com/andela-nmartin/frodocms/issues"
+    "url": "https://github.com/n8e/frodocms/issues"
   },
-  "homepage": "https://github.com/andela-nmartin/frodocms#readme"
+  "homepage": "https://github.com/n8e/frodocms#readme"
 }
