@@ -13,7 +13,7 @@ var gulp = require('gulp'),
   minifycss = require('gulp-minify-css'),
   gutil = require('gulp-util'),
   uglify = require('gulp-uglify'),
-  jshint = require('jshint'),
+  eslint = require('gulp-eslint'),
   plumber = require('gulp-plumber'),
   reporter = require('gulp-codeclimate-reporter'),
   browserify = require('browserify'),
@@ -64,7 +64,7 @@ var gulp = require('gulp'),
 var Server = require('karma').Server;
 var jasmineNode = require('gulp-jasmine');
 
-gulp.task('browser-sync', function() {
+gulp.task('browser-sync', function () {
   browserSync({
     server: {
       baseDir: './public'
@@ -72,14 +72,14 @@ gulp.task('browser-sync', function() {
   });
 });
 
-gulp.task('bs-reload', function() {
+gulp.task('bs-reload', function () {
   browserSync.reload();
 });
 
-gulp.task('scripts', function() {
+gulp.task('scripts', function () {
   return gulp.src(paths.scripts)
     .pipe(plumber({
-      errorHandler: function(error) {
+      errorHandler: function (error) {
         console.log(error.message);
         this.emit('end');
       }
@@ -96,7 +96,7 @@ gulp.task('scripts', function() {
     }));
 });
 
-gulp.task('images', function() {
+gulp.task('images', function () {
   gulp.src('app/images/**/*')
     .pipe(cache(imagemin({
       optimizationLevel: 3,
@@ -106,34 +106,34 @@ gulp.task('images', function() {
     .pipe(gulp.dest('public/img/'));
 });
 
-gulp.task('test:fend', function(done) {
+gulp.task('test:fend', function (done) {
   // Be sure to return the stream
   new Server({
     configFile: __dirname + '/karma.conf.js',
     // autoWatch: false,
     singleRun: true
-  }, function() {
+  }, function () {
     done();
   }).start();
 });
 
-gulp.task('test:bend', function() {
+gulp.task('test:bend', function () {
   return gulp.src(['tests/server/**/*.spec.js'])
     .pipe(jasmineNode({
       verbose: true
     }));
 });
 
-gulp.task('jade', function() {
+gulp.task('jade', function () {
   gulp.src(paths.jade)
     .pipe(jade())
     .pipe(gulp.dest('./public/'));
 });
 
-gulp.task('less', function() {
+gulp.task('less', function () {
   gulp.src(paths.styles)
     .pipe(plumber({
-      errorHandler: function(error) {
+      errorHandler: function (error) {
         console.log(error.message);
         this.emit('end');
       }
@@ -144,47 +144,48 @@ gulp.task('less', function() {
     .pipe(gulp.dest('public/css/'));
 });
 
-gulp.task('bower', function() {
+gulp.task('bower', function () {
   return bower()
     .pipe(gulp.dest('public/lib/'));
 });
 
-gulp.task('lint', function() {
+gulp.task('lint', function () {
   return gulp.src(['./app/**/*.js', './index.js', +
-      './server/**/*.js', './tests/**/*.js'
-    ])
-    .pipe(jshint())
-    .pipe(jshint.reporter('default'));
+    './server/**/*.js', './tests/**/*.js'
+  ])
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
 });
 
-gulp.task('static-files', function() {
+gulp.task('static-files', function () {
   return gulp.src(paths.staticFiles)
     .pipe(gulp.dest('public/'));
 });
 
-gulp.task('nodemon', function() {
+gulp.task('nodemon', function () {
   nodemon({
-      script: 'index.js',
-      ext: 'js',
-      ignore: ['public/lib', 'node_modules/']
-    })
+    script: 'index.js',
+    ext: 'js',
+    ignore: ['public/lib', 'node_modules/']
+  })
     .on('change', ['lint'])
-    .on('restart', function() {
+    .on('restart', function () {
       console.log('>> node restart');
     });
 });
 
-gulp.task('codeclimate-reporter', ['test:fend', 'test:bend'], function() {
+gulp.task('codeclimate-reporter', ['test:fend', 'test:bend'], function () {
   return gulp.src(['coverage/lcov/lcov.info'], {
-      read: false
-    })
+    read: false
+  })
     .pipe(reporter({
       token: process.env.CODECLIMATE_REPO_TOKEN,
       verbose: true
     }));
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', function () {
   gulp.watch(paths.jade, ['jade']);
   gulp.watch(paths.styles, ['less']);
   gulp.watch(paths.scripts, ['scripts']);
@@ -196,4 +197,4 @@ gulp.task('build', ['jade', 'less', 'static-files', 'scripts',
 gulp.task('heroku:production', ['build']);
 gulp.task('production', ['nodemon', 'build']);
 gulp.task('default', ['nodemon', 'watch', 'build', 'images']);
-gulp.task('test', ['test:bend', 'test:fend', 'codeclimate-reporter']);
+gulp.task('test', ['test:bend']);

@@ -1,5 +1,5 @@
 fail_on_violations: true
 
 javascript:
-  config_file: .jshintrc
-  ignore_file: .jshintignore
+  config_file: .eslintrc.js
+  ignore_file: .eslintignore
