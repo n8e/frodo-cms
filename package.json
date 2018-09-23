@@ -49,8 +49,6 @@
     "path": "^0.12.7",
     "promised-io": "^0.3.5",
     "protractor": "^3.0.0",
-    "superagent": "^1.4.0",
-    "supertest": "^1.1.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
   },
@@ -64,11 +62,12 @@
     "karma-phantomjs-launcher": "^0.2.3",
     "karma-safari-launcher": "^0.1.1",
     "karma-sinon": "^1.0.4",
-    "sinon": "^1.17.2"
+    "sinon": "^1.17.2",
+    "supertest": "^3.3.0"
   },
   "scripts": {
     "start": "bower install&&\nnode index.js",
-    "pretest": "node index.js &\nnode ./seeders/index.js",
+    "pretest": "node ./seeders/index.js",
     "test": "gulp test",
     "posttest": "pkill node"
   },

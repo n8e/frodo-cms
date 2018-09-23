@@ -12,13 +12,15 @@ var app = express();
 
 // connect to Mongo when the app initializes and 
 // drop the db before seeding
-mongoose.connect(config.database, function(err) {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log('Server connected to the database.');
-  }
-});
+mongoose.connect(config.database, { useMongoClient: true });
+mongoose.Promise = global.Promise;
+mongoose.connection
+  .on('connected', () => {
+    console.log(`Mongoose connection open on ${config.database}`);
+  })
+  .on('error', (err) => {
+    console.log(`Connection error: ${err.message}`);
+  });
 
 
 app.use(bodyParser.urlencoded({
@@ -33,13 +35,13 @@ app.use(express.static(__dirname + '/public'));
 var api = require('./server/routes/index')(app, express);
 app.use('/api', api);
 
-app.get('/*', function(req, res) {
+app.get('/*', function (req, res) {
   res.sendFile('index.html', {
     root: './public/'
   });
 });
 
-var server = app.listen(config.port || 3000, function() {
+var server = app.listen(config.port || 3000, function () {
   console.log('Express server listening on %d, in %s' +
     ' mode', server.address().port, app.get('env'));
 });
