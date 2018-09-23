@@ -13,28 +13,32 @@ var mongoose = require('mongoose'),
 mongoose.Promise = Promise;
 
 function connectAndSeedRoles() {
-  return new Promise(function(resolve, reject) {
-    return mongoose.connect(config.testDB, function(err) {
-      if (err) reject(err);
+  return new Promise(function (resolve, reject) {
+    return mongoose.connect(config.testDB, function (err) {
+      if (err) {
+        reject(err);
+      }
 
       return mongoose.connection.db.dropDatabase(function (err) {
-        if (err) reject(err);
+        if (err) {
+          reject(err);
+        }
         console.log('Connected to Test DB and dropped database');
 
         var loadFirstRole = helpers.seedRole(data.roleAdmin);
         return loadFirstRole
-          .then(function (resp) {
+          .then(function () {
             var loadSecondRole = helpers.seedRole(data.roleUser);
 
             return loadSecondRole
               .then(function (resp) {
                 resolve(resp);
               })
-              .catch(function(err) {
+              .catch(function (err) {
                 reject(err);
               });
           })
-          .catch(function(err) {
+          .catch(function (err) {
             reject(err);
           });
       });
@@ -44,42 +48,42 @@ function connectAndSeedRoles() {
 
 function seeder(callback) {
   return connectAndSeedRoles()
-  .then(function(resp) {
-    return callback().then(function() {
-      return helpers.exit();
+    .then(function () {
+      return callback().then(function () {
+        return helpers.exit();
+      });
     });
-  });
-  
+
 }
 
 seeder(function () {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     var loadFirstUser = helpers.seedUser(data.user1);
 
     return loadFirstUser
-      .then(function(resp) {
+      .then(function (resp) {
         console.log('LOADED ONE USER!', resp);
         var loadSecondUser = helpers.seedUser(data.user2);
 
         return loadSecondUser
-          .then(function(resp) {
+          .then(function (resp) {
             console.log('LOADED TWO USERS!', resp);
             var loadThirdUser = helpers.seedUser(data.admin);
 
             return loadThirdUser
-              .then(function(resp) {
+              .then(function (resp) {
                 resolve('LOADED ALL THREE USERS!', resp);
               })
               .then()
-              .catch(function(err) {
+              .catch(function (err) {
                 reject(err);
               });
           })
-          .catch(function(err) {
+          .catch(function (err) {
             reject(err);
           });
       })
-      .catch(function(err) {
+      .catch(function (err) {
         reject(err);
       });
   });

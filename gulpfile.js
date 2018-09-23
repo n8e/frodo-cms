@@ -112,7 +112,9 @@ gulp.task('test:fend', function(done) {
     configFile: __dirname + '/karma.conf.js',
     // autoWatch: false,
     singleRun: true
-  }, done).start();
+  }, function() {
+    done();
+  }).start();
 });
 
 gulp.task('test:bend', function() {
