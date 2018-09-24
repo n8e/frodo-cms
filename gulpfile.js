@@ -4,13 +4,13 @@ if (env === 'development') {
 }
 var gulp = require('gulp'),
   less = require('gulp-less'),
-  jade = require('gulp-jade'),
+  pug = require('gulp-pug'),
   concat = require('gulp-concat'),
   bower = require('gulp-bower'),
   rename = require('gulp-rename'),
   imagemin = require('gulp-imagemin'),
   cache = require('gulp-cache'),
-  minifycss = require('gulp-minify-css'),
+  minifycss = require('gulp-clean-css'),
   uglify = require('gulp-uglify'),
   eslint = require('gulp-eslint'),
   plumber = require('gulp-plumber'),
@@ -21,7 +21,7 @@ var gulp = require('gulp'),
   browserSync = require('browser-sync'),
   paths = {
     public: 'public/**',
-    jade: ['!app/shared/**', 'app/**/*.jade'],
+    pug: ['!app/shared/**', 'app/**/*.pug'],
     scripts: [
       'app/scripts/app.routes.js',
       'app/scripts/services/index.js',
@@ -42,7 +42,7 @@ var gulp = require('gulp'),
       'app/scripts/lib/**/*.js'
     ],
     staticFiles: [
-      '!app/**/*.+(less|css|js|jade)',
+      '!app/**/*.+(less|css|js|pug)',
       '!app/images/**/*',
       'app/**/*.*'
     ],
@@ -117,9 +117,9 @@ gulp.task('test:bend', function () {
     }));
 });
 
-gulp.task('jade', function () {
-  gulp.src(paths.jade)
-    .pipe(jade())
+gulp.task('pug', function () {
+  gulp.src(paths.pug)
+    .pipe(pug())
     .pipe(gulp.dest('./public/'));
 });
 
@@ -169,12 +169,12 @@ gulp.task('nodemon', function () {
 });
 
 gulp.task('watch', function () {
-  gulp.watch(paths.jade, ['jade']);
+  gulp.watch(paths.pug, ['pug']);
   gulp.watch(paths.styles, ['less']);
   gulp.watch(paths.scripts, ['scripts']);
 });
 
-gulp.task('build', ['jade', 'less', 'static-files', 'scripts',
+gulp.task('build', ['pug', 'less', 'static-files', 'scripts',
   'images', 'bower'
 ]);
 gulp.task('heroku:production', ['build']);
