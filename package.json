@@ -1,5 +1,5 @@
 {
-  "name": "frodocms",
+  "name": "frodo-cms",
   "version": "1.0.0",
   "description": "document management system",
   "main": "index.js",
@@ -62,7 +62,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/n8e/frodocms.git"
+    "url": "git+https://github.com/n8e/frodo-cms.git"
   },
   "keywords": [
     "document",
@@ -75,7 +75,7 @@
     "node": "0.12.5"
   },
   "bugs": {
-    "url": "https://github.com/n8e/frodocms/issues"
+    "url": "https://github.com/n8e/frodo-cms/issues"
   },
-  "homepage": "https://github.com/n8e/frodocms#readme"
+  "homepage": "https://github.com/n8e/frodo-cms#readme"
 }
