@@ -11,19 +11,13 @@ var gulp = require('gulp'),
   imagemin = require('gulp-imagemin'),
   cache = require('gulp-cache'),
   minifycss = require('gulp-minify-css'),
-  gutil = require('gulp-util'),
   uglify = require('gulp-uglify'),
   eslint = require('gulp-eslint'),
   plumber = require('gulp-plumber'),
-  reporter = require('gulp-codeclimate-reporter'),
-  browserify = require('browserify'),
-  path = require('path'),
-  source = require('vinyl-source-stream'),
   nodemon = require('gulp-nodemon'),
-  karma = require('gulp-karma'),
-  protractor = require('gulp-protractor').protractor,
   mocha = require('gulp-mocha'),
-  buffer = require('vinyl-buffer'),
+  karma = require('gulp-karma'),
+  mocha = require('gulp-mocha'),
   browserSync = require('browser-sync'),
   paths = {
     public: 'public/**',
@@ -62,7 +56,6 @@ var gulp = require('gulp'),
     styles: 'app/styles/*.+(less|css)'
   };
 var Server = require('karma').Server;
-var jasmineNode = require('gulp-jasmine');
 
 gulp.task('browser-sync', function () {
   browserSync({
@@ -118,9 +111,9 @@ gulp.task('test:fend', function (done) {
 });
 
 gulp.task('test:bend', function () {
-  return gulp.src(['tests/server/**/*.spec.js'])
-    .pipe(jasmineNode({
-      verbose: true
+  return gulp.src(['tests/server/**/*.spec.js'], { read: false })
+    .pipe(mocha({
+      reporter: 'nyan'
     }));
 });
 
@@ -173,16 +166,6 @@ gulp.task('nodemon', function () {
     .on('restart', function () {
       console.log('>> node restart');
     });
-});
-
-gulp.task('codeclimate-reporter', ['test:fend', 'test:bend'], function () {
-  return gulp.src(['coverage/lcov/lcov.info'], {
-    read: false
-  })
-    .pipe(reporter({
-      token: process.env.CODECLIMATE_REPO_TOKEN,
-      verbose: true
-    }));
 });
 
 gulp.task('watch', function () {
