@@ -1,5 +1,4 @@
 var mongoose = require('mongoose'),
-  ensureDatabaseConnection = require('./helpers/databaseConnection'),
   request = require('supertest'),
   moment = require('moment'),
   app = require('../../index'),
@@ -12,10 +11,6 @@ describe('SERVER Tests', function () {
   });
 
   describe('Roles:', function () {
-
-    // beforeAll(function () {
-    //   return ensureDatabaseConnection().then(data => data);
-    // });
 
     it('validates that the seeded roles are stored in database', function (done) {
       request(app)
