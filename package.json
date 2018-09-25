@@ -55,7 +55,7 @@
   "scripts": {
     "start": "bower install&&\nnode index.js",
     "pretest": "node ./seeders/index.js",
-    "test": "gulp test",
+    "test": "./node_modules/mocha/bin/mocha --reporter spec",
     "posttest": "pkill node"
   },
   "repository": {

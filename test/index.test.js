@@ -3,8 +3,7 @@ var mongoose = require('mongoose'),
   chai = require('chai'),
   chaiHttp = require('chai-http'),
   moment = require('moment'),
-  config = require('../../server/config'),
-  app = require('../../index'),
+  app = require('..'),
   documentHelper = require('./helpers/documentHelper');
 
 chai.use(chaiHttp);
@@ -12,10 +11,10 @@ chai.use(chaiHttp);
 describe('SERVER Tests', function () {
 
   before(function (done) {
-    mongoose.connect(config.testDB);
+    mongoose.connect(process.env.TEST_DATABASE_URL);
     var db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error'));
-    db.once('open', function() {
+    db.once('open', function () {
       console.log('We are connected to test database!');
       done();
     });
