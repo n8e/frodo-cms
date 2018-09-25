@@ -1,4 +1,4 @@
-[![Test Coverage](https://codeclimate.com/repos/56a2211afaf90c39110062e7/badges/8df98f2fa7ab990b6850/coverage.svg)](https://codeclimate.com/repos/56a2211afaf90c39110062e7/coverage)
+[![Build Status](https://travis-ci.com/n8e/frodo-cms.svg?branch=master)](https://travis-ci.com/n8e/frodo-cms)
 
 #Frodocms
 
