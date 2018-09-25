@@ -110,13 +110,6 @@ gulp.task('test:fend', function (done) {
   }).start();
 });
 
-gulp.task('test:bend', function () {
-  return gulp.src(['tests/server/**/*.spec.js'], { read: false })
-    .pipe(mocha({
-      reporter: 'nyan'
-    }));
-});
-
 gulp.task('pug', function () {
   gulp.src(paths.pug)
     .pipe(pug())
@@ -180,4 +173,4 @@ gulp.task('build', ['pug', 'less', 'static-files', 'scripts',
 gulp.task('heroku:production', ['build']);
 gulp.task('production', ['nodemon', 'build']);
 gulp.task('default', ['nodemon', 'watch', 'build', 'images']);
-gulp.task('test', ['test:bend']);
+gulp.task('test', ['test:fend']);
