@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/n8e/frodo-cms.svg?branch=master)](https://travis-ci.com/n8e/frodo-cms) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/9065a320f6a24ec58ba91ae6259370fe)](https://www.codacy.com/app/godmetweenciati/frodo-cms?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=n8e/frodo-cms&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.com/n8e/frodo-cms.svg?branch=master)](https://travis-ci.com/n8e/frodo-cms) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/9065a320f6a24ec58ba91ae6259370fe)](https://www.codacy.com/app/godmetweenciati/frodo-cms?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=n8e/frodo-cms&amp;utm_campaign=Badge_Grade) [![Coverage Status](https://coveralls.io/repos/github/n8e/frodo-cms/badge.svg?branch=master)](https://coveralls.io/github/n8e/frodo-cms?branch=master)
 
 # Frodocms
 
