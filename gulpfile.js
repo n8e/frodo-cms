@@ -6,7 +6,6 @@ var gulp = require('gulp'),
   less = require('gulp-less'),
   pug = require('gulp-pug'),
   concat = require('gulp-concat'),
-  bower = require('gulp-bower'),
   rename = require('gulp-rename'),
   imagemin = require('gulp-imagemin'),
   cache = require('gulp-cache'),
@@ -130,11 +129,6 @@ gulp.task('less', function () {
     .pipe(gulp.dest('public/css/'));
 });
 
-gulp.task('bower', function () {
-  return bower()
-    .pipe(gulp.dest('public/lib/'));
-});
-
 gulp.task('lint', function () {
   return gulp.src(['./app/**/*.js', './index.js', +
     './server/**/*.js', './tests/**/*.js'
@@ -168,7 +162,7 @@ gulp.task('watch', function () {
 });
 
 gulp.task('build', ['pug', 'less', 'static-files', 'scripts',
-  'images', 'bower'
+  'images'
 ]);
 gulp.task('heroku:production', ['build']);
 gulp.task('production', ['nodemon', 'build']);

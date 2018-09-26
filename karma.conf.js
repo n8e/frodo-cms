@@ -1,7 +1,7 @@
 // Karma configuration
 // Generated on Thu Jan 07 2016 16:26:21 GMT+0300 (EAT)
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -10,7 +10,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine', 'sinon'],
+    frameworks: ['mocha', 'sinon'],
 
 
     // list of files / patterns to load in the browser
@@ -27,11 +27,11 @@ module.exports = function(config) {
       'app/scripts/app.routes.js',
       'app/scripts/controllers/index.js',
       'app/scripts/controllers/*.js',
-      'app/scripts/services/index.js',      
-      'app/scripts/services/*.js',      
+      'app/scripts/services/index.js',
+      'app/scripts/services/*.js',
       'app/scripts/directives/reverse.js',
       'app/scripts/app.js',
-      'tests/unit/client/**/*.spec.js'
+      'app/tests/client/**/*.spec.js'
     ],
 
 
