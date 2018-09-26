@@ -57,6 +57,7 @@ describe('SERVER Tests', function () {
           title: 'Administrator'
         })
         .end(function (err, res) {
+          console.log('gfvdshjabckjnakmdslcknjdbchjakbn,kxcnbjsbdjhbcnmasnmdcklnjdbhjn', err)
           assert.equal(res.status, 409);
           assert.equal(res.body.code, 11000);
           assert.equal(res.body.index, 0);
