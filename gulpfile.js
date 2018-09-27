@@ -37,8 +37,7 @@ var gulp = require('gulp'),
       'app/scripts/controllers/all.documents.js',
       'app/scripts/controllers/user.js',
       'app/scripts/directives/reverse.js',
-      'app/scripts/app.js',
-      'app/scripts/lib/**/*.js'
+      'app/scripts/app.js'
     ],
     staticFiles: [
       '!app/**/*.+(less|css|js|pug)',
