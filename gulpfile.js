@@ -95,7 +95,7 @@ gulp.task('images', function () {
       progressive: true,
       interlaced: true
     })))
-    .pipe(gulp.dest('public/img/'));
+    .pipe(gulp.dest('public/assets/'));
 });
 
 gulp.task('test:fend', function (done) {

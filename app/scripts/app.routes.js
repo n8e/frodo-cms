@@ -1,20 +1,12 @@
-(function() {
+(function () {
   angular.module('appRoutes', ['ngRoute'])
     .config(['$routeProvider', '$locationProvider',
-      function($routeProvider, $locationProvider) {
+      function ($routeProvider, $locationProvider) {
         $routeProvider
           .when('/', {
             templateUrl: 'views/login.html',
             controller: 'MainController',
             controllerAs: 'main'
-          })
-          .when('/signup', {
-            templateUrl: 'views/signup.html'
-          })
-          .when('/login', {
-            templateUrl: 'views/login.html',
-            controller: 'LoginController',
-            controllerAs: 'login'
           })
           .when('/document', {
             templateUrl: 'views/user/document.html'
@@ -33,8 +25,8 @@
             controller: 'AllDocumentsController',
             controllerAs: 'document',
             resolve: {
-              documents: function(Document) {
-                return Document.allDocuments(function(err, data) {
+              documents: function (Document) {
+                return Document.allDocuments(function (err, data) {
                   return { error: err, date: data };
                 });
               }
@@ -45,8 +37,8 @@
             controller: 'AllDocumentsController',
             controllerAs: 'document',
             resolve: {
-              documents: function(Document) {
-                return Document.all(function(err, data) {
+              documents: function (Document) {
+                return Document.all(function (err, data) {
                   return { error: err, date: data };
                 });
               }
@@ -58,8 +50,8 @@
         $locationProvider.html5Mode(true);
       }
     ])
-    .run(function($rootScope, $location) {
-      $rootScope.$on('$routeChangeSuccess', function() {
+    .run(function ($rootScope, $location) {
+      $rootScope.$on('$routeChangeSuccess', function () {
         $rootScope.showSection = $location.$$path !== '/';
       });
     });

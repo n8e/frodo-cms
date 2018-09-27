@@ -6,101 +6,96 @@ html(lang='en', ng-app='frodocms')
     script(src='lib/angular/angular.min.js')
     script(src='lib/angular-route/angular-route.min.js')
     script(src='lib/angular-ui-router/release/angular-ui-router.min.js')
-    script(src='lib/angular-animate/angular-animate.min.js')
-    link(rel='stylesheet', href='lib/bootstrap/dist/css/bootstrap.min.css')
-    link(rel='stylesheet', href='lib/animate.css/animate.min.css')
+    link(rel='shortcut icon', href='assets/favicon.ico', type='image/x-icon')
     link(rel='stylesheet', href='lib/font-awesome/css/font-awesome.min.css', type='text/css', media='screen')
     link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
-    link(href='css/material.css', rel='stylesheet')
-    link(href='lib/bootstrap-material-design/dist/css/ripples.min.css', rel='stylesheet')
-    link(href='lib/bootstrap-material-design/dist/css/bootstrap-material-design.min.css', rel='stylesheet')
     link(href='css/main.css', rel='stylesheet')
     link(href='lib/robotodraft/robotodraft.css', rel='stylesheet')
-    link(href='css/responsive.css', rel='stylesheet')
-    link(href='lib/animate.css/animate.min.css', rel='stylesheet')
-    link(href='lib/Materialize/dist/css/materialize.css', rel='stylesheet')
-    script(src='lib/jquery/dist/jquery.min.js')
-    script(src='lib/bootstrap-material-design/dist/js/ripples.min.js')
-    script(src='lib/bootstrap-material-design/dist/js/material.min.js')
-    script(src='lib/bootstrap/dist/js/bootstrap.min.js')
-    script(src='lib/material/js/material.js')
-    script(src='lib/Materialize/dist/js/materialize.js')
-    script(src='lib/bootstrap/dist/js/bootstrap.min.js')
     script(src='js/main.js')
   body(ng-controller='MainController as main')
     header
-      .navbar.navbar-invers.menu-wrap
-        .navbar-header.text-center
-          a.navbar-brand.logo-right(href='/')
-            i.mdi-image-timelapse
+      .frodo-navbar
+        .frodo-navbar-header
+          a(href='/')
             | Frodocms
-        ul.nav.navbar-nav
-          li(ng-if='currentUser')
-            a(href='/profile') My Profile
-          li(ng-if='currentUser')
-            a(href='/myDocuments') My Documents
-          li(ng-if='currentUser')
-            a(href='/document') Create Document
-          li(ng-if='currentUser.user.role == "Administrator"')
-            a(href='/allDocuments') All Documents
-        ul.nav.navbar-nav
-          li.active
-            a(href='/') Home
-          li(ng-if='!currentUser')
-            a(href='/login') Login
-          li(ng-if='!currentUser')
-            a(href='/signup') Signup
-          li(ng-if='currentUser')
-            a(href='#') Hello {{ currentUser.username }}
-          li(ng-if='currentUser')
-            .btn.btn-lg.btn-material-teal(ng-click='main.doLogout()') {{ main.message}}
-        button#close-button.close-button Close Menu
-    main(style='min-height:100%;')
-      header#home.hero-area(ng-show='!showSection', style='min-height:850px;')
-        .col-md-12
-          .navbar.navbar-inverse.sticky-navigation.navbar-fixed-top(role='navigation', data-spy='affix', data-offset-top='200')
-              .container
-                .navbar-header
-                  a.logo-left(href='/')
-                    i.mdi-image-timelapse
-                    | Frodocms
-                .navbar-right
-                  button#open-button.menu-icon(ng-click='main.toggleMenu()')
-                    i.mdi-navigation-menu
-        .content-wrap
-          .container
-            .contents.text-right
-              h1.wow.fadeInRight(data-wow-duration='1000ms', data-wow-delay='300ms') Frodocms - A notebook for all your scribbles and sketches.
-              p.wow.fadeInRight(data-wow-duration='1000ms', data-wow-delay='400ms') Write and Save Notes
-              a.btn.btn-lg.btn-material-teal.wow.fadeInUp(ng-href='/login' data-wow-duration='1000ms' data-wow-delay='400ms' ng-if='!currentUser') Sign In
-              a.btn.btn-lg.btn-border.wow.fadeInUp(ng-href='/signup' data-wow-duration='1000ms' data-wow-delay='500ms' ng-if='!currentUser') Sign Up
-      header(ng-show="showSection", style='padding-top:90px;min-height:850;')
-        .col-md-12
-          .navbar.navbar-inverse.sticky-navigation.navbar-fixed-top(role='navigation', data-spy='affix', data-offset-top='200', style='background-color:#009090;')
-            .container
-              .navbar-header
-                a.logo-left(href='/')
-                  i.mdi-image-timelapse
-                  | Frodocms
-              .navbar-right
-                button#open-button-2.menu-icon(ng-click='main.toggleMenu()')
-                  i.mdi-navigation-menu
-        div(ng-view)
-      section#footer(style='min-height:20%;')
-        .container#copyright
-          .row
-            .col-md-12
-            p.copyright-text
-              | © Frodocms 2015 All right reserved. Designed and Developed by 
-              a(href='https://github.com/andela-nmartin/')
-                | NM
+            i.fas.fa-pen
+        .frodo-navbar-menu(ng-show='false')
+    .frodo-row
+      .frodo-side
+        h1 Frodocms - A notebook for all your scribbles and sketches.
+        p Write and Save Notes
+      .frodo-main
+        .cta
+          .tab
+            button.frodo-cancel-button.tablinks(onclick="openCta(event, 'Login')") Login
+            button.frodo-cancel-button.tablinks(onclick="openCta(event, 'Register')") Register
+          #Login.tabcontent
+            h2 Login
+            form(method='post', ng-submit='main.doLogin()')
+              .frodo-alert.frodo-alert-danger(ng-if='main.error')
+                strong Error!
+                |  {{ main.error }}
+                a(aria-label='close', onclick="closeFunction(event)") x
+              .frodo-input-field(style="width: 98%")
+                label(for='login_user_name') Username
+                input#login_user_name.frodo-input(type='text', name='username', style="width: 100%", ng-model='main.loginData.username')
+              .frodo-input-field(style="width: 98%")
+                label(for='login_password') Password
+                input#login_password.frodo-input(type='password', name='password', style="width: 100%", ng-model='login.loginData.password')
+              button.frodo-ok-button(type='submit', style="width: 100%;") Login
+            p
+              a(onclick="openCta(event, 'Register')") Not Registered? Sign up here.
+          #Register.tabcontent
+            h2 Sign Up
+            form(method='post', ng-submit='main.doSignup()')
+              .frodo-alert.frodo-alert-warning(ng-if='!main.error')
+                strong Info!
+                |  Please fill every entry to signup!
+                a.close(aria-label='close', onclick="closeFunction(event)") ×
+              .frodo-alert.frodo-alert-danger(ng-if='main.error')
+                strong Error!
+                | {{ main.error }}
+                a.close(aria-label='close', onclick="closeFunction(event)") ×
+              br
+              .row(style='display:flex;')
+                .frodo-input-field(style="flex-grow: 1; margin-right: 10px;")
+                  label(for='signup_first_name') First Name
+                  input#signup_first_name.frodo-input(type='text', style='width: 100%', ng-model='main.signupData.firstname')
+                .frodo-input-field(style="flex-grow: 1;")
+                  label(for='signup_last_name') Last Name
+                  input#signup_last_name.frodo-input(type='text', style='width: 100%', ng-model='main.signupData.lastname')
+              .row
+                .frodo-input-field
+                  label(for='signup_password') Password
+                  input#signup_password.frodo-input(type='password', style="width: 100%", ng-model='main.signupData.password')
+              .row
+                .frodo-input-field
+                  label(for='signup_user_name') Username
+                  input#signup_user_name.frodo-input(type='text', name='username', style="width: 100%", ng-model='main.signupData.username')
+              .row
+                .frodo-input-field
+                  label(for='signup_email') Email
+                  input#signup_email.frodo-input(type='text', name='email', style="width: 100%", ng-model='main.signupData.email')
+              button.frodo-ok-button(type='submit', style="width: 100%;") Signup
+            p
+              a(onclick="openCta(event, 'Login')") Already Registered? Login here.
 
-    script(src='lib/wow/dist/wow.js')
     script(src='js/main.js')
-    script(src='lib/smooth-scroll/smooth-scroll.js')
-    script(src='lib/classie/classie.js')
     script.
-      $(document).ready(function() {
-      // This command is used to initialize some elements and make them work properly
-      $.material.init();
-      });
+      function openCta(evt, ctaType) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(ctaType).style.display = "block";
+      evt.currentTarget.className += " active";
+      }
+
+      function closeFunction(evt) {
+      evt.currentTarget.parentElement.style.display = "none";
+      }
