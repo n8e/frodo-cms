@@ -5,6 +5,7 @@
         var self = this;
         var isOpen = false;
         self.isOpen = isOpen;
+
         self.toggleMenu = function () {
           if (isOpen) {
             classie.remove(document.body, 'show-menu');

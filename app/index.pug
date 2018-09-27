@@ -6,7 +6,7 @@ html(lang='en', ng-app='frodocms')
     script(src='lib/angular/angular.min.js')
     script(src='lib/angular-route/angular-route.min.js')
     script(src='lib/angular-ui-router/release/angular-ui-router.min.js')
-    script(src='lib/angular-animate/angular-animate.min.js')
+    link(rel='shortcut icon', href='assets/favicon.ico', type='image/x-icon')
     link(rel='stylesheet', href='lib/font-awesome/css/font-awesome.min.css', type='text/css', media='screen')
     link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
     link(href='css/main.css', rel='stylesheet')
@@ -20,84 +20,65 @@ html(lang='en', ng-app='frodocms')
             | Frodocms
             i.fas.fa-pen
         .frodo-navbar-menu(ng-show='false')
-    main(style='min-height:100%;')
-      header#home.hero-area(ng-show='!showSection', style='min-height:850px;')
-        .content-wrap
-          .container
-            .contents
-              h1.wow.fadeInRight(data-wow-duration='1000ms', data-wow-delay='300ms') Frodocms - A notebook for all your scribbles and sketches.
-              p.wow.fadeInRight(data-wow-duration='1000ms', data-wow-delay='400ms') Write and Save Notes
-              a.btn.btn-lg.btn-material-teal.wow.fadeInUp(ng-href='/login' data-wow-duration='1000ms' data-wow-delay='400ms' ng-if='!currentUser') Sign In
-              a.btn.btn-lg.btn-border.wow.fadeInUp(ng-href='/signup' data-wow-duration='1000ms' data-wow-delay='500ms' ng-if='!currentUser') Sign Up
-            .cta
-              p Login / Register:
-                .tab
-                  button.frodo-cancel-button.tablinks(onclick="openCta(event, 'Login')") Login
-                  button.frodo-cancel-button.tablinks(onclick="openCta(event, 'Register')") Register
-                #Login.tabcontent
-                  .container
-                    .jumbotron
-                      h2 Login
-                    section
-                      form.form-sigin(method='post', ng-submit='login.doLogin()')
-                        .alert.alert-danger(ng-if='login.error')
-                          a.close(href='#', data-dismiss='alert', aria-label='close') ×
-                          strong Error!
-                          |  {{ login.error }}
-                        .row
-                          .input-field.col.s12
-                            input#user_name.validate(type='text', name='username', ng-model='login.loginData.username')
-                            label(for='user_name') Username
-                        .row
-                          .input-field.col.s12
-                            input#password.validate(type='password', name='password', ng-model='login.loginData.password')
-                            label(for='password') Password
-                        button.btn.btn-lg.btn-material-teal(type='submit') Login
-                      p
-                        a(onclick="openCta(event, 'Register')") Not Registered? Sign up here.
-                #Register.tabcontent
-                  .container
-                    .jumbotron
-                      h2 Sign Up
-                    section(ng-controller='SignupController as signup')
-                      form.form-sigin(method='post', ng-submit='signup.doSignup()')
-                        .alert.alert-info(ng-if='!signup.error')
-                          a.close(href='#', data-dismiss='alert', aria-label='close') ×
-                          strong Info!
-                          |  Please fill every entry to signup!
-                        .alert.alert-danger(ng-if='signup.error')
-                          a.close(href='#', data-dismiss='alert', aria-label='close') ×
-                          strong Error!
-                          | {{ signup.error }}
-                        br
-                        .row  
-                          .input-field.col.s6
-                            input#first_name.validate(type='text', ng-model='signup.signupData.firstname')
-                            label(for='first_name') First Name
-                          .input-field.col.s6
-                            input#last_name.validate(type='text', ng-model='signup.signupData.lastname')
-                            label(for='last_name') Last Name
-                        .row
-                          .input-field.col.s12
-                            input#password.validate(type='password', ng-model='signup.signupData.password')
-                            label(for='password') Password
-                        .row
-                          .input-field.col.s12
-                            input#user_name.validate(type='text', name='username', ng-model='signup.signupData.username')
-                            label(for='user_name') Username
-                        .row
-                          .input-field.col.s12
-                            input#email.validate(type='text', name='email', ng-model='signup.signupData.email')
-                            label(for='email') Email
-                        p
-                          input#test1(name='role', type='radio', value='1', ng-model='signup.signupData.role')
-                          label(for='test1') Administrator
-                        p
-                          input#test2(name='role', type='radio', value='2', checked='true', ng-model='signup.signupData.role')
-                          label(for='test2') User
-                        button.btn.btn-lg.btn-material-teal(type='submit') Signup
-                      p
-                        a(onclick="openCta(event, 'Login')") Already Registered? Login here.
+    .frodo-row
+      .frodo-side
+        h1 Frodocms - A notebook for all your scribbles and sketches.
+        p Write and Save Notes
+      .frodo-main
+        .cta
+          .tab
+            button.frodo-cancel-button.tablinks(onclick="openCta(event, 'Login')") Login
+            button.frodo-cancel-button.tablinks(onclick="openCta(event, 'Register')") Register
+          #Login.tabcontent
+            h2 Login
+            form(method='post', ng-submit='main.doLogin()')
+              .frodo-alert.frodo-alert-danger(ng-if='main.error')
+                strong Error!
+                |  {{ main.error }}
+                a(aria-label='close', onclick="closeFunction(event)") x
+              .frodo-input-field(style="width: 98%")
+                label(for='login_user_name') Username
+                input#login_user_name.frodo-input(type='text', name='username', style="width: 100%", ng-model='main.loginData.username')
+              .frodo-input-field(style="width: 98%")
+                label(for='login_password') Password
+                input#login_password.frodo-input(type='password', name='password', style="width: 100%", ng-model='login.loginData.password')
+              button.frodo-ok-button(type='submit', style="width: 100%;") Login
+            p
+              a(onclick="openCta(event, 'Register')") Not Registered? Sign up here.
+          #Register.tabcontent
+            h2 Sign Up
+            form(method='post', ng-submit='main.doSignup()')
+              .frodo-alert.frodo-alert-warning(ng-if='!main.error')
+                strong Info!
+                |  Please fill every entry to signup!
+                a.close(aria-label='close', onclick="closeFunction(event)") ×
+              .frodo-alert.frodo-alert-danger(ng-if='main.error')
+                strong Error!
+                | {{ main.error }}
+                a.close(aria-label='close', onclick="closeFunction(event)") ×
+              br
+              .row(style='display:flex;')
+                .frodo-input-field(style="flex-grow: 1; margin-right: 10px;")
+                  label(for='signup_first_name') First Name
+                  input#signup_first_name.frodo-input(type='text', style='width: 100%', ng-model='main.signupData.firstname')
+                .frodo-input-field(style="flex-grow: 1;")
+                  label(for='signup_last_name') Last Name
+                  input#signup_last_name.frodo-input(type='text', style='width: 100%', ng-model='main.signupData.lastname')
+              .row
+                .frodo-input-field
+                  label(for='signup_password') Password
+                  input#signup_password.frodo-input(type='password', style="width: 100%", ng-model='main.signupData.password')
+              .row
+                .frodo-input-field
+                  label(for='signup_user_name') Username
+                  input#signup_user_name.frodo-input(type='text', name='username', style="width: 100%", ng-model='main.signupData.username')
+              .row
+                .frodo-input-field
+                  label(for='signup_email') Email
+                  input#signup_email.frodo-input(type='text', name='email', style="width: 100%", ng-model='main.signupData.email')
+              button.frodo-ok-button(type='submit', style="width: 100%;") Signup
+            p
+              a(onclick="openCta(event, 'Login')") Already Registered? Login here.
 
     script(src='js/main.js')
     script.
@@ -113,4 +94,8 @@ html(lang='en', ng-app='frodocms')
       }
       document.getElementById(ctaType).style.display = "block";
       evt.currentTarget.className += " active";
+      }
+
+      function closeFunction(evt) {
+      evt.currentTarget.parentElement.style.display = "none";
       }

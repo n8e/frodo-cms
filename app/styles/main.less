@@ -1,14 +1,24 @@
+@purple-bg: #125187;
+@red-bg: #c33325;
+@light-red-bg: #f5c1c3;
+@teal-bg: #2c8693;
+@cream-bg: #eff1d5;
+@orange-bg: #f19723;
+@lighter-bg: #ddd;
+@darker-bg: #ccc;
+@darkest-bg: #666666;
+
 body {
   font-family:'Roboto', sans-serif;
-  color:#666666;
+  color:@darkest-bg;
   font-size:14px;
   font-weight:400;
   background:#ffffff;
   margin: 0px;
 
   .frodo-navbar, .frodo-modals {
-    background-color: #eff1d5;
-    color: #125187;
+    background-color: @cream-bg;
+    color: @purple-bg;
 
     .frodo-navbar-header {
       display: inline-block;
@@ -25,40 +35,107 @@ body {
     }
   }
 
+  .frodo-alert {
+    margin-bottom: 7px;
+    position: relative;
+
+    a {
+      cursor: pointer;
+      height:100%;
+      position: absolute;
+      right: 3px;
+      text-decoration: none;
+      z-index: 999;
+    }
+
+    &.frodo-alert-warning {
+      background-color: @cream-bg;
+      border-radius: 4px;
+      color: @darkest-bg;
+      padding: 7px;
+    }
+  
+    &.frodo-alert-danger {
+      background-color: @light-red-bg;
+      border-radius: 4px;
+      color: @red-bg;
+      padding: 7px;
+    }
+  }
+
+  .frodo-input-field {
+    margin-bottom: 13px;
+
+    label, input {
+      display: block;
+    }
+
+    .frodo-input {
+      border-radius: 4px;
+      border: 1px solid @darker-bg;
+      height: 20px;
+    }
+  }
+
+  .frodo-row {
+    display: flex;
+    flex-wrap: wrap;
+    height: 90vh;
+
+    .frodo-side {
+      background-image: url('../assets/red-notes.png');
+      color: @red-bg;
+      flex: 60%;
+      padding: 20px;
+    }
+  
+    .frodo-main {
+      flex: 34%;
+      padding: 20px;
+    }
+  }
+
+  @media screen and (max-width: 700px) {
+    .frodo-row, .frodo-navbar {   
+        flex-direction: column;
+    }
+  }
+
   .frodo-ok-button {
-    color: #eff1d5;
-    background-color: #2c8693;
+    color: @cream-bg;
+    background-color: @teal-bg;
+    border-radius: 4px;
+    font-size: 1.2em;
+    height: 30px;
+    margin-top: 27px;
 
     &:hover {
-      border: 1px solid #eff1d5;
+      border: 1px solid @cream-bg;
     }
   }
 
   .frodo-cancel-button {
-    background-color: #eff1d5;
-    color: #2c8693;
+    background-color: @cream-bg;
+    color: @teal-bg;
 
     &:hover {
-      border: 1px solid #2c8693;
+      border: 1px solid @teal-bg;
     }
   }
 }
 
 .frodo-navbar-header {
   height: 55px;
-}
-
-.contents {
-  display: inline-block;
+  padding: 5px;
+  text-align: center;
 }
 
 .cta {
-  display: inline-block;
-
+  height: 55%;
   /* Style the tab */
   .tab {
     overflow: hidden;
-    border: 1px solid #ccc;
+    border: 1px solid @darker-bg;
     background-color: #f1f1f1;
   }
 
@@ -76,19 +153,20 @@ body {
 
   /* Change background color of buttons on hover */
   .tab button:hover {
-    background-color: #ddd;
+    background-color: @lighter-bg;
   }
 
   /* Create an active/current tablink class */
   .tab button.active {
-    background-color: #ccc;
+    background-color: @darker-bg;
   }
 
   /* Style the tab content */
   .tabcontent {
-    display: none;
-    padding: 6px 12px;
-    border: 1px solid #ccc;
+    border: 1px solid @darker-bg;
     border-top: none;
+    display: none;
+    height: 100%;
+    padding: 6px 12px;
   }
 }
