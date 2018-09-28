@@ -1,20 +1,19 @@
-var env = process.env.NODE_ENV || 'development';
-if (env === 'development') {
-  require('dotenv').load();
-}
+require('dotenv').load();
 
-var mongoose = require('mongoose'),
+var env = 'test',
+  mongoose = require('mongoose'),
   Promise = require('bluebird'),
-  Role = require('../server/models/roles'),
-  config = require('../server/config')[env],
+  Role = require('../../server/models/roles'),
+  config = require('../../server/config')[env],
   data = require('./data'),
   helpers = require('./helperMethods');
 
-mongoose.Promise = Promise;
+// mongoose.Promise = Promise;
+mongoose.Promise = global.Promise;
 
 function connectAndSeedRoles() {
   return new Promise(function (resolve, reject) {
-    return mongoose.connect(config.testDB, function (err) {
+    return mongoose.connect(config.database[env], { keepAlive: true, keepAliveInitialDelay: 300000 }, function (err) {
       if (err) {
         reject(err);
       }

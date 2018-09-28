@@ -1,5 +1,5 @@
 var Promise = require('bluebird'),
-  Role = require('../server/models/roles');
+  Role = require('../../server/models/roles');
 
 var main = {
   exit: function () {

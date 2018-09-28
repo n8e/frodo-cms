@@ -1,5 +1,5 @@
-var User = require('../server/models/users'),
-  Role = require('../server/models/roles');
+var User = require('../../server/models/users'),
+  Role = require('../../server/models/roles');
 
 var user1 = new User({
   firstname: 'Sadiq',

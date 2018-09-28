@@ -1,3 +1,5 @@
+process.env.NODE_ENV = 'test';
+
 var mongoose = require('mongoose'),
   assert = require('assert'),
   chai = require('chai'),
@@ -11,11 +13,17 @@ chai.use(chaiHttp);
 describe('SERVER Tests', function () {
 
   before(function (done) {
-    mongoose.connect(process.env.TEST_DATABASE_URL);
-    var db = mongoose.connection;
-    db.on('error', console.error.bind(console, 'connection error'));
-    db.once('open', function () {
-      console.log('We are connected to test database!');
+    mongoose.connection.on('disconnected', () => {
+      console.log('-> lost connection');
+    });
+
+    mongoose.connection.on('reconnect', () => {
+      console.log('-> reconnected');
+      done();
+    });
+
+    mongoose.connection.on('connected', () => {
+      console.log('-> connected');
       done();
     });
   });

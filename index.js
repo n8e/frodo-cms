@@ -1,22 +1,22 @@
 var env = process.env.NODE_ENV || 'development';
-if (env === 'development') {
-  require('dotenv').load();
-}
+require('dotenv').load();
+
 // The main application script, ties everything together.
 var bodyParser = require('body-parser');
 var config = require('./server/config')[env];
 var express = require('express');
 var mongoose = require('mongoose');
 var morgan = require('morgan');
+
 var app = express();
 
 // connect to Mongo when the app initializes and 
 // drop the db before seeding
-mongoose.connect(config.database, { useMongoClient: true });
+mongoose.connect(config.database[env], { useMongoClient: true });
 mongoose.Promise = global.Promise;
 mongoose.connection
   .on('connected', () => {
-    console.log(`Mongoose connection open on ${config.database}`);
+    console.log(`Mongoose connection open on ${config.database[env]}`);
   })
   .on('error', (err) => {
     console.log(`Connection error: ${err.message}`);

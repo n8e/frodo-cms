@@ -66,8 +66,9 @@
     "sinon": "^1.17.2"
   },
   "scripts": {
+    "prestart": "node ./server/helpers/seedRoles.js",
     "start": "./node_modules/gulp/bin/gulp.js",
-    "pretest": "node ./seeders/index.js",
+    "pretest": "node ./test/seeders/index.js",
     "test": "./node_modules/nyc/bin/nyc.js ./node_modules/mocha/bin/mocha --reporter spec --exit",
     "preinstall": "mkdir public",
     "postinstall": "node -e \"try { require('fs').symlinkSync(require('path').resolve('node_modules/@bower_components'), 'public/lib', 'junction') } catch (e) { }\"",
