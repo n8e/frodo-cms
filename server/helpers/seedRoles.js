@@ -39,7 +39,7 @@ function connectAndSeedRoles() {
         reject(err);
       }
 
-      return mongoose.connection.db.roles.drop(function (err) {
+      return mongoose.connection.db.dropCollection('roles', function (err) {
         if (err) {
           reject(err);
         }
@@ -48,10 +48,12 @@ function connectAndSeedRoles() {
         var loadFirstRole = seedRole(roleData.roleAdmin);
         return loadFirstRole
           .then(function () {
+            console.log('Loaded Role -', roleData.roleAdmin.title);
             var loadSecondRole = seedRole(roleData.roleUser);
 
             return loadSecondRole
               .then(function (resp) {
+                console.log('Loaded Role -', roleData.roleUser.title);
                 resolve(resp);
               })
               .catch(function (err) {
@@ -67,5 +69,7 @@ function connectAndSeedRoles() {
 }
 
 (function seeder() {
-  return connectAndSeedRoles();
+  return connectAndSeedRoles().then(function () {
+    return process.exit(0);
+  });
 })();
