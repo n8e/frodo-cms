@@ -1,7 +1,9 @@
 // require the modules for database and password
 var mongoose = require('mongoose'),
+  Promise = require('bluebird'),
   Schema = mongoose.Schema,
-  bcrypt = require('bcrypt-nodejs');
+  bcrypt = require('bcrypt'),
+  saltRounds = 10;
 
 // create a schema
 var UserSchema = new Schema({
@@ -30,14 +32,14 @@ var UserSchema = new Schema({
   }
 });
 
-UserSchema.pre('save', function(next) {
+UserSchema.pre('save', function (next) {
   var user = this;
 
   if (!user.isModified('password')) {
     return next();
   }
 
-  bcrypt.hash(user.password, null, null, function(err, hash) {
+  bcrypt.hash(user.password, saltRounds, function (err, hash) {
     if (err) {
       return next(err);
     }
@@ -46,9 +48,18 @@ UserSchema.pre('save', function(next) {
   });
 });
 
-UserSchema.methods.comparePassword = function(password) {
+UserSchema.methods.comparePassword = function (password) {
   var user = this;
-  return bcrypt.compareSync(password, user.password);
+
+  return new Promise(function (resolve, reject) {
+
+    return bcrypt.compare(password, user.password, function (err, res) {
+      if (res) {
+        resolve(res);
+      }
+      reject(err);
+    });
+  });
 };
 
 // make the model available to our users in our Node applications

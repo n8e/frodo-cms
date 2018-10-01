@@ -19,7 +19,7 @@
     "@bower_components/robotodraft": "raibutera/robotodraft#^1.1.0",
     "@bower_components/sinonjs": "blittle/sinon.js#>= 1.7.1",
     "angular-route": "^1.7.4",
-    "bcrypt-nodejs": "0.0.3",
+    "bcrypt": "^3.0.1",
     "bluebird": "^3.5.2",
     "body-parser": "^1.14.1",
     "browser-sync": "^2.24.7",
@@ -66,10 +66,11 @@
     "sinon": "^1.17.2"
   },
   "scripts": {
+    "prestart": "node ./server/helpers/seedRoles.js",
     "start": "./node_modules/gulp/bin/gulp.js",
-    "pretest": "node ./seeders/index.js",
+    "pretest": "node ./test/seeders/index.js",
     "test": "./node_modules/nyc/bin/nyc.js ./node_modules/mocha/bin/mocha --reporter spec --exit",
-    "preinstall": "mkdir public",
+    "preinstall": "[ -d public ] || mkdir public",
     "postinstall": "node -e \"try { require('fs').symlinkSync(require('path').resolve('node_modules/@bower_components'), 'public/lib', 'junction') } catch (e) { }\"",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },

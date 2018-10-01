@@ -1,15 +1,15 @@
-(function() {
+(function () {
   angular.module('frodocms.services')
-    .factory('AuthToken', ['$window', '$http', function($window, $http) {
+    .factory('AuthToken', ['$window', '$http', function ($window, $http) {
       var authTokenFactory = {};
 
       // get the token from  the window
-      authTokenFactory.getToken = function() {
+      authTokenFactory.getToken = function () {
         return $window.localStorage.getItem('token');
       };
 
       // set the token in the window storage
-      authTokenFactory.setToken = function(token) {
+      authTokenFactory.setToken = function (token) {
         if (token) {
           $http.defaults.headers.common['x-access-token'] = token;
           $window.localStorage.setItem('token', token);
