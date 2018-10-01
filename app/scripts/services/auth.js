@@ -1,29 +1,29 @@
-(function() {
+(function () {
   angular.module('frodocms.services')
     .factory('Auth', ['$http', '$q', 'AuthToken',
-      function($http, $q, AuthToken) {
+      function ($http, $q, AuthToken) {
         var authFactory = {};
 
 
         // user login service
-        authFactory.login = function(credentials, callback) {
+        authFactory.login = function (credentials, callback) {
           return $http.post('/api/users/login', credentials)
-            .success(function(data) {
-              AuthToken.setToken(data.token);
-              callback(data);
-            })
-            .error(function(err){
+            .then(function (response) {
+              AuthToken.setToken(response.data.token);
+              callback(response.data);
+            }, function (err) {
+              console.log('Error: Login Failed!');
               callback(err);
             });
         };
 
         // user logout service
-        authFactory.logout = function() {
+        authFactory.logout = function () {
           AuthToken.setToken();
         };
 
         // service to check if user is logged in
-        authFactory.isLoggedIn = function() {
+        authFactory.isLoggedIn = function () {
           if (AuthToken.getToken()) {
             return true;
           } else {
@@ -32,13 +32,12 @@
         };
 
         // service to get the logged in user
-        authFactory.getUser = function(cb) {
+        authFactory.getUser = function (cb) {
           if (AuthToken.getToken()) {
             return $http.get('/api/me')
-              .success(function(data) {
+              .then(function (data) {
                 cb(null, data);
-              })
-              .error(function(err) {
+              }, function (err) {
                 cb(err, null);
               });
           } else {
