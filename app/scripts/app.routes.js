@@ -20,7 +20,7 @@
           .when('/error', {
             templateUrl: 'views/error.html'
           })
-          .when('/allDocuments', {
+          .when('/documents/all', {
             templateUrl: 'views/user/all_documents.html',
             controller: 'AllDocumentsController',
             controllerAs: 'document',
@@ -32,7 +32,7 @@
               }
             }
           })
-          .when('/myDocuments', {
+          .when('/documents', {
             templateUrl: 'views/user/view_my_documents.html',
             controller: 'AllDocumentsController',
             controllerAs: 'document',

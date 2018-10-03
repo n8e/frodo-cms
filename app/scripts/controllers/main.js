@@ -62,7 +62,7 @@
               $rootScope.currentUser = data;
             });
             if (data.success) {
-              $location.path('/profile');
+              $location.path('/documents');
             } else {
               self.error = data.message;
             }
