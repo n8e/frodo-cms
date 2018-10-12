@@ -1,40 +1,39 @@
-.container
-  section
-    .heading
-      h3 My Documents
-      .panel-body(ng-repeat='each in document.documents')
-        h3.title-small {{ each.title }}
-        p {{ each.content }}
-        p Created: {{ each.dateCreated | date }}
-        br
-        button.btn.btn-lg.btn-material-teal(type='button' data-toggle="modal" data-target="#updateModal") Update Document
-        #updateModal.modal.fade(role='dialog')
-          .modal-content
-            .modal-header(style='padding:35px 50px;')
-              button.close(type='button', data-dismiss='modal') ×
-              h4.modal-title Update '{{ each.title }}'
-            .modal-body(style='padding:40px 50px;')
-              .input-field.col.s12
-                input#title(type='text', name='title', placeholder='{{ each.title }}', ng-model='document.docData.title')
-                label(for='title') Title
-              .input-field.col.s12
-                textarea#content.materialize-textarea(name='content', style='height:150px;', placeholder='{{ each.content }}',  ng-model='document.docData.content')
-                label(for='content') Content
-            .modal-footer
-              button.btn.btn-default(type='submit', ng-click='document.update(each._id)', data-dismiss='modal') Update
-              button.btn.btn-default(type='button', data-dismiss='modal') Close
-        button.btn.btn-lg.btn-material-red(type='button' data-toggle="modal" data-target="#myModal") Delete
-        #myModal.modal.fade(role='dialog', style='height:325px;')
-          .modal-content
-            .modal-header(style='padding:35px 50px;')
-              button.close(type='button', data-dismiss='modal') ×
-              h4.modal-title Warning!
-            .modal-body(style='padding:40px 50px;')
-              h6 Do you want to delete this document?
-            .modal-footer
-              button.btn.btn-default(type='submit', ng-click='document.delete(each._id)', data-dismiss='modal') Delete
-              button.btn.btn-default(type='button', data-dismiss='modal') Close
-      script.
-        | $('#myModal').on('hidden', function(){
-        | $(this).data('modal', null);
-        | });
+section
+  h3 {{ currentUser.username }} 's Documents
+  .frodo-panel(ng-repeat='each in document.documents')
+    h3.title-small {{ each.title }}
+    p {{ each.content }}
+    p Created: {{ each.dateCreated | date }}
+    br
+    button.frodo-ok-button(type='button' data-toggle="modal" data-target="#updateModal") Update Document
+    #updateModal.frodo-modal
+      .frodo-modal-content
+        .frodo-modal-header(style='padding:35px 50px;')
+          span.close(onclick='modal') ×
+          h4.modal-title Update '{{ each.title }}'
+        .frodo-modal-body(style='padding:40px 50px;')
+          .frodo-input-field
+            input#title.frodo-input(type='text', name='title', placeholder='{{ each.title }}', ng-model='document.docData.title')
+            label(for='title') Title
+          .frodo-input-field
+            textarea#content(name='content', style='height:150px;', placeholder='{{ each.content }}',  ng-model='document.docData.content')
+            label(for='content') Content
+        .frodo-modal-footer
+          button.frodo-ok-button(type='submit', ng-click='document.update(each._id)', data-dismiss='modal') Update
+          button.frodo-cancel-button(type='button', data-dismiss='modal') Close
+    button.frodo-cancel-button(type='button' data-toggle="modal" data-target="#myModal") Delete
+    #myModal.frodo-modal(style='height:325px;')
+      .frodo-modal-content
+        .frodo-modal-header(style='padding:35px 50px;')
+          span.close(data-dismiss='modal') ×
+          h4.modal-title Warning!
+        .frodo-modal-body(style='padding:40px 50px;')
+          h6 Do you want to delete this document?
+        .frodo-modal-footer
+          button.frodo-ok-button(type='submit', ng-click='document.delete(each._id)', data-dismiss='modal') Delete
+          button.frodo-cancel-button(type='button', data-dismiss='modal') Close
+  script.
+    function closeModal(evt) {
+    console.log('Closing Button Event->', evt);
+    evt.currentTarget.parentElement.parentElement.parentElement.style.display = "none";
+    }
