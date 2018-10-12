@@ -4,9 +4,21 @@
       function ($routeProvider, $locationProvider) {
         $routeProvider
           .when('/', {
-            templateUrl: 'views/login.html',
+            templateUrl: 'index.html',
             controller: 'MainController',
             controllerAs: 'main'
+          })
+          .when('/documents', {
+            templateUrl: 'views/user/view_my_documents.html',
+            controller: 'AllDocumentsController',
+            controllerAs: 'document',
+            resolve: {
+              documents: function (Document) {
+                return Document.all(function (err, data) {
+                  return { error: err, date: data };
+                });
+              }
+            }
           })
           .when('/document', {
             templateUrl: 'views/user/document.html'
@@ -32,18 +44,6 @@
               }
             }
           })
-          .when('/documents', {
-            templateUrl: 'views/user/view_my_documents.html',
-            controller: 'AllDocumentsController',
-            controllerAs: 'document',
-            resolve: {
-              documents: function (Document) {
-                return Document.all(function (err, data) {
-                  return { error: err, date: data };
-                });
-              }
-            }
-          })
           .otherwise({
             redirectTo: '/'
           });
@@ -52,6 +52,7 @@
     ])
     .run(function ($rootScope, $location) {
       $rootScope.$on('$routeChangeSuccess', function () {
+        console.log('ROUTE CHANGE SUCCESS', $location.$$path);
         $rootScope.showSection = $location.$$path !== '/';
       });
     });

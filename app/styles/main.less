@@ -15,6 +15,66 @@ body {
   font-weight:400;
   background:#ffffff;
   margin: 0px;
+  
+  .frodo-panel {
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+
+  .frodo-modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+
+    /* Modal Content */
+    .frodo-modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      box-sizing: border-box;
+      width: 80%;
+
+      .frodo-modal-header {
+        padding: 15px;
+        border-bottom: 1px solid #e5e5e5;
+      }
+
+      .frodo-modal-body {
+        position: relative;
+        padding: 15px;
+      }
+
+      .frodo-footer {
+        padding: 15px;
+        text-align: right;
+        border-top: 1px solid #e5e5e5;
+      }
+
+      /* The Close Button */
+      .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+      }
+    }
+  }
 
   .frodo-navbar, .frodo-modals {
     background-color: @cream-bg;
