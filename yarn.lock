@@ -335,8 +335,8 @@ angular-route@^1.7.4:
   resolved "https://registry.yarnpkg.com/angular-route/-/angular-route-1.7.4.tgz#2af79395b7bc0d92d2a394efea255a912255fea9"
 
 angular@^1.0.8:
-  version "1.7.9"
-  resolved "https://registry.yarnpkg.com/angular/-/angular-1.7.9.tgz#e52616e8701c17724c3c238cfe4f9446fd570bc4"
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/angular/-/angular-1.8.3.tgz#851ad75d5163c105a7e329555ef70c90aa706894"
 
 ansi-align@^2.0.0:
   version "2.0.0"
